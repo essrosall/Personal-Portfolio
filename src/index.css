@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
-@theme {
+:root {
   --color-background: #ffffff;
   --color-foreground: #000000;
 
-  --color-card:#f0f0f0;
+  --color-card: #f0f0f0;
 
   --color-primary: #1e90ff;
   --color-primary-foreground: #ffffff;
