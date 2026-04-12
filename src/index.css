@@ -1,26 +1,26 @@
 @import "tailwindcss";
 
-:root {
-  --color-background: #0f1418;
-  --color-foreground: #f0f2ff;
+:root{
+  --color-background: #0f1420;
+  --color-foreground: #f0f2f8;
 
-  --color-card: #141a14;
+  --color-card: #141a1f;
 
-  --color-primary: #20c264;
+  --color-primary: #20c2a8;
   --color-primary-foreground: #ffffff;
 
-  --color-secondary: #1f2840;
+  --color-secondary: #1f2834;
   --color-secondary-foreground: #20b2a9;
 
   --color-muted: #252e40;
-  --color-muted-foreground: #8a8593;
+  --color-muted-foreground: #7a8593;
 
   --color-border: #242b24;
 
-  --radius: 0.8rem;
+  --radius: 0.75rem;
 
   --color-highlight: #f5a725;
-  --color-surface: #1b4339;
+  --color-surface: #1b2333;
 }
 
 @layer base {
@@ -42,7 +42,7 @@
 @layer components {
   .glass {
     background-color: color-mix(in srgb, var(--color-surface) 50%, transparent);
-    backdrop-filter: blur(10px);
-    border: var(--color-border) solid 1px color-mix(in srgb, var(--color-border) 50%, transparent);
+    backdrop-filter: blur(16px);
+    border: solid 1px color-mix(in srgb, var(--color-border) 50%, transparent);
   }
 }
