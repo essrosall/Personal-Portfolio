@@ -1,3 +1,126 @@
+import { useEffect, useState, useMemo } from "react";
+import {Button} from '@/Components/Button';
+import { ArrowRight, Download } from "lucide-react";
+import { AnimatedBorderButton } from "../Components/AnimatedBorderButton";
+
+const roles = ["UI/UX Designer", "Web Developer", "Graphic designer"];
+
 export const Hero = () => {
-    return <section></section>
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
+  
+  const greenDots = useMemo(
+    () =>
+      Array.from({ length: 30 }, (_, i) => ({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        duration: `${15 + Math.random() * 25}s`,
+        delay: `${Math.random() * 10}s`,
+      })),
+    []
+  );
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex % roles.length];
+    const isFullText = !isDeleting && text === currentRole;
+    const isEmptyText = isDeleting && text === "";
+
+    const delay = isFullText
+      ? 1200
+      : isEmptyText
+      ? 500
+      : isDeleting
+      ? 80
+      : 120;
+
+    const timer = setTimeout(() => {
+      if (isFullText) {
+        setIsDeleting(true);
+      } else if (isEmptyText) {
+        setIsDeleting(false);
+        setRoleIndex((prev) => prev + 1);
+      } else {
+        setText((prev) =>
+          isDeleting
+            ? currentRole.substring(0, prev.length - 1)
+            : currentRole.substring(0, prev.length + 1)
+        );
+      }
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, roleIndex]);
+
+  return (
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/*Background*/}
+      <div className="absolute inset-0">
+        <img
+          src="/bg.jpg"
+          alt="Bg Image"
+          className="w-full h-full object-cover opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" />
+      </div>
+        {/*Green Dots*/}
+        <div>
+          {greenDots.map((dot) => (
+            <div
+              key={dot.id}
+              className="absolute w-1.5 h-1.5 rounded-full opacity-60"
+              style={{
+                backgroundColor: "#20b2a6",
+                left: dot.left,
+                top: dot.top,
+                animation: `slowdrift ${dot.duration} ease-in-out infinite`,
+                animationDelay: dot.delay,
+              }}
+            />
+          ))}
+        </div>
+      {/*Content*/}
+      <div className="container mx-auto px-4 pt-32p pb-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/*left Column - Text Content*/}
+          <div className="space-y-8">
+            <div className="animate-fade-in">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-[var(--color-primary)]">
+                <span className="w-2 h-2 bg-[var(--color-primary)] rounded-sm animate-pulse" />
+                Aspiring&nbsp;
+                <span className="font-semibold">{text}</span>
+                <span className="ml-1 text-[var(--color-primary)] animate-pulse">|</span>
+              </span>
+            </div>
+
+            {/* Main Heading */}
+            <div className="space-y-4">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in">
+              Turning <span className="text-[var(--color-primary)] glow_text">PIXELS </span>
+              <br />
+              into <span className="font-cursive italic font-normal text-white">code </span> and
+              <span className="text-[var(--color-primary)] glow_text"> IDEAS </span>
+              <br/>
+              into <span className="font-cursive italic font-normal text-white">interfaces</span>.
+            </h1>
+            <p className="text-lg text-[var(--color-muted-foreground)] animate-fade-in">
+              I’m an aspiring Web Developer and UI/UX Designer dedicated to building clean, responsive, and user-centered digital experiences from the ground up. By blending visual storytelling with intuitive interactions, I ensure every pixel serves a purpose and every user journey feels effortless.
+            </p>
+            </div>
+
+            {/* Call to Action Buttons */}
+            <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
+              <Button size="lg">
+                Contact Me <ArrowRight className="w-5 h-5" />
+              </Button>
+                <AnimatedBorderButton/>
+
+            </div>
+          </div>
+          {/*right Column - Profile Image*/}
+        </div>
+      </div>
+    </section>
+  );
 };
