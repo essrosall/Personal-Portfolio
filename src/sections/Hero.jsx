@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
-import {Button} from '@/Components/Button';
-import { ArrowRight, Download } from "lucide-react";
-import { AnimatedBorderButton } from "../Components/AnimatedBorderButton";
+import {Button } from '@/Components/Button';
+import { FaArrowRight, FaGithub, FaFacebookSquare, FaTwitterSquare, FaInstagramSquare, FaLinkedin } from "react-icons/fa";
+import { AnimatedBorderButton } from "@/Components/AnimatedBorderButton";
 
 const roles = ["UI/UX Designer", "Web Developer", "Graphic designer"];
 
@@ -112,11 +112,32 @@ export const Hero = () => {
             {/* Call to Action Buttons */}
             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
               <Button size="lg">
-                Contact Me <ArrowRight className="w-5 h-5" />
+                Contact Me <FaArrowRight className="w-5 h-5" />
               </Button>
                 <AnimatedBorderButton/>
-
             </div>
+
+            {/* Social Media Links */}
+            <div className="flex items-cente gap-1 animate-fade-in animation-delay-500">
+                <span className="text-sm text-[var(--color-muted-foreground)]">Follow me:</span>
+                {[
+                    {icon: FaGithub, href: "#" },
+                    {icon: FaLinkedin, href: "#" },
+                    {icon: FaTwitterSquare, href: "#" },
+                    {icon: FaFacebookSquare, href: "#" },
+                    {icon: FaInstagramSquare, href: "#" },
+                ].map((social, idx) => (
+                <a
+                  key={idx}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full glass text-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] transition-colors"
+                >
+                  {<social.icon className="w-5 h-5"/>}
+                </a>
+            ))}
+            </div>  
           </div>
           {/*right Column - Profile Image*/}
         </div>
