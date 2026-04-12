@@ -45,4 +45,14 @@
     backdrop-filter: blur(16px);
     border: solid 1px color-mix(in srgb, var(--color-border) 50%, transparent);
   }
+
+  .glass_strong {
+    background-color: color-mix(in srgb, var(--color-surface) 80%, transparent);
+    backdrop-filter: blur(24px);
+    border: solid 1px color-mix(in srgb, var(--color-border) 60%, transparent);
+  }
+}
+
+@layer utilities {
+
 }
