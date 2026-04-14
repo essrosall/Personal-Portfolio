@@ -79,6 +79,7 @@ export const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
+              onClick= {() => setIsMobileMenuOpen(false)}
               className="px-3 py-2 text-sm text-[var(--color-muted-foreground)]
                 hover:text-[var(--color-foreground)] rounded-lg hover:bg-[var(--color-surface)]/50 transition-colors duration-300"
             >
