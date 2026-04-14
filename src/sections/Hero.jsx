@@ -105,7 +105,7 @@ export const Hero = () => {
               into <span className="font-cursive italic font-normal text-white">interfaces</span>.
             </h1>
             <p className="text-lg text-[var(--color-muted-foreground)] animate-fade-in">
-              I’m an aspiring Web Developer and UI/UX Designer dedicated to building clean, responsive, and user-centered digital experiences from the ground up. By blending visual storytelling with intuitive interactions, I ensure every pixel serves a purpose and every user journey feels effortless.
+              I'm an aspiring Web Developer and UI/UX Designer dedicated to building clean, responsive, and user-centered digital experiences from the ground up. By blending visual storytelling with intuitive interactions, I ensure every pixel serves a purpose and every user journey feels effortless.
             </p>
             </div>
 
@@ -151,16 +151,16 @@ export const Hero = () => {
               <div className="relative glass rounded-3xl p-2 glow-border">
                 <img src="" alt="John Rey Rosales" className="w-full aspect-[4/5] objext-cover rounded-2xl"/>
                 {/*Floating badge*/}
-                <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float ">
+                <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float ">    
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse">
-                      <span className="text-sm font-medium">Available for work</span>
-                    </div>
-                  </div>
+                    <span className="text-sm font-medium">Available for work</span>
+                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                  </div>       
                 </div>
+                
                 {/*Stats Badge*/}
                 <div className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 animate-float animation-delay-500">
-                  <div className="text-xl font-bold text-[var(--color-primary)]">1 </div>
+                  <div className="text-3xl font-bold text-[var(--color-primary)]">1</div>
                   <div className="text-xs text-[var(--color-muted-foreground)]">Year Experience</div>
                 </div>
               </div>
