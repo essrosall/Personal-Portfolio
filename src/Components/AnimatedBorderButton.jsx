@@ -8,7 +8,7 @@ export const AnimatedBorderButton = ({ children }) => {
         duration-1000 focus:outline-none focus-visible:ring-2 
         focus-visible:ring-primary focus-visible:ring-offset-2 
         disabled:opacity-50 disabled:cursor-not-allowed group 
-        px-8 py-4 text-lg font-medium rounded-md overflow-visible 
+        px-8 py-4 text-lg font-medium rounded-lg overflow-visible 
         animated-border"
     >
       {/* Animated SVG Border */}
@@ -19,16 +19,16 @@ export const AnimatedBorderButton = ({ children }) => {
         style={{ overflow: "visible" }}
       >
         <path
-          d="M 30,1 A 29,29 0 0 0 1,30 L 1,30 A 29,29 0 0 0 30,59 L 170,59 A 29,29 0 0 0 199,30 L 199,30 A 29,29 0 0 0 170,1 Z"
-          fill="none"
-          stroke="var(--color-primary)"
-          strokeWidth="2"
-          strokeDasharray="400 550"
-          strokeDashoffset="400"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="animated-border-path"
-        />
+  d="M 7,1 H 193 A 6,6 0 0 1 199,7 V 53 A 6,6 0 0 1 193,59 H 7 A 6,6 0 0 1 1,53 V 7 A 6,6 0 0 1 7,1 Z"
+  fill="none"
+  stroke="var(--color-primary)"
+  strokeWidth="2"
+  strokeDasharray="400 550"
+  strokeDashoffset="400"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+  className="animated-border-path"
+/>
       </svg>
       <span className="relative z-10 flex items-center justify-center gap-2">
         <Download className="w-5 h-5" />

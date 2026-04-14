@@ -132,7 +132,7 @@ export const Hero = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-full glass text-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] transition-colors"
+                  className="p-2 rounded-lg glass text-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] transition-colors"
                 >
                   {<social.icon className="w-5 h-5"/>}
                 </a>

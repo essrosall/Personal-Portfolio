@@ -37,13 +37,13 @@ export const Navbar = () => {
         </a>
 
         <div className="hidden md:flex items-center gap-2">
-          <div className="glass rounded-sm px-2 py-1 flex items-center gap-3">
+          <div className="glass rounded-lg px-2 py-1 flex items-center gap-3">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-sm text-[var(--color-muted-foreground)]
-                  hover:text-[var(--color-foreground)] rounded-sm hover:bg-[var(--color-surface)]/50 transition-colors duration-300"
+                className="px-3 py-2 text-md text-[var(--color-muted-foreground)]
+                  hover:text-[var(--color-foreground)] rounded-lg hover:bg-[var(--color-surface)]/50 transition-colors duration-300"
               >
                 {link.label}
               </a>
@@ -80,7 +80,7 @@ export const Navbar = () => {
               key={link.href}
               href={link.href}
               className="px-3 py-2 text-sm text-[var(--color-muted-foreground)]
-                hover:text-[var(--color-foreground)] rounded-sm hover:bg-[var(--color-surface)]/50 transition-colors duration-300"
+                hover:text-[var(--color-foreground)] rounded-lg hover:bg-[var(--color-surface)]/50 transition-colors duration-300"
             >
               {link.label}
             </a>
