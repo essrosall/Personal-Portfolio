@@ -52,16 +52,29 @@ export const About = () => {
 
                 </div>
 
-                <div className="glass rounded-2xl p-6 glow_text animate-fade-in animation-delay-400">
-                    <p className="text-md font-medium italic text-[var(--color-foreground)]"> 
+                <div className="glass rounded-2xl p-8 glow-border animate-fade-in animation-delay-400">
+                    <p className="text-md font-sm italic text-[var(--color-foreground)]"> 
                         My mission is to create visually stunning and user-friendly websites that not only look great but also provide an intuitive and enjoyable user experience. I am committed to honing my design skills and continuously learning how to translate my understanding of structural logic into captivating web applications. With a strong foundation in design and a growing proficiency in coding, I am confident that I can create engaging and impactful web experiences that leave a lasting impression on users.
                     </p>
                 </div>
             </div>
 
             {/*Right Column*/}
+                    <div className="grid sm:grid-cols-2 gap-6">
+                        {highlights.map((item, idx) => (
+                            <div 
+                            key={idx} 
+                            className="glass rounded-xl p-6 animate-fade-in"
+                            style={{animationDelay: '${(idx + 1) * 100}ms'}}>
+                                <div className="w-12 h-12 rounded-lg bg-[var(--color-primary)]/10 flex items-center justify-center mb-4 hover:bg-[var(--color-primary)]/20">
+                                    <item.Icon className="w-6 h-6 text-[var(--color-primary)]"/>
+                                </div>
+                                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                                <p className="text-sm text-[var(--color-muted-foreground)]">{item.description}</p>
 
-            
+                    </div>
+                        ))}
+            </div> 
         </div>
         </div>
     </section>);
