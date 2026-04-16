@@ -1,4 +1,4 @@
-readme_content = """# ✦ John Rey Rosales | Personal Portfolio
+✦ John Rey Rosales | Personal Portfolio ✦
 
 > **Turning PIXELS into code and IDEAS into interfaces.**
 
@@ -13,12 +13,12 @@ My background uniquely positions me at the intersection of visual design and tec
 ## 🛠️ Tech Stack & Tools
 
 **Frontend Development**
-* React / Vite / Next.js
+* React / Vite 
 * HTML5 / CSS3 / JavaScript
 * Tailwind CSS
 
 **Backend & Core Languages**
-* Java / Spring Boot
+* Java
 * Python
 
 **Design & Prototyping**
@@ -26,10 +26,6 @@ My background uniquely positions me at the intersection of visual design and tec
 * Adobe Photoshop
 * Adobe Illustrator
 * Canva
-
-**Version Control & IT Tools**
-* Git & GitHub
-* Active Directory (AD), BigFix, SCCM, Workday
 
 ## 💼 Career Journey
 
