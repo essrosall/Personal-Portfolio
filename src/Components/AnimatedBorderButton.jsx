@@ -19,21 +19,21 @@ export const AnimatedBorderButton = ({ children }) => {
         style={{ overflow: "visible" }}
       >
         <path
-  d="M 7,1 H 193 A 6,6 0 0 1 199,7 V 53 A 6,6 0 0 1 193,59 H 7 A 6,6 0 0 1 1,53 V 7 A 6,6 0 0 1 7,1 Z"
-  fill="none"
-  stroke="var(--color-primary)"
-  strokeWidth="2"
-  strokeDasharray="400 550"
-  strokeDashoffset="400"
-  strokeLinecap="round"
-  strokeLinejoin="round"
-  className="animated-border-path"
-/>
+          d="M 7,1 H 193 A 6,6 0 0 1 199,7 V 53 A 6,6 0 0 1 193,59 H 7 A 6,6 0 0 1 1,53 V 7 A 6,6 0 0 1 7,1 Z"
+          fill="none"
+          stroke="var(--color-primary)"
+          strokeWidth="2"
+          strokeDasharray="400 550"
+          strokeDashoffset="400"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="animated-border-path"
+        />
       </svg>
       <span className="relative z-10 flex items-center justify-center gap-2">
-        
+
         {children}
-        
+
       </span>
     </button>
   );

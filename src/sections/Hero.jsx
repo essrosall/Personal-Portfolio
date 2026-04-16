@@ -1,16 +1,16 @@
 import { useEffect, useState, useMemo } from "react";
 import { Button } from '@/Components/Button';
 import { AnimatedBorderButton } from "@/Components/AnimatedBorderButton";
-import { 
-  FaArrowRight, FaGithub, FaFacebookSquare, FaTwitterSquare, 
+import {
+  FaArrowRight, FaGithub, FaFacebookSquare, FaTwitterSquare,
   FaInstagramSquare, FaLinkedin, FaChevronDown, FaJava, FaCss3Alt,
   FaHtml5, FaPython, FaReact, FaFigma, FaGitAlt
 } from "react-icons/fa";
 import { LuDownload } from "react-icons/lu";
-import { 
-  SiJavascript, SiTailwindcss, SiCanva 
+import {
+  SiJavascript, SiTailwindcss, SiCanva
 } from "react-icons/si";
-import {  
+import {
   DiIllustrator, DiPhotoshop
 } from "react-icons/di";
 
@@ -37,7 +37,7 @@ export const Hero = () => {
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [roleIndex, setRoleIndex] = useState(0);
-  
+
   const greenDots = useMemo(
     () =>
       Array.from({ length: 30 }, (_, i) => ({
@@ -58,10 +58,10 @@ export const Hero = () => {
     const delay = isFullText
       ? 1200
       : isEmptyText
-      ? 500
-      : isDeleting
-      ? 80
-      : 120;
+        ? 500
+        : isDeleting
+          ? 80
+          : 120;
 
     const timer = setTimeout(() => {
       if (isFullText) {
@@ -82,24 +82,24 @@ export const Hero = () => {
   }, [text, isDeleting, roleIndex]);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/*Green Dots*/}
-        <div>
-          {greenDots.map((dot) => (
-            <div
-              key={dot.id}
-              className="absolute w-1.5 h-1.5 rounded-full opacity-60"
-              style={{
-                backgroundColor: "#20b2a6",
-                left: dot.left,
-                top: dot.top,
-                animation: `slowdrift ${dot.duration} ease-in-out infinite`,
-                animationDelay: dot.delay,
-              }}
-            />
-          ))}
-        </div>
-      
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
+      {/*Green Dots*/}
+      <div>
+        {greenDots.map((dot) => (
+          <div
+            key={dot.id}
+            className="absolute w-1.5 h-1.5 rounded-full opacity-60"
+            style={{
+              backgroundColor: "#20b2a6",
+              left: dot.left,
+              top: dot.top,
+              animation: `slowdrift ${dot.duration} ease-in-out infinite`,
+              animationDelay: dot.delay,
+            }}
+          />
+        ))}
+      </div>
+
       {/*Content*/}
       <div className="container mx-auto px-4 pt-32 pb-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -116,17 +116,17 @@ export const Hero = () => {
 
             {/* Main Heading */}
             <div className="space-y-4">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in">
-              Turning <span className="text-[var(--color-primary)] glow_text">PIXELS </span>
-              <br />
-              into <span className="font-cursive italic font-normal text-white">code </span> and
-              <span className="text-[var(--color-primary)] glow_text"> IDEAS </span>
-              <br/>
-              into <span className="font-cursive italic font-normal text-white">interfaces</span>.
-            </h1>
-            <p className="text-lg text-[var(--color-muted-foreground)] animate-fade-in">
-              I'm an aspiring Web Developer and UI/UX Designer dedicated to building clean, responsive, and user-centered digital experiences from the ground up. By blending visual storytelling with intuitive interactions, I ensure every pixel serves a purpose and every user journey feels effortless.
-            </p>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in">
+                Turning <span className="text-[var(--color-primary)] glow_text">PIXELS </span>
+                <br />
+                into <span className="font-cursive italic font-normal text-white">code </span> and
+                <span className="text-[var(--color-primary)] glow_text"> IDEAS </span>
+                <br />
+                into <span className="font-cursive italic font-normal text-white">interfaces</span>.
+              </h1>
+              <p className="text-lg text-[var(--color-muted-foreground)] animate-fade-in">
+                I'm an aspiring Web Developer and UI/UX Designer dedicated to building clean, responsive, and user-centered digital experiences from the ground up. By blending visual storytelling with intuitive interactions, I ensure every pixel serves a purpose and every user journey feels effortless.
+              </p>
             </div>
 
             {/* Call to Action Buttons */}
@@ -134,22 +134,22 @@ export const Hero = () => {
               <Button size="lg">
                 Contact Me <FaArrowRight className="w-5 h-5" />
               </Button>
-                <AnimatedBorderButton>
-                  <LuDownload className="w-5 h-5"/>
-                  Download CV
-                </AnimatedBorderButton>
+              <AnimatedBorderButton>
+                <LuDownload className="w-5 h-5" />
+                Download CV
+              </AnimatedBorderButton>
             </div>
 
             {/* Social Media Links */}
             <div className="flex items-center gap-1 animate-fade-in animation-delay-500">
-                <span className="text-sm text-[var(--color-muted-foreground)] mr-2">Follow me:</span>
-                {[
-                    {icon: FaGithub, href: "#" },
-                    {icon: FaLinkedin, href: "#" },
-                    {icon: FaTwitterSquare, href: "#" },
-                    {icon: FaFacebookSquare, href: "#" },
-                    {icon: FaInstagramSquare, href: "#" },
-                ].map((social, idx) => (
+              <span className="text-sm text-[var(--color-muted-foreground)] mr-2">Follow me:</span>
+              {[
+                { icon: FaGithub, href: "#" },
+                { icon: FaLinkedin, href: "#" },
+                { icon: FaTwitterSquare, href: "#" },
+                { icon: FaFacebookSquare, href: "#" },
+                { icon: FaInstagramSquare, href: "#" },
+              ].map((social, idx) => (
                 <a
                   key={idx}
                   href={social.href}
@@ -157,10 +157,10 @@ export const Hero = () => {
                   rel="noopener noreferrer"
                   className="p-2 rounded-lg glass text-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] transition-colors"
                 >
-                  {<social.icon className="w-5 h-5"/>}
+                  {<social.icon className="w-5 h-5" />}
                 </a>
-            ))}
-            </div>  
+              ))}
+            </div>
           </div>
 
           {/*right Column - Profile Image*/}
@@ -173,16 +173,16 @@ export const Hero = () => {
               via-transparent to-[var(--color-primary)]/10 
               blur-2xl animate-pulse-glow"/>
               <div className="relative glass rounded-3xl p-2 glow-border">
-                <img src="#" alt="Profile Picture" className="w-full aspect-[4/5] object-cover rounded-2xl"/>
-               
+                <img src="#" alt="Profile Picture" className="w-full aspect-[4/5] object-cover rounded-2xl" />
+
                 {/*Floating badge*/}
-                <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float ">    
+                <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float ">
                   <div className="flex items-center gap-3">
                     <span className="text-sm font-medium">Available for work</span>
                     <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                  </div>       
+                  </div>
                 </div>
-                
+
                 {/*Stats Badge*/}
                 <div className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 animate-float animation-delay-500">
                   <div className="text-3xl font-bold text-[var(--color-primary)]">1</div>
@@ -194,11 +194,11 @@ export const Hero = () => {
         </div>
 
         {/*Skills Section - UPDATED*/}
-        <div className="mt-20 animate-fade-in animation-delay-600">
+        <div className="mt-15 animate-fade-in animation-delay-600">
           <p className="text-sm text-[var(--color-muted-foreground)] mb-6 text-center">Technologies I work with</p>
           <div className="relative overflow-hidden">
-            <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
-              {[...skills,...skills].map((skill, idx) => (
+            <div className="flex w-max animate-marquee">
+              {[...skills, ...skills].map((skill, idx) => (
                 <div key={idx} className="flex shrink-0 px-8 py-4">
                   {/* Now rendering skill.icon and skill.name */}
                   <span className="flex items-center gap-3 text-xl font-semibold text-[var(--color-muted-foreground)]/50 hover:text-[var(--color-muted-foreground)] transition-colors cursor-default">
@@ -212,9 +212,9 @@ export const Hero = () => {
         </div>
       </div>
 
-       <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 
-      animate-fade-in animation-delay-800"
+      <div
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 
+      animate-fade-in animation-delay-1000"
       >
         <a
           href="#about"

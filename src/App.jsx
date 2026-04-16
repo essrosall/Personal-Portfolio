@@ -1,12 +1,12 @@
-import {Hero} from "@/sections/Hero";
-import {About} from "@/sections/About";
-import {Experience} from "@/sections/Experience";
-import {Projects} from "@/sections/Projects";
-import {Contact} from "@/sections/Contact";
-import {Navbar} from "@/layout/Navbar";
+import { Hero } from "@/sections/Hero";
+import { About } from "@/sections/About";
+import { Experience } from "@/sections/Experience";
+import { Projects } from "@/sections/Projects";
+import { Contact } from "@/sections/Contact";
+import { Navbar } from "@/layout/Navbar";
 
 function App() {
-  return<div className="min-h-screen overflow-x-hidden">
+  return <div className="min-h-screen overflow-x-hidden">
     <Navbar />
     <main>
       <Hero />
@@ -15,8 +15,8 @@ function App() {
       <Experience />
       <Contact />
     </main>
-    </div>
-  
+  </div>
+
 }
 
 export default App
