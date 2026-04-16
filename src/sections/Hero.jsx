@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import {Button } from '@/Components/Button';
 import { FaArrowRight, FaGithub, FaFacebookSquare, FaTwitterSquare, FaInstagramSquare, FaLinkedin, FaChevronDown } from "react-icons/fa";
+import { LuDownload } from "react-icons/lu";
 import { AnimatedBorderButton } from "@/Components/AnimatedBorderButton";
 
 const roles = ["UI/UX Designer", "Web Developer", "Graphic designer"];
@@ -114,7 +115,10 @@ export const Hero = () => {
               <Button size="lg">
                 Contact Me <FaArrowRight className="w-5 h-5" />
               </Button>
-                <AnimatedBorderButton/>
+                <AnimatedBorderButton>
+                  <LuDownload className="w-5 h-5"/>
+                  Download CV
+                </AnimatedBorderButton>
             </div>
 
             {/* Social Media Links */}
@@ -149,7 +153,7 @@ export const Hero = () => {
               via-transparent to-[var(--color-primary)]/10 
               blur-2xl animate-pulse-glow"/>
               <div className="relative glass rounded-3xl p-2 glow-border">
-                <img src="" alt="John Rey Rosales" className="w-full aspect-[4/5] objext-cover rounded-2xl"/>
+                <img src="#" alt="John Rey Rosales" className="w-full aspect-[4/5] objext-cover rounded-2xl"/>
                 {/*Floating badge*/}
                 <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float ">    
                   <div className="flex items-center gap-3">

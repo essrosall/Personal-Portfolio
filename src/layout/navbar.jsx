@@ -27,7 +27,7 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 transition-all duration-400 ${
+      className={`fixed top-0 left-0 right-0 transition-all duration-700 ${
         isScrolled ? "glass_strong py-4" : "bg-transparent py-5"
       } z-50`}
     >
@@ -36,14 +36,15 @@ export const Navbar = () => {
           EssRosall <span className="text-[var(--color-primary)]">.</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-2">
+        {/*Desktop Nav*/}
+        <div className="hidden md:flex items-center gap-1">
           <div className="glass rounded-lg px-2 py-1 flex items-center gap-3">
-            {navLinks.map((link) => (
+            {navLinks.map((link, index) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={index}
                 className="px-3 py-2 text-md text-[var(--color-muted-foreground)]
-                  hover:text-[var(--color-foreground)] rounded-lg hover:bg-[var(--color-surface)]/50 transition-colors duration-300"
+                  hover:text-[var(--color-foreground)] rounded-lg hover:bg-[var(--color-surface)]/80 transition-colors duration-300"
               >
                 {link.label}
               </a>
@@ -51,12 +52,13 @@ export const Navbar = () => {
           </div>
         </div>
 
+            {/*Call to Action Button*/}
         <div className="hidden md:block">
-          <Button size="md">Contact Me</Button>
+          <Button size="sm">Contact Me</Button>
         </div>
 
         <button
-          className={`md:hidden p-2 text-[var(--color-foreground)] hover:cursor-pointer transition-transform duration-200 ease-out ${
+          className={`md:hidden p-2 text-[var(--color-foreground)] hover:cursor-pointer transition-transform duration-500 ease-out ${
             isMobileMenuOpen ? "rotate-90" : "rotate-0"
           }`}
           onClick={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -67,6 +69,7 @@ export const Navbar = () => {
         </button>
       </nav>
 
+          
       <div
         className={`md:hidden glass_strong origin-top transform transition-all duration-300 ease-out overflow-hidden ${
           isMobileMenuOpen
