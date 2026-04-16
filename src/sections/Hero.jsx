@@ -104,7 +104,7 @@ export const Hero = () => {
       <div className="container mx-auto px-4 pt-32 pb-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/*left Column - Text Content*/}
-          <div className="space-y-8">
+          <div className="space-y-4">
             <div className="animate-fade-in">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-[var(--color-primary)]">
                 <span className="w-2 h-2 bg-[var(--color-primary)] rounded-sm animate-pulse" />
@@ -178,8 +178,8 @@ export const Hero = () => {
                 {/*Floating badge*/}
                 <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float ">
                   <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium">Available for work</span>
                     <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-medium">Available for work</span>
                   </div>
                 </div>
 
@@ -194,8 +194,8 @@ export const Hero = () => {
         </div>
 
         {/*Skills Section - UPDATED*/}
-        <div className="mt-15 animate-fade-in animation-delay-600">
-          <p className="text-sm text-[var(--color-muted-foreground)] mb-6 text-center">Technologies I work with</p>
+        <div className="mt-10 animate-fade-in animation-delay-600">
+          <p className="text-sm text-[var(--color-muted-foreground)] mb-2 text-center">Technologies I work with</p>
           <div className="relative overflow-hidden">
             <div className="flex w-max animate-marquee">
               {[...skills, ...skills].map((skill, idx) => (
@@ -213,7 +213,7 @@ export const Hero = () => {
       </div>
 
       <div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 
       animate-fade-in animation-delay-1000"
       >
         <a

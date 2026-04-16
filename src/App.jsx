@@ -4,6 +4,7 @@ import { Experience } from "@/sections/Experience";
 import { Projects } from "@/sections/Projects";
 import { Contact } from "@/sections/Contact";
 import { Navbar } from "@/layout/Navbar";
+import { CertnBadge } from "./sections/CertnBadge";
 
 function App() {
   return <div className="min-h-screen overflow-x-hidden">
@@ -13,6 +14,7 @@ function App() {
       <About />
       <Projects />
       <Experience />
+      <CertnBadge/>
       <Contact />
     </main>
   </div>
