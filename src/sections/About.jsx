@@ -55,8 +55,7 @@ export const About = () => {
 
                 <div className="glass rounded-2xl p-8 glow-border animate-fade-in animation-delay-400">
                     <p className="text-md font-sm italic text-[var(--color-foreground)]"> 
-                        My mission is to create visually stunning and user-friendly websites that not only look great but also provide an intuitive and enjoyable user experience. I am committed to honing my design skills and continuously learning how to translate my understanding of structural logic into captivating web applications. With a strong foundation in design and a growing proficiency in coding, I am confident that I can create engaging and impactful web experiences that leave a lasting impression on users.
-                    </p>
+My mission is to design and develop visually stunning, user-centered web applications by seamlessly merging intuitive interfaces with clean structural logic.                    </p>
                 </div>
             </div>
 

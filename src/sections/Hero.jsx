@@ -1,11 +1,38 @@
 import { useEffect, useState, useMemo } from "react";
-import {Button } from '@/Components/Button';
-import { FaArrowRight, FaGithub, FaFacebookSquare, FaTwitterSquare, FaInstagramSquare, FaLinkedin, FaChevronDown } from "react-icons/fa";
-import { LuDownload } from "react-icons/lu";
+import { Button } from '@/Components/Button';
 import { AnimatedBorderButton } from "@/Components/AnimatedBorderButton";
+import { 
+  FaArrowRight, FaGithub, FaFacebookSquare, FaTwitterSquare, 
+  FaInstagramSquare, FaLinkedin, FaChevronDown, FaJava, FaCss3Alt,
+  FaHtml5, FaPython, FaReact, FaFigma, FaGitAlt
+} from "react-icons/fa";
+import { LuDownload } from "react-icons/lu";
+import { 
+  SiJavascript, SiTailwindcss, SiCanva 
+} from "react-icons/si";
+import {  
+  DiIllustrator, DiPhotoshop
+} from "react-icons/di";
 
 const roles = ["UI/UX Designer", "Web Developer", "Graphic designer"];
-const skills = ["HTML", "CSS", "JavaScript", "Python","Java", "React", "Tailwind CSS", "Figma", "Photoshop", "Illustrator", "Git", "GitHub", "Canva"];
+
+// 1. SKILLS ARRAY UPDATED TO OBJECTS
+const skills = [
+  { name: "HTML", icon: <FaHtml5 /> },
+  { name: "CSS", icon: <FaCss3Alt /> },
+  { name: "JavaScript", icon: <SiJavascript /> },
+  { name: "Python", icon: <FaPython /> },
+  { name: "Java", icon: <FaJava /> },
+  { name: "React", icon: <FaReact /> },
+  { name: "Tailwind CSS", icon: <SiTailwindcss /> },
+  { name: "Figma", icon: <FaFigma /> },
+  { name: "Photoshop", icon: <DiPhotoshop /> },
+  { name: "Illustrator", icon: <DiIllustrator /> },
+  { name: "Git", icon: <FaGitAlt /> },
+  { name: "GitHub", icon: <FaGithub /> },
+  { name: "Canva", icon: <SiCanva /> },
+];
+
 export const Hero = () => {
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -56,15 +83,6 @@ export const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/*Background*/}
-      <div className="absolute inset-0">
-        <img
-          src="/bg.jpg"
-          alt="Bg Image"
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" />
-      </div>
         {/*Green Dots*/}
         <div>
           {greenDots.map((dot) => (
@@ -81,8 +99,9 @@ export const Hero = () => {
             />
           ))}
         </div>
+      
       {/*Content*/}
-      <div className="container mx-auto px-4 pt-32 p pb-20 relative z-10">
+      <div className="container mx-auto px-4 pt-32 pb-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/*left Column - Text Content*/}
           <div className="space-y-8">
@@ -122,8 +141,8 @@ export const Hero = () => {
             </div>
 
             {/* Social Media Links */}
-            <div className="flex items-cente gap-1 animate-fade-in animation-delay-500">
-                <span className="text-sm text-[var(--color-muted-foreground)]">Follow me:</span>
+            <div className="flex items-center gap-1 animate-fade-in animation-delay-500">
+                <span className="text-sm text-[var(--color-muted-foreground)] mr-2">Follow me:</span>
                 {[
                     {icon: FaGithub, href: "#" },
                     {icon: FaLinkedin, href: "#" },
@@ -143,17 +162,19 @@ export const Hero = () => {
             ))}
             </div>  
           </div>
+
           {/*right Column - Profile Image*/}
-          <div className="relatice animate-fade-in animation-delay-400">
+          <div className="relative animate-fade-in animation-delay-400">
             {/*Profile Image*/}
             <div className="relative max-w-md mx-auto">
               <div className="absolute inset-0 
-              rounded-3xl bg-gradient-tobr 
+              rounded-3xl bg-gradient-to-br 
               from-[var(--color-primary)]/30 
               via-transparent to-[var(--color-primary)]/10 
               blur-2xl animate-pulse-glow"/>
               <div className="relative glass rounded-3xl p-2 glow-border">
-                <img src="#" alt="John Rey Rosales" className="w-full aspect-[4/5] objext-cover rounded-2xl"/>
+                <img src="#" alt="Profile Picture" className="w-full aspect-[4/5] object-cover rounded-2xl"/>
+               
                 {/*Floating badge*/}
                 <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float ">    
                   <div className="flex items-center gap-3">
@@ -172,15 +193,17 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/*Skills Section*/}
-        <div className="mt-20 animate-fade-in animateion-delay-600">
-          <p className="text-sm text-sm text-[var(--color-muted-foreground mb-6 text-center)]">Technologies I work with</p>
-          <div className="relative overflow-hidded">
-            <div className="flex animate-marquee">
+        {/*Skills Section - UPDATED*/}
+        <div className="mt-20 animate-fade-in animation-delay-600">
+          <p className="text-sm text-[var(--color-muted-foreground)] mb-6 text-center">Technologies I work with</p>
+          <div className="relative overflow-hidden">
+            <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
               {[...skills,...skills].map((skill, idx) => (
                 <div key={idx} className="flex shrink-0 px-8 py-4">
-                  <span className="text-xl font-semibold text-[var(--color-muted-foreground)]/50 hover:text-[var(--color-muted-foreground)] transition-colors">
-                    {skill}
+                  {/* Now rendering skill.icon and skill.name */}
+                  <span className="flex items-center gap-3 text-xl font-semibold text-[var(--color-muted-foreground)]/50 hover:text-[var(--color-muted-foreground)] transition-colors cursor-default">
+                    <span className="text-2xl">{skill.icon}</span>
+                    {skill.name}
                   </span>
                 </div>
               ))}
