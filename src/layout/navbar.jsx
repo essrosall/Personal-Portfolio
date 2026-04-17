@@ -6,7 +6,6 @@ const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -25,25 +24,38 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // NEW: Bulletproof smooth scrolling function
+  const scrollToProjects = (e) => {
+    e.preventDefault();
+    const projectsSection = document.getElementById("projects");
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: "smooth" });
+      setIsMobileMenuOpen(false); // Closes the mobile menu automatically
+    } else {
+      console.warn("Could not find a section with id='projects'");
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 transition-all duration-700 ${
         isScrolled ? "glass_strong py-4 shadow-lg" : "bg-transparent py-5"
       } z-50`}
     >
-      <nav className="container mx-auto px-6 flex items-center justify-between relative z-10">
-        <a href="#" className="text-xl font-bold tracking-tight hover:text-[var(--color-primary)]">
+      <nav className="container mx-auto px-6 flex items-center justify-between relative z-10 gap-4">
+        
+        <a href="#" className="text-xl font-bold tracking-tight hover:text-[var(--color-primary)] shrink-0">
           EssRosall <span className="text-[var(--color-primary)]">.</span>
         </a>
 
-        {/*Desktop Nav*/}
+        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-1">
           <div className="glass rounded-lg px-2 py-1 flex items-center gap-3">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-md text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)] rounded-lg hover:bg-[var(--color-surface)]/50 transition-colors duration-300"
+                className="px-3 py-2 text-md text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)] rounded-lg hover:bg-[var(--color-surface)]/50 transition-colors duration-300 whitespace-nowrap"
               >
                 {link.label}
               </a>
@@ -51,12 +63,15 @@ export const Navbar = () => {
           </div>
         </div>
 
-        <div className="hidden md:block">
-          <Button size="sm">Contact Me</Button>
+        {/* FIXED Desktop Button: Using onClick instead of <a> */}
+        <div className="hidden md:block shrink-0">
+          <Button size="md" onClick={scrollToProjects}>
+            <span className="whitespace-nowrap">View Projects</span>
+          </Button>
         </div>
 
         <button
-          className={`md:hidden p-2 text-[var(--color-foreground)] hover:cursor-pointer transition-transform duration-200 ease-out ${
+          className={`md:hidden p-2 text-[var(--color-foreground)] hover:cursor-pointer transition-transform duration-200 ease-out shrink-0 ${
             isMobileMenuOpen ? "rotate-90" : "rotate-0"
           }`}
           onClick={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -87,7 +102,10 @@ export const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <Button>Contact Me</Button>
+          {/* FIXED Mobile Button: Using onClick instead of <a> */}
+          <Button className="w-full" onClick={scrollToProjects}>
+            View Projects
+          </Button>
         </div>
       </div>
     </header>

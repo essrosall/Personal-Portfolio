@@ -1,12 +1,11 @@
 import { FaGithub, FaLinkedin, FaTwitter, FaBehance } from "react-icons/fa";
 import { MoveUp } from "lucide-react";
-import {Button} from "@Components/Button";
 
 const socialLinks = [
   { icon: FaGithub, href: "#", label: "GitHub" },
   { icon: FaLinkedin, href: "#", label: "LinkedIn" },
   { icon: FaTwitter, href: "#", label: "Twitter" },
-  { icon: FaBehance, href: "#", label: "Behance" }, // Added for UI/UX & Graphic Design portfolios
+  { icon: FaBehance, href: "#", label: "Behance" }, 
 ];
 
 const footerLinks = [
@@ -20,32 +19,53 @@ const footerLinks = [
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  // Smooth scroll to top function
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="pt-20 pb-10 border-t border-white/10 bg-[var(--color-background)]">
-      <div className="container mx-auto px-6">
+    <footer className="pt-20 pb-10 border-t border-white/10 bg-[var(--color-background)] relative overflow-hidden">
+      
+      {/* Subtle background glow to tie in with the rest of the site */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-[var(--color-primary)]/50 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[var(--color-primary)]/5 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="container mx-auto px-6 relative z-10">
         
-        {/* Top Section: Brand & Navigation */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
+        {/* Top Section: 3-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
           
-          {/* Brand & Tagline */}
-          <div className="max-w-sm">
-            <a href="#" className="text-2xl font-bold tracking-tight text-white">
+          {/* Column 1: Brand & Tagline */}
+          <div className="md:col-span-5 lg:col-span-4">
+            <a href="#" className="text-2xl font-bold tracking-tight text-white inline-block mb-4">
               EssRosall <span className="text-[var(--color-primary)]">.</span>
             </a>
-            <p className="text-[var(--color-muted-foreground)] mt-4 leading-relaxed">
-              Turning ideas into stunning visuals and pixels into intuitive interfaces.
+            <p className="text-[var(--color-muted-foreground)] leading-relaxed text-sm pr-4">
+              Turning ideas into stunning visuals and pixels into intuitive interfaces. Building digital experiences with purpose.
             </p>
           </div>
 
-          {/* Navigation Grid */}
-          <div className="flex flex-col md:flex-row gap-12 md:gap-24">
+          {/* Column 2: Social Links (Replaced the CTA) */}
+          <div className="md:col-span-7 lg:col-span-4 lg:mx-auto">
+            <h4 className="text-white font-medium mb-5 tracking-wider uppercase text-xs">Connect Online</h4>
+            <div className="flex items-center gap-4">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-10 h-10 rounded-full glass border border-white/5 flex items-center justify-center text-[var(--color-muted-foreground)] hover:text-white hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] transition-all hover:-translate-y-1 shadow-lg"
+                >
+                  <social.icon className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 3: Navigation Grid */}
+          <div className="md:col-span-12 lg:col-span-4 flex flex-row gap-16 lg:justify-end">
             <div>
-              <h4 className="text-white font-medium mb-4 tracking-wider uppercase text-xs">Explore</h4>
+              <h4 className="text-white font-medium mb-5 tracking-wider uppercase text-xs">Explore</h4>
               <nav className="flex flex-col gap-3">
                 {footerLinks.slice(0, 3).map((link) => (
                   <a 
@@ -59,7 +79,7 @@ export const Footer = () => {
               </nav>
             </div>
             <div>
-              <h4 className="text-white font-medium mb-4 tracking-wider uppercase text-xs">Connect</h4>
+              <h4 className="text-white font-medium mb-5 tracking-wider uppercase text-xs">Connect</h4>
               <nav className="flex flex-col gap-3">
                 {footerLinks.slice(3).map((link) => (
                   <a 
@@ -75,37 +95,21 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Section: Copyright & Socials */}
+        {/* Bottom Section: Copyright & Back to Top ONLY */}
         <div className="pt-8 border-t border-white/10 flex flex-col-reverse md:flex-row items-center justify-between gap-6">
           
           <p className="text-sm text-[var(--color-muted-foreground)]">
             © {currentYear} John Rey Rosales. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-6">
-            {/* Minimalist Social Icons */}
-            <div className="flex items-center gap-5 border-r border-white/10 pr-6">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="text-[var(--color-muted-foreground)] hover:text-[var(--color-primary)] transition-all hover:-translate-y-1"
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-
-            {/* Sharp Back to Top Button */}
-            <button
-              onClick={scrollToTop}
-              className="group flex items-center justify-center w-10 h-10 rounded-xl glass border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)] text-[var(--color-muted-foreground)] hover:text-[var(--color-primary-foreground)] transition-all"
-              aria-label="Scroll to top"
-            >
-              <MoveUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
-            </button>
-          </div>
+          {/* Sharp Back to Top Button */}
+          <button
+            onClick={scrollToTop}
+            className="group flex items-center justify-center w-10 h-10 rounded-xl glass border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)] text-[var(--color-muted-foreground)] hover:text-[var(--color-primary-foreground)] transition-all shadow-lg"
+            aria-label="Scroll to top"
+          >
+            <MoveUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+          </button>
 
         </div>
       </div>
