@@ -3,69 +3,128 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const artworks = [
   {
-    title: "Food Advertisement Campaign",
-    description: "Vibrant promotional poster for restaurant menu launch",
-    image: "/projects/gallery/artwork-1.png",
+    title: "Blackpink Poster",
+    description: "Fan-art poster composition with vibrant stage energy.",
+    image: "/artworks/Blackpink-Poster.png",
   },
   {
-    title: "Minimalist Poster Design",
-    description: "Clean, modern aesthetic poster with typography focus",
-    image: "/projects/gallery/artwork-2.png",
+    title: "Bowl Gogi",
+    description: "Food promo artwork with bold layout and appetizing visuals.",
+    image: "/artworks/BOWL-GOGI.png",
   },
   {
-    title: "Festival Pubmat",
-    description: "Eye-catching event promotion material for summer festival",
-    image: "/projects/gallery/artwork-3.png",
+    title: "Bruno Mars Poster",
+    description: "Concert-style poster focused on performance mood and contrast.",
+    image: "/artworks/Bruno-Mars-Poster.png",
   },
   {
-    title: "Product Launch Poster",
-    description: "Dynamic design showcasing new tech product release",
-    image: "/projects/gallery/artwork-4.png",
+    title: "Dwight Ramos Poster",
+    description: "Sports-themed visual featuring dynamic balance and rhythm.",
+    image: "/artworks/Dwight-Ramos-Poster.png",
   },
   {
-    title: "Beverage Advertising",
-    description: "Colorful and refreshing advertisement design",
-    image: "/projects/gallery/artwork-5.png",
+    title: "EYes",
+    description: "Experimental typography and layered composition study.",
+    image: "/artworks/EYes.png",
   },
   {
-    title: "Concert Promotion",
-    description: "Bold typography and visual hierarchy for music event",
-    image: "/projects/gallery/artwork-6.png",
+    title: "Father's Day Art",
+    description: "Warm celebratory design with personal and emotional tone.",
+    image: "/artworks/FATHER'S-DAY-ART.png",
   },
   {
-    title: "Brand Identity Poster",
-    description: "Cohesive visual system representing brand values",
-    image: "/projects/gallery/artwork-7.png",
+    title: "Food Advertisement",
+    description: "Commercial design focused on product hero placement.",
+    image: "/artworks/Food Advertisement.png",
   },
   {
-    title: "Social Media Campaign",
-    description: "Creative series for multi-platform promotion",
-    image: "/projects/gallery/artwork-8.png",
+    title: "Animal Infographics",
+    description: "Editorial-style back page composition for print layout.",
+    image: "/artworks/Group 4 STS Backpage.png",
+  },
+  {
+    title: "JOKERs",
+    description: "Character-focused digital artwork with dramatic treatment.",
+    image: "/artworks/JOKERs.png",
+  },
+  {
+    title: "Jordan Clarkson Poster",
+    description: "Athlete spotlight poster with strong visual hierarchy.",
+    image: "/artworks/Jordan-Clarkson-Poster.png",
+  },
+  {
+    title: "Yoo Jimin Poster",
+    description: "Portrait-based layout with bold color and framing.",
+    image: "/artworks/Yoo-Jimin-Poster.png",
   },
 ];
 
+const tileStyles = [
+  "aspect-[4/5]",
+  "aspect-square",
+  "aspect-[3/4]",
+  "aspect-[5/6]",
+  "aspect-[16/10]",
+  "aspect-[10/13]",
+];
+
+const shuffleArray = (items) => {
+  const array = [...items];
+
+  for (let i = array.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array;
+};
+
 export const Gallery = () => {
-  const [selectedArtwork, setSelectedArtwork] = useState(null);
+  const [displayedArtworks, setDisplayedArtworks] = useState(() =>
+    shuffleArray(artworks).map((artwork, idx) => ({
+      ...artwork,
+      tileStyle: tileStyles[idx % tileStyles.length],
+    }))
+  );
   const [selectedIndex, setSelectedIndex] = useState(null);
 
+  const selectedArtwork =
+    selectedIndex === null ? null : displayedArtworks[selectedIndex];
+
+  const openViewer = (index) => {
+    setSelectedIndex(index);
+  };
+
   const closeViewer = () => {
-    setSelectedArtwork(null);
+    setSelectedIndex(null);
+  };
+
+  const randomizeGallery = () => {
+    setDisplayedArtworks((prev) =>
+      shuffleArray(prev).map((artwork, idx) => ({
+        ...artwork,
+        tileStyle: tileStyles[idx % tileStyles.length],
+      }))
+    );
     setSelectedIndex(null);
   };
 
   const nextArtwork = () => {
     if (selectedIndex === null) return;
-    const nextIndex = (selectedIndex + 1) % artworks.length;
+    const nextIndex = (selectedIndex + 1) % displayedArtworks.length;
     setSelectedIndex(nextIndex);
-    setSelectedArtwork(artworks[nextIndex]);
   };
 
   const prevArtwork = () => {
     if (selectedIndex === null) return;
-    const prevIndex = (selectedIndex - 1 + artworks.length) % artworks.length;
+    const prevIndex =
+      (selectedIndex - 1 + displayedArtworks.length) % displayedArtworks.length;
     setSelectedIndex(prevIndex);
-    setSelectedArtwork(artworks[prevIndex]);
   };
+
+  useEffect(() => {
+    randomizeGallery();
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (event) => {
@@ -87,7 +146,7 @@ export const Gallery = () => {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [selectedArtwork, selectedIndex]);
+  }, [selectedArtwork, selectedIndex, displayedArtworks.length]);
 
   return (
     <section id="gallery" className="py-32 relative overflow-hidden">
@@ -111,36 +170,43 @@ export const Gallery = () => {
           <p className="text-[var(--color-muted-foreground)] animate-fade-in animation-delay-200">
             A collection of posters, advertisements, and promotional materials. Each design tells a story and captures the essence of the brand or event it represents.
           </p>
+          <div className="mt-6 animate-fade-in animation-delay-300">
+            <button
+              type="button"
+              onClick={randomizeGallery}
+              className="px-4 py-2 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
+            >
+              Shuffle artworks
+            </button>
+          </div>
         </div>
 
         {/* Masonry Gallery Grid */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-          {artworks.map((artwork, idx) => (
+          {displayedArtworks.map((artwork, idx) => (
             <article
-              key={idx}
+              key={`${artwork.image}-${idx}`}
               className="group glass rounded-2xl overflow-hidden animate-fade-in break-inside-avoid hover:shadow-[0_20px_60px_rgba(32,194,168,0.15)] transition-all duration-300 cursor-pointer"
               style={{ animationDelay: `${(idx % 3) * 100}ms` }}
-              onClick={() => {
-                setSelectedArtwork(artwork);
-                setSelectedIndex(idx);
-              }}
+              onClick={() => openViewer(idx)}
             >
-              <div className="relative overflow-hidden aspect-auto">
+              <div className={`relative overflow-hidden ${artwork.tileStyle}`}>
                 <img
                   src={artwork.image}
                   alt={artwork.title}
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+
+                <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full glass_strong text-white">
+                  Click to view
+                </span>
 
                 <div className="absolute inset-0 flex flex-col items-end justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="text-right">
                     <h3 className="text-sm font-semibold text-white mb-1">
                       {artwork.title}
                     </h3>
-                    <p className="text-xs text-[var(--color-muted-foreground)]">
-                      Click to view
-                    </p>
                   </div>
                 </div>
               </div>
@@ -214,7 +280,7 @@ export const Gallery = () => {
                 {selectedArtwork.description}
               </p>
               <p className="text-xs text-white/70 mt-2">
-                {selectedIndex !== null ? selectedIndex + 1 : 1} / {artworks.length}
+                {selectedIndex !== null ? selectedIndex + 1 : 1} / {displayedArtworks.length}
               </p>
             </div>
           </div>

@@ -31,7 +31,7 @@ const capstoneProject = {
     "Servo Motors",
   ],
   tinkercadLink: "https://www.tinkercad.com/things/ga8ANlyNf7F-trashure-machine",
-  manualLink: "/projects/capstone/TRASHURE-Manual.pdf",
+  manualLink: "/projects/capstone/User Manual.pdf",
 };
 
 const webDesignProjects = [

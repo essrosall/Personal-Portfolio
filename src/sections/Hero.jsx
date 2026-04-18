@@ -34,6 +34,8 @@ const skills = [
 ];
 
 export const Hero = () => {
+  const CV_PATH = "/Rosales_ATS Resume.pdf";
+
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [roleIndex, setRoleIndex] = useState(0);
@@ -76,6 +78,19 @@ export const Hero = () => {
     return () => clearTimeout(timer);
   }, [text, isDeleting, roleIndex]);
 
+  const handleManualOpen = () => {
+    window.open(MANUAL_URL, "_blank", "noopener,noreferrer");
+  };
+
+  const handleCVDownload = () => {
+    const link = document.createElement("a");
+    link.href = CV_PATH;
+    link.download = "John-Rey-Rosales-CV.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
       <div className="absolute top-[-2rem] left-[-5rem] w-[500px] h-[500px] bg-[var(--color-primary)]/8 rounded-full blur-3xl pointer-events-none" />
@@ -114,10 +129,10 @@ export const Hero = () => {
 
             {/* Call to Action Buttons */}
             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-              <Button size="lg">
-                Contact Me <FaArrowRight className="w-5 h-5" />
+              <Button size="lg" onClick={handleManualOpen}>
+                Manual <FaArrowRight className="w-5 h-5" />
               </Button>
-              <AnimatedBorderButton>
+              <AnimatedBorderButton onClick={handleCVDownload}>
                 <LuDownload className="w-5 h-5" />
                 Download CV
               </AnimatedBorderButton>
