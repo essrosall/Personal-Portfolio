@@ -232,7 +232,7 @@ export const Hero = () => {
       >
         <a
           href="#about"
-          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"
+          className="flex flex-col items-center gap-2 text-[var(--color-muted-foreground)] hover:text-[var(--color-primary)] transition-colors group"
         >
           <span className="text-xs uppercase tracking-wider">Scroll</span>
           <FaChevronDown className="w-6 h-6 animate-bounce" />

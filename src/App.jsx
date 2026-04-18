@@ -2,6 +2,7 @@ import { Hero } from "@/sections/Hero";
 import { About } from "@/sections/About";
 import { Experience } from "@/sections/Experience";
 import { Projects } from "@/sections/Projects";
+import { Gallery } from "@/sections/Gallery";
 import { Contact } from "@/sections/Contact";
 import { Navbar } from "@/layout/Navbar";
 import { CertnBadge } from "./sections/CertnBadge";
@@ -14,6 +15,7 @@ function App() {
       <Hero />
       <About />
       <Projects />
+      <Gallery />
       <Experience />
       <CertnBadge/>
       <Contact />

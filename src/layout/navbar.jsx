@@ -67,7 +67,7 @@ export const Navbar = () => {
           </div>
         </div>
 
-        {/* FIXED Desktop Button: Using onClick instead of <a> */}
+        {/*View Project Button*/}
         <div className="hidden md:block shrink-0">
           <Button size="md" onClick={scrollToProjects}>
             <span className="whitespace-nowrap">View Projects</span>
@@ -106,7 +106,7 @@ export const Navbar = () => {
               {link.label}
             </a>
           ))}
-          {/* FIXED Mobile Button: Using onClick instead of <a> */}
+          {/**/}
           <Button className="w-full" onClick={scrollToProjects}>
             View Projects
           </Button>
