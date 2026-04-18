@@ -78,8 +78,8 @@ export const Hero = () => {
     return () => clearTimeout(timer);
   }, [text, isDeleting, roleIndex]);
 
-  const handleManualOpen = () => {
-    window.open(MANUAL_URL, "_blank", "noopener,noreferrer");
+  const handleContactClick = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleCVDownload = () => {
@@ -129,8 +129,8 @@ export const Hero = () => {
 
             {/* Call to Action Buttons */}
             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-              <Button size="lg" onClick={handleManualOpen}>
-                Manual <FaArrowRight className="w-5 h-5" />
+              <Button size="lg" onClick={handleContactClick}>
+                Contact Me <FaArrowRight className="w-5 h-5" />
               </Button>
               <AnimatedBorderButton onClick={handleCVDownload}>
                 <LuDownload className="w-5 h-5" />
