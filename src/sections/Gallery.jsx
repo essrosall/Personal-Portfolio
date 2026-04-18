@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const artworks = [
   {
@@ -46,6 +46,48 @@ const artworks = [
 
 export const Gallery = () => {
   const [selectedArtwork, setSelectedArtwork] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+
+  const closeViewer = () => {
+    setSelectedArtwork(null);
+    setSelectedIndex(null);
+  };
+
+  const nextArtwork = () => {
+    if (selectedIndex === null) return;
+    const nextIndex = (selectedIndex + 1) % artworks.length;
+    setSelectedIndex(nextIndex);
+    setSelectedArtwork(artworks[nextIndex]);
+  };
+
+  const prevArtwork = () => {
+    if (selectedIndex === null) return;
+    const prevIndex = (selectedIndex - 1 + artworks.length) % artworks.length;
+    setSelectedIndex(prevIndex);
+    setSelectedArtwork(artworks[prevIndex]);
+  };
+
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (!selectedArtwork) return;
+
+      if (event.key === "Escape") {
+        closeViewer();
+        return;
+      }
+
+      if (event.key === "ArrowRight") {
+        nextArtwork();
+      }
+
+      if (event.key === "ArrowLeft") {
+        prevArtwork();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedArtwork, selectedIndex]);
 
   return (
     <section id="gallery" className="py-32 relative overflow-hidden">
@@ -78,7 +120,10 @@ export const Gallery = () => {
               key={idx}
               className="group glass rounded-2xl overflow-hidden animate-fade-in break-inside-avoid hover:shadow-[0_20px_60px_rgba(32,194,168,0.15)] transition-all duration-300 cursor-pointer"
               style={{ animationDelay: `${(idx % 3) * 100}ms` }}
-              onClick={() => setSelectedArtwork(artwork)}
+              onClick={() => {
+                setSelectedArtwork(artwork);
+                setSelectedIndex(idx);
+              }}
             >
               <div className="relative overflow-hidden aspect-auto">
                 <img
@@ -116,26 +161,50 @@ export const Gallery = () => {
       {/* Fullscreen Viewer */}
       {selectedArtwork && (
         <div
-          className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setSelectedArtwork(null)}
+          className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-start justify-center pt-24 md:pt-28 px-4 pb-6"
+          onClick={closeViewer}
         >
           <button
             type="button"
-            onClick={() => setSelectedArtwork(null)}
+            onClick={closeViewer}
             className="absolute top-5 right-5 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
             aria-label="Close artwork viewer"
           >
             <X className="w-5 h-5" />
           </button>
 
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              prevArtwork();
+            }}
+            className="absolute left-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
+            aria-label="Previous artwork"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              nextArtwork();
+            }}
+            className="absolute right-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
+            aria-label="Next artwork"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
           <div
-            className="relative w-full max-w-4xl max-h-[90vh] flex flex-col items-center justify-center"
+            className="relative w-full max-w-4xl max-h-[88vh] flex flex-col items-center justify-center"
             onClick={(event) => event.stopPropagation()}
           >
             <img
               src={selectedArtwork.image}
               alt={selectedArtwork.title}
-              className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+              className="max-w-full max-h-[74vh] object-contain rounded-2xl shadow-2xl"
             />
             <div className="mt-6 text-center">
               <h3 className="text-xl font-semibold text-white mb-2">
@@ -143,6 +212,9 @@ export const Gallery = () => {
               </h3>
               <p className="text-[var(--color-muted-foreground)]">
                 {selectedArtwork.description}
+              </p>
+              <p className="text-xs text-white/70 mt-2">
+                {selectedIndex !== null ? selectedIndex + 1 : 1} / {artworks.length}
               </p>
             </div>
           </div>

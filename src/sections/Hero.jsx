@@ -183,7 +183,7 @@ export const Hero = () => {
                   }
                 >
                   <img
-                    src="/projects/Profile.png"
+                    src="/logo/Profile.png"
                     alt="Profile Picture"
                     className="w-full aspect-[4/5] object-cover transition-transform duration-700 ease-out hover:scale-110"
                   />

@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];
@@ -46,7 +47,7 @@ export const Navbar = () => {
         
         <a href="#" className="shrink-0 inline-flex items-center hover:opacity-90 transition-opacity" aria-label="Go to home">
           <img
-            src="/projects/JRLOGO.png"
+            src="/logo/JRLOGO.png"
             alt="JR Logo"
             className="h-11 w-auto object-contain"
           />
