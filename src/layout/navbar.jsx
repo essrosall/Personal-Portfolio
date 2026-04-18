@@ -44,8 +44,12 @@ export const Navbar = () => {
     >
       <nav className="container mx-auto px-6 flex items-center justify-between relative z-10 gap-4">
         
-        <a href="#" className="text-xl font-bold tracking-tight hover:text-[var(--color-primary)] shrink-0">
-          EssRosall <span className="text-[var(--color-primary)]">.</span>
+        <a href="#" className="shrink-0 inline-flex items-center hover:opacity-90 transition-opacity" aria-label="Go to home">
+          <img
+            src="/projects/JRLOGO.png"
+            alt="JR Logo"
+            className="h-11 w-auto object-contain"
+          />
         </a>
 
         {/* Desktop Nav */}

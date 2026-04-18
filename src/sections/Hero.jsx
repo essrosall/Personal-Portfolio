@@ -37,6 +37,11 @@ export const Hero = () => {
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [roleIndex, setRoleIndex] = useState(0);
+  const [profileTooltip, setProfileTooltip] = useState({
+    x: 0,
+    y: 0,
+    visible: false,
+  });
 
  
 
@@ -150,8 +155,39 @@ export const Hero = () => {
               from-[var(--color-primary)]/30 
               via-transparent to-[var(--color-primary)]/10 
               blur-2xl animate-pulse-glow"/>
-              <div className="relative glass rounded-3xl p-2 glow-border">
-                <img src="#" alt="Profile Picture" className="w-full aspect-[4/5] object-cover rounded-2xl" />
+              <div className="group relative glass rounded-3xl p-2 glow-border">
+                <div
+                  className={`absolute px-3 py-1.5 rounded-lg glass text-xs font-medium text-[var(--color-foreground)] whitespace-nowrap pointer-events-none transition-all duration-150 z-20 ${
+                    profileTooltip.visible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                  }`}
+                  style={{
+                    left: profileTooltip.x,
+                    top: profileTooltip.y,
+                    transform: "translate(-50%, -130%)",
+                  }}
+                >
+                  Mr. John Rey A. Rosales
+                </div>
+                <div
+                  className="rounded-2xl overflow-hidden"
+                  onMouseMove={(event) => {
+                    const rect = event.currentTarget.getBoundingClientRect();
+                    setProfileTooltip({
+                      x: event.clientX - rect.left,
+                      y: event.clientY - rect.top,
+                      visible: true,
+                    });
+                  }}
+                  onMouseLeave={() =>
+                    setProfileTooltip((prev) => ({ ...prev, visible: false }))
+                  }
+                >
+                  <img
+                    src="/projects/Profile.png"
+                    alt="Profile Picture"
+                    className="w-full aspect-[4/5] object-cover transition-transform duration-700 ease-out hover:scale-110"
+                  />
+                </div>
 
                 {/*Floating badge*/}
                 <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float ">
