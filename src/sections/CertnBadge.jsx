@@ -13,38 +13,39 @@ const badges = [
     title: "Network Defense",
     date: "March 22, 2026",
     issuer: "CISCO",
-    image: "/public/badges/DEF.png",
+    image: "/badges/DEF.png",
     credly: "https://www.credly.com/badges/c60a0b9b-aed1-4e6c-be94-06c1e501c0df/public_url",
   },
   {
     title: "AI Fundamentals with IBM SkillsBuild",
     date: "March 13, 2026",
     issuer: "IBM",
-    image: "/public/badges/AI.png",
+    image: "/badges/AI.png",
     credly: "https://www.credly.com/badges/081690b6-d900-4c7d-840a-22ebf7dd4a78/public_url",
   },
   {
     title: "Artificial Intelligence Fundamentals",
     date: "March 13, 2026",
     issuer: "IBM",
-    image: "/public/badges/IBM.png",
+    image: "/badges/IBM.png",
     credly: "https://www.credly.com/badges/7eb1e9d0-67ae-4728-8847-cb81726d4086/public_url",
   },
   {
     title: "Introduction to Data Science",
     date: "February 27, 2026",
     issuer: "CISCO",
-    image: "/public/badges/DATSCI.png",
+    image: "/badges/DATSCI.png",
     credly: "https://www.credly.com/badges/660952c8-d299-4b7f-8198-32ca94640497/public_url",
   },
   {
     title: "Introduction to Cybersecurity Badge",
     date: " February 05, 2026",
     issuer: "CISCO",
-    image: "/public/badges/CS.png",
+    image: "/badges/CS.png",
     credly: "https://www.credly.com/badges/27b4ea10-dbaf-48ed-a1bc-f6b0822a345d/public_url",
   },
-  
+
+
 ];
 
 const certifications = [
@@ -106,6 +107,13 @@ const certifications = [
   },
   {
     title: "AI Fundamentals with IBM SkillsBuild",
+    description: "CISCO IBM SkillsBuild - Essential artificial intelligence concepts and practical AI applications.",
+    date: "March 13, 2026",
+    image: "/certificates/AIFUND.jpg",
+    credly: "https://www.credly.com/badges/081690b6-d900-4c7d-840a-22ebf7dd4a78/public_url",
+  },
+  {
+    title: "Logo Design Competition",
     description: "CISCO IBM SkillsBuild - Essential artificial intelligence concepts and practical AI applications.",
     date: "March 13, 2026",
     image: "/certificates/AIFUND.jpg",
@@ -222,66 +230,6 @@ export const CertnBadge = () => {
           </p>
         </div>
 
-        {/* Badges Section */}
-        <div className="max-w-5xl mx-auto mb-20">
-          <div className="text-center mb-8 animate-fade-in animation-delay-200">
-            <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-secondary-foreground)]">
-              Industry Badges
-            </h3>
-            <p className="text-[var(--color-muted-foreground)] mt-2">
-              Cisco and IBM achievement badges with acquisition dates.
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
-            {badges.map((item, idx) => (
-              <article
-                key={idx}
-                className="group glass rounded-2xl overflow-hidden animate-fade-in md:row-span-1"
-              >
-                <div className="relative overflow-hidden aspect-square flex items-center justify-center p-5 bg-gradient-to-b from-[var(--color-surface)]/70 to-[var(--color-background)]/70">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full max-w-[250px] max-h-[250px] object-contain transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/65 via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white">
-                    <Award className="w-4 h-4 text-[var(--color-primary)]" />
-                    {item.issuer} Badge
-                  </div>
-                </div>
-
-                <div className="p-6 space-y-4">
-                  <h3 className="text-base md:text-lg font-semibold group-hover:text-[var(--color-primary)] transition-colors">
-                    {item.title}
-                  </h3>
-                  <div className="flex items-center gap-2 text-sm text-[var(--color-secondary-foreground)]">
-                    <Calendar className="w-4 h-4" />
-                    <span>{item.date}</span>
-                  </div>
-                  <a
-                    href={item.credly}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
-                  >
-                    View Proof
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </div>
-              </article>
-            ))}
-
-            {!isBadgeCountDivisibleByThree && (
-              <article className="glass rounded-2xl p-6 flex items-center justify-center text-center min-h-[220px] animate-fade-in">
-                <p className="text-[var(--color-muted-foreground)] text-sm md:text-base">
-                  Working on my next badge... currently grinding XP like it is a
-                  side quest.
-                </p>
-              </article>
-            )}
-          </div>
-
           {isBadgeCountDivisibleByThree && (
             <div className="mt-6 text-center animate-fade-in">
               <p className="text-[var(--color-muted-foreground)] text-sm md:text-base">
@@ -290,7 +238,6 @@ export const CertnBadge = () => {
               </p>
             </div>
           )}
-        </div>
 
         {/* Certification and Badge Cards */}
         <div className="text-center mb-8 animate-fade-in animation-delay-200">
@@ -375,17 +322,68 @@ export const CertnBadge = () => {
                   key={idx}
                   type="button"
                   onClick={() => setActiveCertificate(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    idx === activeCertificate
+                  className={`h-2 rounded-full transition-all duration-300 ${idx === activeCertificate
                       ? "w-8 bg-[var(--color-primary)]"
                       : "w-2 bg-[var(--color-muted-foreground)]/40 hover:bg-[var(--color-muted-foreground)]/70"
-                  }`}
+                    }`}
                   aria-label={`Go to certificate ${idx + 1}`}
                 />
               ))}
             </div>
           </div>
         </article>
+
+        <div className="mt-16 animate-fade-in animation-delay-300">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-secondary-foreground)]">
+              Badges
+            </h3>
+            <p className="text-[var(--color-muted-foreground)] mt-2">
+              Digital badges and micro-credentials that support my certificate portfolio.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {badges.map((badge) => (
+              <article
+                key={badge.title}
+                className="group glass rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300"
+              >
+                <div className="relative aspect-[4/3] bg-[var(--color-surface)]/40 overflow-hidden">
+                  <img
+                    src={badge.image}
+                    alt={badge.title}
+                    className="w-full h-full object-contain p-5 transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                  <span className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white">
+                    <Award className="w-4 h-4 text-[var(--color-primary)]" />
+                    Badge
+                  </span>
+                </div>
+
+                <div className="p-5 space-y-3">
+                  <h4 className="text-lg font-semibold text-[var(--color-foreground)] leading-snug">
+                    {badge.title}
+                  </h4>
+                  <div className="flex items-center justify-between gap-4 text-sm text-[var(--color-muted-foreground)] flex-wrap">
+                    <span>{badge.issuer}</span>
+                    <span>{badge.date}</span>
+                  </div>
+                  <a
+                    href={badge.credly}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
+                  >
+                    View Proof
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
 
         <div className="text-center mt-8 animate-fade-in animation-delay-300">
           <p className="text-sm text-[var(--color-muted-foreground)]">
@@ -440,6 +438,7 @@ export const CertnBadge = () => {
           </div>
         </div>
       )}
+
     </section>
   );
 };
