@@ -4,7 +4,7 @@ import { Experience } from "@/sections/Experience";
 import { Projects } from "@/sections/Projects";
 import { Gallery } from "@/sections/Gallery";
 import { Contact } from "@/sections/Contact";
-import { Navbar } from "@/layout/Navbar";
+import { Navbar } from "./layout/Navbar.jsx";
 import { CertnBadge } from "./sections/CertnBadge";
 import { Footer } from "./layout/Footer";
 import { Achievement } from "./sections/Achievement";

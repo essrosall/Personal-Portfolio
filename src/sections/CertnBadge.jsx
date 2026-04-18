@@ -4,13 +4,14 @@ import {
   ChevronLeft,
   ChevronRight,
   ExternalLink,
+  X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const badges = [
   {
     title: "Network Defense",
-    date: "February 2026",
+    date: "March 22, 2026",
     issuer: "CISCO",
     image: "/public/badges/DEF.png",
     credly: "https://www.credly.com/badges/c60a0b9b-aed1-4e6c-be94-06c1e501c0df/public_url",
@@ -43,47 +44,84 @@ const badges = [
     image: "/public/badges/CS.png",
     credly: "https://www.credly.com/badges/27b4ea10-dbaf-48ed-a1bc-f6b0822a345d/public_url",
   },
+  
 ];
 
 const certifications = [
   {
-    title: "Google UX Design Professional Certificate",
-    description:
-      "Comprehensive UX training focused on user research, wireframing, prototyping, and accessibility-first product design.",
-    date: "June 2025",
-    image: "/projects/certificates/google-ux-certificate.png",
-    credly: "https://www.credly.com/",
+    title: "CLOUDSTART 2026: AWS FULL STACK HANDS-ON WORKSHOP",
+    description: "Amazon Web Service Learning Club - Comprehensive AWS full stack training and hands-on workshop experience.",
+    date: "February 9, 2026",
+    image: "certificates/AWS.jpg",
+    credly: "#",
   },
   {
-    title: "Meta Front-End Developer Certificate",
-    description:
-      "Validated frontend skills in React, JavaScript, responsive design, and modern web development workflows.",
-    date: "October 2025",
-    image: "/projects/certificates/meta-frontend-certificate.png",
-    credly: "https://www.credly.com/",
+    title: "IGNITE SUMMIT 2023",
+    description: "Navigating the Digital Frontier: Trends, Innovation, and Cybersecurity in the Modern IT Landscape - QCU.",
+    date: "December 5, 2023",
+    image: "/certificates/SUMMIT.png",
+    credly: "#",
   },
   {
-    title: "Figma UI Design Badge",
-    description:
-      "Recognized ability to design scalable design systems, polished interfaces, and collaborative design handoff flows.",
-    date: "January 2026",
-    image: "/projects/certificates/figma-ui-badge.png",
-    credly: "https://www.credly.com/",
+    title: "Cybersecurity in Education",
+    description: "Nephila Technology Inc. - Safeguarding Learner's Data in Academic Integrity.",
+    date: "October 9, 2025",
+    image: "/certificates/NEPHILA.jpg",
+    credly: "#",
   },
   {
-    title: "JavaScript Algorithms and Data Structures",
-    description:
-      "Demonstrated strong fundamentals in core JavaScript logic, problem solving, and efficient coding patterns.",
-    date: "March 2026",
-    image: "/projects/certificates/javascript-algorithms-certificate.png",
-    credly: "https://www.credly.com/",
+    title: "FROM IDEA TO APP",
+    description: "National College of Business and Arts - Fairview Campus. Demystifying Web and Digital Marketing.",
+    date: "September 21, 2025",
+    image: "/certificates/NCBA.jpg",
+    credly: "#",
+  },
+  {
+    title: "Your Online Blueprint",
+    description: "Quezon City University - How to Protect Digital Privacy and Security.",
+    date: "December 2, 2024",
+    image: "/certificates/YOB.jpg",
+    credly: "#",
+  },
+  {
+    title: "Introduction to Data Science",
+    description: "CISCO Networking Academy - Core data science fundamentals and practical applications.",
+    date: "February 27, 2026",
+    image: "/certificates/INTDATSCI.jpg",
+    credly: "https://www.credly.com/badges/660952c8-d299-4b7f-8198-32ca94640497/public_url",
+  },
+  {
+    title: "Network Defense",
+    description: "CISCO Networking Academy - Advanced network security and defense mechanisms.",
+    date: "March 22, 2026",
+    image: "/certificates/NETDEF.jpg",
+    credly: "https://www.credly.com/badges/c60a0b9b-aed1-4e6c-be94-06c1e501c0df/public_url",
+  },
+  {
+    title: "Introduction to Cyber Security",
+    description: "CISCO Networking Academy - Foundational cybersecurity principles and best practices.",
+    date: "February 5, 2026",
+    image: "/certificates/INTCS.jpg",
+    credly: "https://www.credly.com/badges/27b4ea10-dbaf-48ed-a1bc-f6b0822a345d/public_url",
+  },
+  {
+    title: "AI Fundamentals with IBM SkillsBuild",
+    description: "CISCO IBM SkillsBuild - Essential artificial intelligence concepts and practical AI applications.",
+    date: "March 13, 2026",
+    image: "/certificates/AIFUND.jpg",
+    credly: "https://www.credly.com/badges/081690b6-d900-4c7d-840a-22ebf7dd4a78/public_url",
   },
 ];
 
 export const CertnBadge = () => {
   const [activeCertificate, setActiveCertificate] = useState(0);
   const [isCertificateZoomOpen, setIsCertificateZoomOpen] = useState(false);
+  const [selectedCertificate, setSelectedCertificate] = useState(0);
   const isBadgeCountDivisibleByThree = badges.length % 3 === 0;
+
+  const closeCertificateViewer = () => {
+    setIsCertificateZoomOpen(false);
+  };
 
   const nextCertificate = () => {
     setActiveCertificate((prev) => (prev + 1) % certifications.length);
@@ -102,9 +140,24 @@ export const CertnBadge = () => {
 
     const intervalId = window.setInterval(() => {
       setActiveCertificate((prev) => (prev + 1) % certifications.length);
-    }, 3000);
+    }, 3500);
 
     return () => window.clearInterval(intervalId);
+  }, [isCertificateZoomOpen]);
+
+  useEffect(() => {
+    if (!isCertificateZoomOpen) {
+      return undefined;
+    }
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        closeCertificateViewer();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [isCertificateZoomOpen]);
 
   return (
@@ -170,7 +223,7 @@ export const CertnBadge = () => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full max-w-[180px] max-h-[180px] object-contain transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full max-w-[250px] max-h-[250px] object-contain transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card/65 via-transparent to-transparent" />
                   <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white">
@@ -230,18 +283,21 @@ export const CertnBadge = () => {
           </p>
         </div>
 
-        <article className="group glass rounded-2xl overflow-hidden animate-fade-in animation-delay-300 max-w-6xl mx-auto">
-          <div className="relative overflow-hidden min-h-[240px] md:min-h-[280px] flex items-center justify-center p-6 md:p-8 bg-gradient-to-b from-[var(--color-surface)]/80 to-[var(--color-background)]/70">
+        <article className="group glass rounded-2xl overflow-hidden animate-fade-in animation-delay-300 max-w-5xl mx-auto">
+          <div className="relative overflow-hidden w-full h-[360px] md:h-[560px] lg:h-[640px] bg-gradient-to-b from-[var(--color-surface)]/85 to-[var(--color-background)]/75">
             <button
               type="button"
-              onClick={() => setIsCertificateZoomOpen(true)}
-              className="cursor-zoom-in"
+              onClick={() => {
+                setSelectedCertificate(activeCertificate);
+                setIsCertificateZoomOpen(true);
+              }}
+              className="w-full h-full cursor-zoom-in"
               aria-label={`Open ${certifications[activeCertificate].title} in full screen`}
             >
               <img
                 src={certifications[activeCertificate].image}
                 alt={certifications[activeCertificate].title}
-                className="max-w-[260px] md:max-w-[340px] max-h-[180px] md:max-h-[220px] object-contain transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-contain p-2 md:p-3 transition-transform duration-700 group-hover:scale-[1.01]"
               />
             </button>
             <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
@@ -250,54 +306,55 @@ export const CertnBadge = () => {
               <Award className="w-4 h-4 text-[var(--color-primary)]" />
               Certified
             </div>
+
+            <button
+              type="button"
+              onClick={prevCertificate}
+              className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full glass hover:bg-[var(--color-primary)] hover:text-white transition-all"
+              aria-label="Previous certificate"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              type="button"
+              onClick={nextCertificate}
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full glass hover:bg-[var(--color-primary)] hover:text-white transition-all"
+              aria-label="Next certificate"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
           </div>
 
-          <div className="p-6">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h4 className="text-xl font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
-                  {certifications[activeCertificate].title}
-                </h4>
-                <p className="text-sm text-[var(--color-muted-foreground)] mt-2">
-                  {certifications[activeCertificate].description}
-                </p>
-                <div className="flex items-center gap-2 text-sm text-[var(--color-secondary-foreground)] mt-2">
-                  <Calendar className="w-4 h-4" />
-                  <span>{certifications[activeCertificate].date}</span>
-                </div>
+          <div className="p-6 space-y-4">
+            <h4 className="text-xl font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
+              {certifications[activeCertificate].title}
+            </h4>
+            <p className="text-sm text-[var(--color-muted-foreground)]">
+              {certifications[activeCertificate].description}
+            </p>
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <div className="flex items-center gap-2 text-sm text-[var(--color-secondary-foreground)]">
+                <Calendar className="w-4 h-4" />
+                <span>{certifications[activeCertificate].date}</span>
+              </div>
+              {certifications[activeCertificate].credly !== "#" && (
                 <a
                   href={certifications[activeCertificate].credly}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm mt-4"
+                  className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
                 >
                   View Proof
                   <ExternalLink className="w-4 h-4" />
                 </a>
-              </div>
-
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  onClick={prevCertificate}
-                  className="p-2.5 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all"
-                  aria-label="Previous certificate"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={nextCertificate}
-                  className="p-2.5 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all"
-                  aria-label="Next certificate"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
+              )}
             </div>
 
-            <div className="flex items-center justify-center gap-2 mt-6">
+            <div className="flex items-center justify-center gap-2 pt-1">
               {certifications.map((_, idx) => (
                 <button
                   key={idx}
+                  type="button"
                   onClick={() => setActiveCertificate(idx)}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     idx === activeCertificate
@@ -322,27 +379,16 @@ export const CertnBadge = () => {
 
       {isCertificateZoomOpen && (
         <div
-          className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setIsCertificateZoomOpen(false)}
+          className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 pt-24 md:pt-28"
+          onClick={closeCertificateViewer}
         >
           <button
             type="button"
-            onClick={() => setIsCertificateZoomOpen(false)}
+            onClick={closeCertificateViewer}
             className="absolute top-5 right-5 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
             aria-label="Close certificate viewer"
           >
-            <svg
-              viewBox="0 0 24 24"
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
+            <X className="w-5 h-5" />
           </button>
 
           <div
@@ -350,8 +396,8 @@ export const CertnBadge = () => {
             onClick={(event) => event.stopPropagation()}
           >
             <img
-              src={certifications[activeCertificate].image}
-              alt={certifications[activeCertificate].title}
+              src={certifications[selectedCertificate].image}
+              alt={certifications[selectedCertificate].title}
               className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
             />
           </div>

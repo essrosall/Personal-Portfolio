@@ -5,6 +5,7 @@ import { FiCalendar } from "react-icons/fi";
 const capstoneProject = {
   title:
     "TRASHURE: Automated Trash to Treasure Waste Verification with Points Allocation and Reward System",
+  role: "UI/UX Design Lead and Hardware Build Lead",
   abstract:
     "TRASHURE is our capstone system that verifies waste input using sensor-assisted classification, then allocates points to users for rewards. It combines a web-based management and tracking workflow with machine-level automation to support proper waste segregation and community engagement.",
   screenshots: [
@@ -325,6 +326,11 @@ export const Projects = () => {
 
               <p className="text-sm md:text-base text-[var(--color-muted-foreground)] mt-3 leading-relaxed">
                 {capstoneProject.abstract}
+              </p>
+
+              <p className="text-sm md:text-base text-white] mt-3">
+                <span className="font-semibold text-white]">Role:</span>{" "}
+                {capstoneProject.role}
               </p>
             </div>
 

@@ -2,8 +2,8 @@ import { useEffect, useState, useMemo } from "react";
 import { Button } from '@/Components/Button';
 import { AnimatedBorderButton } from "@/Components/AnimatedBorderButton";
 import {
-  FaArrowRight, FaGithub, FaFacebookSquare, FaTwitterSquare,
-  FaInstagramSquare, FaLinkedin, FaChevronDown, FaJava, FaCss3Alt,
+  FaArrowRight, FaGithub, FaFacebookSquare, FaBehance,
+  FaLinkedin, FaChevronDown, FaJava, FaCss3Alt,
   FaHtml5, FaPython, FaReact, FaFigma, FaGitAlt
 } from "react-icons/fa";
 import { LuDownload } from "react-icons/lu";
@@ -127,11 +127,10 @@ export const Hero = () => {
             <div className="flex items-center gap-1 animate-fade-in animation-delay-500">
               <span className="text-sm text-[var(--color-muted-foreground)] mr-2">Follow me:</span>
               {[
-                { icon: FaGithub, href: "#" },
-                { icon: FaLinkedin, href: "#" },
-                { icon: FaTwitterSquare, href: "#" },
-                { icon: FaFacebookSquare, href: "#" },
-                { icon: FaInstagramSquare, href: "#" },
+                { icon: FaGithub, href: "https://github.com/essrosall" },
+                { icon: FaLinkedin, href: "https://www.linkedin.com/in/rosales-john-rey-a-017a14341/" },
+                { icon: FaFacebookSquare, href: "https://www.facebook.com/ess.rosall/" },
+                { icon: FaBehance, href: "https://www.behance.net/rosalesjohnreya" },
               ].map((social, idx) => (
                 <a
                   key={idx}

@@ -1,11 +1,11 @@
-import { FaGithub, FaLinkedin, FaTwitter, FaBehance } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaFacebook, FaBehance } from "react-icons/fa";
 import { MoveUp } from "lucide-react";
 
 const socialLinks = [
-  { icon: FaGithub, href: "#", label: "GitHub" },
-  { icon: FaLinkedin, href: "#", label: "LinkedIn" },
-  { icon: FaTwitter, href: "#", label: "Twitter" },
-  { icon: FaBehance, href: "#", label: "Behance" }, 
+  { icon: FaGithub, href: "https://github.com/essrosall", label: "GitHub" },
+  { icon: FaLinkedin, href: "https://www.linkedin.com/in/rosales-john-rey-a-017a14341/", label: "LinkedIn" },
+  { icon: FaFacebook, href: "https://www.facebook.com/ess.rosall/", label: "Facebook" },
+  { icon: FaBehance, href: "https://www.behance.net/rosalesjohnreya", label: "Behance" }, 
 ];
 
 const footerLinks = [
@@ -37,15 +37,19 @@ export const Footer = () => {
           
           {/* Column 1: Brand & Tagline */}
           <div className="md:col-span-5 lg:col-span-4">
-            <a href="#" className="text-2xl font-bold tracking-tight text-white inline-block mb-4">
-              EssRosall <span className="text-[var(--color-primary)]">.</span>
+            <a href="#" className="inline-block mb-4" aria-label="Home">
+              <img
+                src="/logo/JRLOGO.png"
+                alt="JR Logo"
+                className="h-10 w-auto object-contain"
+              />
             </a>
             <p className="text-[var(--color-muted-foreground)] leading-relaxed text-sm pr-4">
               Turning ideas into stunning visuals and pixels into intuitive interfaces. Building digital experiences with purpose.
             </p>
           </div>
 
-          {/* Column 2: Social Links (Replaced the CTA) */}
+          {/* Column 2: Social Links */}
           <div className="md:col-span-7 lg:col-span-4 lg:mx-auto">
             <h4 className="text-white font-medium mb-5 tracking-wider uppercase text-xs">Connect Online</h4>
             <div className="flex items-center gap-4">
@@ -56,7 +60,7 @@ export const Footer = () => {
                   aria-label={social.label}
                   className="w-10 h-10 rounded-full glass border border-white/5 flex items-center justify-center text-[var(--color-muted-foreground)] hover:text-white hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] transition-all hover:-translate-y-1 shadow-lg"
                 >
-                  <social.icon className="w-4 h-4" />
+                  <social.icon className="w-5 h-5" />
                 </a>
               ))}
             </div>
