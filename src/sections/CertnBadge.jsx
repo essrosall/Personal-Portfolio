@@ -133,6 +133,16 @@ export const CertnBadge = () => {
     );
   };
 
+  const nextSelectedCertificate = () => {
+    setSelectedCertificate((prev) => (prev + 1) % certifications.length);
+  };
+
+  const prevSelectedCertificate = () => {
+    setSelectedCertificate(
+      (prev) => (prev - 1 + certifications.length) % certifications.length
+    );
+  };
+
   useEffect(() => {
     if (isCertificateZoomOpen) {
       return undefined;
@@ -153,6 +163,15 @@ export const CertnBadge = () => {
     const onKeyDown = (event) => {
       if (event.key === "Escape") {
         closeCertificateViewer();
+        return;
+      }
+
+      if (event.key === "ArrowRight") {
+        nextSelectedCertificate();
+      }
+
+      if (event.key === "ArrowLeft") {
+        prevSelectedCertificate();
       }
     };
 
@@ -297,7 +316,7 @@ export const CertnBadge = () => {
               <img
                 src={certifications[activeCertificate].image}
                 alt={certifications[activeCertificate].title}
-                className="w-full h-full object-contain p-2 md:p-3 transition-transform duration-700 group-hover:scale-[1.01]"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
               />
             </button>
             <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
@@ -395,11 +414,29 @@ export const CertnBadge = () => {
             className="relative w-full max-w-6xl max-h-[90vh] flex items-center justify-center"
             onClick={(event) => event.stopPropagation()}
           >
+            <button
+              type="button"
+              onClick={prevSelectedCertificate}
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full glass hover:bg-[var(--color-primary)] hover:text-white transition-all"
+              aria-label="Previous certificate"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
             <img
               src={certifications[selectedCertificate].image}
               alt={certifications[selectedCertificate].title}
               className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
             />
+
+            <button
+              type="button"
+              onClick={nextSelectedCertificate}
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full glass hover:bg-[var(--color-primary)] hover:text-white transition-all"
+              aria-label="Next certificate"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
           </div>
         </div>
       )}

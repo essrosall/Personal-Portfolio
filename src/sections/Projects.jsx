@@ -150,7 +150,7 @@ export const Projects = () => {
           webDesignProjects[hoveredWebCard].screenshots.length;
         return next;
       });
-    }, 3500);
+    }, 1200);
 
     return () => window.clearInterval(previewIntervalId);
   }, [hoveredWebCard, selectedWebProjectIndex]);
