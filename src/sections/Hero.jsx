@@ -16,7 +16,7 @@ import {
 
 const roles = ["UI/UX Designer", "Web Developer", "Graphic designer"];
 
-// 1. SKILLS ARRAY UPDATED TO OBJECTS
+
 const skills = [
   { name: "HTML", icon: <FaHtml5 /> },
   { name: "CSS", icon: <FaCss3Alt /> },
@@ -34,7 +34,7 @@ const skills = [
 ];
 
 export const Hero = () => {
-  const CV_PATH = "/Rosales_ATS Resume.pdf";
+  const CV_PATH = "/Rosales_ATS resume.pdf";
 
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -85,7 +85,7 @@ export const Hero = () => {
   const handleCVDownload = () => {
     const link = document.createElement("a");
     link.href = CV_PATH;
-    link.download = "John-Rey-Rosales-CV.pdf";
+    link.download = "Rosales Resume.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
