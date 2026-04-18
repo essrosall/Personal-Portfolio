@@ -8,7 +8,7 @@ const experience = [
         description: "Maintained optimal operational performance in a fast-paced BPO environment by configuring hardware, troubleshooting network connectivity, and efficiently resolving IT support tickets.",
         toolsntechnologies: ["Active Directory(AD)", "BigFix", "SCCM", "SolvNow", "Workday"],
         current: true,
-        logo: "/projects/concentrix.jpg",
+        logo: "/logo/concentrix.jpg",
     },
     {
         period: "September 2023 - September 2024",
@@ -17,7 +17,7 @@ const experience = [
         description: "I collaborated directly with clients to design and deliver visually appealing print apparel, digital assets, and website layouts under tight deadlines.",
         toolsntechnologies: ["Adobe Photoshop", "Adobe Illustrator", "MainTop DTP", "DTF Software"],
         current: false,
-        logo: "/projects/tapp.jpg",
+        logo: "/logo/tapp.jpg",
     },
 ];
 

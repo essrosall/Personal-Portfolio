@@ -368,7 +368,7 @@ export const Projects = () => {
             <span className="text-[var(--color-secondary-foreground)] text-sm font-medium tracking-wider uppercase animate-fade-in">
               UI/UX Category
             </span>
-            <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]"><span className="font-cursive text-white italic">Web Design  </span>
+            <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]"><span className="font-cursive text-white]">Web Design  </span>
                Showcase
             </h3>
             <p className="text-[var(--color-muted-foreground)]">
@@ -377,7 +377,7 @@ export const Projects = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-10xl mx-auto">
             {webDesignProjects.map((project, idx) => (
               <article
                 key={project.title}

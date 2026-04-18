@@ -9,39 +9,39 @@ import { useEffect, useState } from "react";
 
 const badges = [
   {
-    title: "Cisco Networking Essentials Badge",
+    title: "Network Defense",
     date: "February 2026",
-    issuer: "Cisco",
-    image: "/projects/badges/cisco-badge-1.png",
-    credly: "https://www.credly.com/",
+    issuer: "CISCO",
+    image: "/public/badges/DEF.png",
+    credly: "https://www.credly.com/badges/c60a0b9b-aed1-4e6c-be94-06c1e501c0df/public_url",
   },
   {
-    title: "Cisco Cybersecurity Essentials Badge",
-    date: "February 2026",
-    issuer: "Cisco",
-    image: "/projects/badges/cisco-badge-2.png",
-    credly: "https://www.credly.com/",
-  },
-  {
-    title: "IBM SkillsBuild AI Fundamentals Badge",
-    date: "March 2026",
+    title: "AI Fundamentals with IBM SkillsBuild",
+    date: "March 13, 2026",
     issuer: "IBM",
-    image: "/projects/badges/ibm-badge-1.png",
-    credly: "https://www.credly.com/",
+    image: "/public/badges/AI.png",
+    credly: "https://www.credly.com/badges/081690b6-d900-4c7d-840a-22ebf7dd4a78/public_url",
   },
   {
-    title: "IBM Data Analytics Badge",
-    date: "March 2026",
+    title: "Artificial Intelligence Fundamentals",
+    date: "March 13, 2026",
     issuer: "IBM",
-    image: "/projects/badges/ibm-badge-2.png",
-    credly: "https://www.credly.com/",
+    image: "/public/badges/IBM.png",
+    credly: "https://www.credly.com/badges/7eb1e9d0-67ae-4728-8847-cb81726d4086/public_url",
   },
   {
-    title: "IBM Web Development Badge",
-    date: "April 2026",
-    issuer: "IBM",
-    image: "/projects/badges/ibm-badge-3.png",
-    credly: "https://www.credly.com/",
+    title: "Introduction to Data Science",
+    date: "February 27, 2026",
+    issuer: "CISCO",
+    image: "/public/badges/DATSCI.png",
+    credly: "https://www.credly.com/badges/660952c8-d299-4b7f-8198-32ca94640497/public_url",
+  },
+  {
+    title: "Introduction to Cybersecurity Badge",
+    date: " February 05, 2026",
+    issuer: "CISCO",
+    image: "/public/badges/CS.png",
+    credly: "https://www.credly.com/badges/27b4ea10-dbaf-48ed-a1bc-f6b0822a345d/public_url",
   },
 ];
 
@@ -170,7 +170,7 @@ export const CertnBadge = () => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-28 h-28 md:w-32 md:h-32 object-contain transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full max-w-[180px] max-h-[180px] object-contain transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card/65 via-transparent to-transparent" />
                   <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white">
@@ -313,9 +313,9 @@ export const CertnBadge = () => {
 
         <div className="text-center mt-8 animate-fade-in animation-delay-300">
           <p className="text-sm text-[var(--color-muted-foreground)]">
-            Update image and Credly links in both <span className="text-white">badges</span> and
+            These are my <span className="text-white">badges</span> and
             <span className="text-white"> certifications </span>
-            arrays with your own files and proof URLs.
+            afor the past years and months.
           </p>
         </div>
       </div>

@@ -7,6 +7,7 @@ import { Contact } from "@/sections/Contact";
 import { Navbar } from "@/layout/Navbar";
 import { CertnBadge } from "./sections/CertnBadge";
 import { Footer } from "./layout/Footer";
+import { Achievement } from "./sections/Achievement";
 
 function App() {
   return <div className="min-h-screen overflow-x-hidden">
@@ -14,9 +15,10 @@ function App() {
     <main>
       <Hero />
       <About />
-      <Projects />
-      <Gallery />
       <Experience />
+      <Achievement />
+      <Projects />
+      <Gallery />     
       <CertnBadge/>
       <Contact />
       <Footer />
