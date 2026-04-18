@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import { FiCalendar } from "react-icons/fi";
 
 const experience = [
     {
@@ -80,7 +81,7 @@ export const Experience = () => {
                                     <div
                                         className={`glass p-6 rounded-2xl border border-[var(--color-primary)]/30 hover:border-[var(--color-primary)]/50 transition-all duration-1000`}
                                     >
-                                        <span className="text-sm text-[var(--color-primary)] font-medium block mb-4">
+                                        <span className="text-sm text-[var(--color-primary)] font-medium block mb-4"> <FiCalendar className="w-4 h-4 inline-block mr-2 justify-align text-[var(--color-primary)]" />
                                             {exp.period}
                                         </span>
                                         

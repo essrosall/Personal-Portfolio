@@ -253,8 +253,11 @@ export const Projects = () => {
         {/* Capstone Card*/}
         <article className="group glass rounded-2xl overflow-hidden animate-fade-in animation-delay-300 max-w-6xl mx-auto">
           <div
-            className="relative overflow-hidden min-h-[240px] md:min-h-[280px] flex items-center justify-center p-0 bg-gradient-to-b from-[var(--color-surface)]/80 to-[var(--color-background)]/70"
-            onMouseEnter={() => setIsHovering(true)}
+            className="relative overflow-hidden h-[320px] md:h-[620px] flex items-center justify-center p-0 bg-gradient-to-b from-[var(--color-surface)]/80 to-[var(--color-background)]/70"
+            onMouseEnter={() => {
+              setActiveSlide(0);
+              setIsHovering(true);
+            }}
             onMouseLeave={() => setIsHovering(false)}
           >
             <button
@@ -374,7 +377,7 @@ export const Projects = () => {
             <span className="text-[var(--color-secondary-foreground)] text-sm font-medium tracking-wider uppercase animate-fade-in">
               UI/UX Category
             </span>
-            <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]"><span className="font-cursive text-white]">Web Design  </span>
+            <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]"><span className="font-cursive text-white italic">Web Design  </span>
                Showcase
             </h3>
             <p className="text-[var(--color-muted-foreground)]">
@@ -422,7 +425,7 @@ export const Projects = () => {
                     <h4 className="text-lg md:text-xl font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
                       {project.title}
                     </h4>
-                    <span className="text-xs md:text-sm text-[var(--color-muted-foreground)] shrink-0"> <FiCalendar className="w-3.5 h-3.5 inline-block mr-2 justify-align" />
+                    <span className="text-xs md:text-sm text-[var(--color-primary)] shrink-0"> <FiCalendar className="w-3.5 h-3.5 inline-block mr-2 justify-align text-[var(--color-primary)]" />
                       {project.period}
                     </span>
                   </div>
