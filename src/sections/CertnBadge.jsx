@@ -1,55 +1,101 @@
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import {
+  Award,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+} from "lucide-react";
 import { useState } from "react";
 
-const testimonials = [
+const badges = [
   {
-    quote:
-      "Pedro is one of the most talented engineers I've worked with. His attention to detail and ability to translate complex requirements into elegant solutions is remarkable.",
-    author: "Sarah Chen",
-    role: "CTO, Tech Innovators Inc.",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
+    title: "Cisco Networking Essentials Badge",
+    date: "February 2026",
+    issuer: "Cisco",
+    image: "/projects/badges/cisco-badge-1.png",
+    credly: "https://www.credly.com/",
   },
   {
-    quote:
-      "Working with Pedro was a game-changer for our project. He delivered ahead of schedule with code quality that set a new standard for our team.",
-    author: "Michael Rodriguez",
-    role: "Product Manager, Digital Solutions",
-    avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
+    title: "Cisco Cybersecurity Essentials Badge",
+    date: "February 2026",
+    issuer: "Cisco",
+    image: "/projects/badges/cisco-badge-2.png",
+    credly: "https://www.credly.com/",
   },
   {
-    quote:
-      "Pedro's expertise in React and TypeScript helped us rebuild our entire frontend in record time. His architectural decisions continue to pay dividends.",
-    author: "Emily Watson",
-    role: "Engineering Lead, StartUp Labs",
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
+    title: "IBM SkillsBuild AI Fundamentals Badge",
+    date: "March 2026",
+    issuer: "IBM",
+    image: "/projects/badges/ibm-badge-1.png",
+    credly: "https://www.credly.com/",
   },
   {
-    quote:
-      "Not only is Pedro technically brilliant, but he's also a fantastic communicator and team player. He elevated everyone around him.",
-    author: "David Kim",
-    role: "CEO, Innovation Hub",
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+    title: "IBM Data Analytics Badge",
+    date: "March 2026",
+    issuer: "IBM",
+    image: "/projects/badges/ibm-badge-2.png",
+    credly: "https://www.credly.com/",
+  },
+  {
+    title: "IBM Web Development Badge",
+    date: "April 2026",
+    issuer: "IBM",
+    image: "/projects/badges/ibm-badge-3.png",
+    credly: "https://www.credly.com/",
+  },
+];
+
+const certifications = [
+  {
+    title: "Google UX Design Professional Certificate",
+    description:
+      "Comprehensive UX training focused on user research, wireframing, prototyping, and accessibility-first product design.",
+    date: "June 2025",
+    image: "/projects/certificates/google-ux-certificate.png",
+    credly: "https://www.credly.com/",
+  },
+  {
+    title: "Meta Front-End Developer Certificate",
+    description:
+      "Validated frontend skills in React, JavaScript, responsive design, and modern web development workflows.",
+    date: "October 2025",
+    image: "/projects/certificates/meta-frontend-certificate.png",
+    credly: "https://www.credly.com/",
+  },
+  {
+    title: "Figma UI Design Badge",
+    description:
+      "Recognized ability to design scalable design systems, polished interfaces, and collaborative design handoff flows.",
+    date: "January 2026",
+    image: "/projects/certificates/figma-ui-badge.png",
+    credly: "https://www.credly.com/",
+  },
+  {
+    title: "JavaScript Algorithms and Data Structures",
+    description:
+      "Demonstrated strong fundamentals in core JavaScript logic, problem solving, and efficient coding patterns.",
+    date: "March 2026",
+    image: "/projects/certificates/javascript-algorithms-certificate.png",
+    credly: "https://www.credly.com/",
   },
 ];
 
 export const CertnBadge = () => {
-  const [activeIdx, setActiveIdx] = useState(0);
+  const [activeCertificate, setActiveCertificate] = useState(0);
+  const isBadgeCountDivisibleByThree = badges.length % 3 === 0;
 
-  const next = () => {
-    setActiveIdx((prev) => (prev + 1) % testimonials.length);
+  const nextCertificate = () => {
+    setActiveCertificate((prev) => (prev + 1) % certifications.length);
   };
 
-  const previous = () => {
-    setActiveIdx(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+  const prevCertificate = () => {
+    setActiveCertificate(
+      (prev) => (prev - 1 + certifications.length) % certifications.length
     );
   };
+
   return (
-    <section id="testimonials" className="py-32 relative overflow-hidden">
+    <section id="certifications" className="py-32 relative overflow-hidden">
       <div
         className="absolute top-1/2 left-1/2
        w-[800px] h-[800px] bg-[var(--color-primary)]/5
@@ -69,84 +115,187 @@ export const CertnBadge = () => {
           text-sm font-medium tracking-wider 
           uppercase animate-fade-in"
           >
-            What People Say
+            Certifications and Badges
           </span>
           <h2
             className="text-4xl md:text-5xl 
           font-bold mt-4 mb-6 animate-fade-in 
           animation-delay-100 text-[var(--color-secondary-foreground)]"
           >
-            Kind words from{" "}
+            Professional learning
             <span
               className="font-cursive italic 
             font-normal text-white"
             >
-              amazing people.
+              {" "}milestones.
             </span>
           </h2>
+          <p className="text-[var(--color-muted-foreground)] animate-fade-in animation-delay-200">
+            A curated showcase of certificates and badges that reflect my growth
+            in UI/UX design and frontend development.
+          </p>
         </div>
 
-        {/* Testimonial Carousel */}
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            {/* Main Testimonial */}
-            <div className="glass p-8 rounded-3xl md:p-12 glow-border animate-fade-in animation-delay-200">
-              <div className="absolute -top-4 left-8 w-12 h-12 rounded-full bg-[var(--color-primary)] flex items-center justify-center">
-                <Quote className="w-6 h-6 text-primary-[var(--color-foreground)]" />
-              </div>
-
-              <blockquote className="text-xl md:text-2xl font-medium leading-relaxed mb-8 pt-4">
-                "{testimonials[activeIdx].quote}"
-              </blockquote>
-
-              <div className="flex items-center gap-4">
-                <img
-                  src={testimonials[activeIdx].avatar}
-                  alt={testimonials[activeIdx].author}
-                  className="w-14 h-14 rounded-full object-cover ring-2 ring-[var(--color-primary)]/20"
-                />
-                <div>
-                  <div className="font-semibold">
-                    {testimonials[activeIdx].author}
-                  </div>
-                  <div className="text-sm text-[var(--color-muted-foreground)]">
-                    {testimonials[activeIdx].role}
+        {/* Badges Section */}
+        <div className="max-w-5xl mx-auto mb-20">
+          <div className="text-center mb-8 animate-fade-in animation-delay-200">
+            <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-secondary-foreground)]">
+              Industry Badges
+            </h3>
+            <p className="text-[var(--color-muted-foreground)] mt-2">
+              Cisco and IBM achievement badges with acquisition dates.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+            {badges.map((item, idx) => (
+              <article
+                key={idx}
+                className="group glass rounded-2xl overflow-hidden animate-fade-in md:row-span-1"
+              >
+                <div className="relative overflow-hidden aspect-square flex items-center justify-center p-5 bg-gradient-to-b from-[var(--color-surface)]/70 to-[var(--color-background)]/70">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-28 h-28 md:w-32 md:h-32 object-contain transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card/65 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white">
+                    <Award className="w-4 h-4 text-[var(--color-primary)]" />
+                    {item.issuer} Badge
                   </div>
                 </div>
-              </div>
+
+                <div className="p-6 space-y-4">
+                  <h3 className="text-base md:text-lg font-semibold group-hover:text-[var(--color-primary)] transition-colors">
+                    {item.title}
+                  </h3>
+                  <div className="flex items-center gap-2 text-sm text-[var(--color-secondary-foreground)]">
+                    <Calendar className="w-4 h-4" />
+                    <span>{item.date}</span>
+                  </div>
+                  <a
+                    href={item.credly}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
+                  >
+                    View Proof
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+              </article>
+            ))}
+
+            {!isBadgeCountDivisibleByThree && (
+              <article className="glass rounded-2xl p-6 flex items-center justify-center text-center min-h-[220px] animate-fade-in">
+                <p className="text-[var(--color-muted-foreground)] text-sm md:text-base">
+                  Working on my next badge... currently grinding XP like it is a
+                  side quest.
+                </p>
+              </article>
+            )}
+          </div>
+
+          {isBadgeCountDivisibleByThree && (
+            <div className="mt-6 text-center animate-fade-in">
+              <p className="text-[var(--color-muted-foreground)] text-sm md:text-base">
+                Working on my next badge... currently grinding XP like it is a
+                side quest.
+              </p>
             </div>
+          )}
+        </div>
 
-            {/* Testimonials Navigation */}
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <button
-                className="p-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all"
-                onClick={previous}
-              >
-                <ChevronLeft />
-              </button>
+        {/* Certification and Badge Cards */}
+        <div className="text-center mb-8 animate-fade-in animation-delay-200">
+          <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-secondary-foreground)]">
+            Professional Certificates
+          </h3>
+          <p className="text-[var(--color-muted-foreground)] mt-2">
+            Course and program certifications that validate my technical and design skills.
+          </p>
+        </div>
 
-              <div className="flex gap-2">
-                {testimonials.map((_, idx) => (
-                  <button
-                  key={idx}
-                    onClick={() => setActiveIdx(idx)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      idx === activeIdx
-                        ? "w-8 bg-[var(--color-primary)]"
-                        : "bg-[var(--color-muted-foreground)]/30 hover:bg-[var(--color-muted-foreground)]/50"
-                    }`}
-                  />
-                ))}
-              </div>
+        <article className="group glass rounded-2xl overflow-hidden animate-fade-in animation-delay-300 max-w-6xl mx-auto">
+          <div className="relative overflow-hidden min-h-[240px] md:min-h-[280px] flex items-center justify-center p-6 md:p-8 bg-gradient-to-b from-[var(--color-surface)]/80 to-[var(--color-background)]/70">
+            <img
+              src={certifications[activeCertificate].image}
+              alt={certifications[activeCertificate].title}
+              className="max-w-[260px] md:max-w-[340px] max-h-[180px] md:max-h-[220px] object-contain transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
 
-              <button
-                onClick={next}
-                className="p-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all"
-              >
-                <ChevronRight />
-              </button>
+            <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white">
+              <Award className="w-4 h-4 text-[var(--color-primary)]" />
+              Certified
             </div>
           </div>
+
+          <div className="p-6">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h4 className="text-xl font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
+                  {certifications[activeCertificate].title}
+                </h4>
+                <p className="text-sm text-[var(--color-muted-foreground)] mt-2">
+                  {certifications[activeCertificate].description}
+                </p>
+                <div className="flex items-center gap-2 text-sm text-[var(--color-secondary-foreground)] mt-2">
+                  <Calendar className="w-4 h-4" />
+                  <span>{certifications[activeCertificate].date}</span>
+                </div>
+                <a
+                  href={certifications[activeCertificate].credly}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm mt-4"
+                >
+                  View Proof
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={prevCertificate}
+                  className="p-2.5 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all"
+                  aria-label="Previous certificate"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={nextCertificate}
+                  className="p-2.5 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all"
+                  aria-label="Next certificate"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center gap-2 mt-6">
+              {certifications.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveCertificate(idx)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    idx === activeCertificate
+                      ? "w-8 bg-[var(--color-primary)]"
+                      : "w-2 bg-[var(--color-muted-foreground)]/40 hover:bg-[var(--color-muted-foreground)]/70"
+                  }`}
+                  aria-label={`Go to certificate ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </article>
+
+        <div className="text-center mt-8 animate-fade-in animation-delay-300">
+          <p className="text-sm text-[var(--color-muted-foreground)]">
+            Update image and Credly links in both <span className="text-white">badges</span> and
+            <span className="text-white"> certifications </span>
+            arrays with your own files and proof URLs.
+          </p>
         </div>
       </div>
     </section>
