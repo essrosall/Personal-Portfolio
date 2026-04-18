@@ -5,7 +5,7 @@ import {
   ChevronRight,
   ExternalLink,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const badges = [
   {
@@ -82,6 +82,7 @@ const certifications = [
 
 export const CertnBadge = () => {
   const [activeCertificate, setActiveCertificate] = useState(0);
+  const [isCertificateZoomOpen, setIsCertificateZoomOpen] = useState(false);
   const isBadgeCountDivisibleByThree = badges.length % 3 === 0;
 
   const nextCertificate = () => {
@@ -94,13 +95,26 @@ export const CertnBadge = () => {
     );
   };
 
+  useEffect(() => {
+    if (isCertificateZoomOpen) {
+      return undefined;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setActiveCertificate((prev) => (prev + 1) % certifications.length);
+    }, 3000);
+
+    return () => window.clearInterval(intervalId);
+  }, [isCertificateZoomOpen]);
+
   return (
     <section id="certifications" className="py-32 relative overflow-hidden">
       <div
-        className="absolute top-1/2 left-1/2
-       w-[800px] h-[800px] bg-[var(--color-primary)]/5
-        rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
+        className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-[var(--color-primary)]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"
       />
+      <div className="absolute top-1/4 right-[-3rem] w-96 h-96 bg-[var(--color-primary)]/6 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-[var(--color-primary)]/7 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-2/3 right-1/3 w-80 h-80 bg-[var(--color-primary)]/5 rounded-full blur-3xl pointer-events-none" />
       <div
         className="container mx-auto 
       px-6 relative z-10"
@@ -218,11 +232,18 @@ export const CertnBadge = () => {
 
         <article className="group glass rounded-2xl overflow-hidden animate-fade-in animation-delay-300 max-w-6xl mx-auto">
           <div className="relative overflow-hidden min-h-[240px] md:min-h-[280px] flex items-center justify-center p-6 md:p-8 bg-gradient-to-b from-[var(--color-surface)]/80 to-[var(--color-background)]/70">
-            <img
-              src={certifications[activeCertificate].image}
-              alt={certifications[activeCertificate].title}
-              className="max-w-[260px] md:max-w-[340px] max-h-[180px] md:max-h-[220px] object-contain transition-transform duration-700 group-hover:scale-105"
-            />
+            <button
+              type="button"
+              onClick={() => setIsCertificateZoomOpen(true)}
+              className="cursor-zoom-in"
+              aria-label={`Open ${certifications[activeCertificate].title} in full screen`}
+            >
+              <img
+                src={certifications[activeCertificate].image}
+                alt={certifications[activeCertificate].title}
+                className="max-w-[260px] md:max-w-[340px] max-h-[180px] md:max-h-[220px] object-contain transition-transform duration-700 group-hover:scale-105"
+              />
+            </button>
             <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
 
             <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white">
@@ -298,6 +319,44 @@ export const CertnBadge = () => {
           </p>
         </div>
       </div>
+
+      {isCertificateZoomOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setIsCertificateZoomOpen(false)}
+        >
+          <button
+            type="button"
+            onClick={() => setIsCertificateZoomOpen(false)}
+            className="absolute top-5 right-5 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
+            aria-label="Close certificate viewer"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+
+          <div
+            className="relative w-full max-w-6xl max-h-[90vh] flex items-center justify-center"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <img
+              src={certifications[activeCertificate].image}
+              alt={certifications[activeCertificate].title}
+              className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 };

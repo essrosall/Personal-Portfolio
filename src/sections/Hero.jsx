@@ -38,17 +38,7 @@ export const Hero = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [roleIndex, setRoleIndex] = useState(0);
 
-  const greenDots = useMemo(
-    () =>
-      Array.from({ length: 30 }, (_, i) => ({
-        id: i,
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        duration: `${15 + Math.random() * 25}s`,
-        delay: `${Math.random() * 10}s`,
-      })),
-    []
-  );
+ 
 
   useEffect(() => {
     const currentRole = roles[roleIndex % roles.length];
@@ -83,22 +73,10 @@ export const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/*Green Dots*/}
-      <div>
-        {greenDots.map((dot) => (
-          <div
-            key={dot.id}
-            className="absolute w-1.5 h-1.5 rounded-full opacity-60"
-            style={{
-              backgroundColor: "#20b2a6",
-              left: dot.left,
-              top: dot.top,
-              animation: `slowdrift ${dot.duration} ease-in-out infinite`,
-              animationDelay: dot.delay,
-            }}
-          />
-        ))}
-      </div>
+      <div className="absolute top-[-2rem] left-[-5rem] w-[500px] h-[500px] bg-[var(--color-primary)]/8 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/3 right-[-3rem] w-96 h-96 bg-[var(--color-primary)]/8 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-[var(--color-primary)]/6 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-[var(--color-primary)]/7 rounded-full blur-3xl pointer-events-none" />
 
       {/*Content*/}
       <div className="container mx-auto px-4 pt-32 pb-20 relative z-10">
