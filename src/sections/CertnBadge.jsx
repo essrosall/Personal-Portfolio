@@ -16,7 +16,7 @@ const badges = [
     issuer: "CISCO",
     image: "/badges/DEF.png",
     credly: "https://www.credly.com/badges/c60a0b9b-aed1-4e6c-be94-06c1e501c0df/public_url",
-    courseLink: "https://www.netacad.com/courses/network-security/network-defense",
+    courseLink: "https://www.netacad.com/courses/network-defense?courseLang=en-US",
   },
   {
     title: "AI Fundamentals with IBM SkillsBuild",
@@ -25,7 +25,7 @@ const badges = [
     issuer: "IBM",
     image: "/badges/AI.png",
     credly: "https://www.credly.com/badges/081690b6-d900-4c7d-840a-22ebf7dd4a78/public_url",
-    courseLink: "https://skillsbuild.org/",
+    courseLink: "https://www.netacad.com/courses/ai-ibm-skillsbuild?courseLang=en-US",
   },
   {
     title: "Artificial Intelligence Fundamentals",
@@ -34,7 +34,7 @@ const badges = [
     issuer: "IBM",
     image: "/badges/IBM.png",
     credly: "https://www.credly.com/badges/7eb1e9d0-67ae-4728-8847-cb81726d4086/public_url",
-    courseLink: "https://skillsbuild.org/",
+    courseLink: "https://www.netacad.com/courses/ai-ibm-skillsbuild?courseLang=en-US",
   },
   {
     title: "Introduction to Data Science",
@@ -43,7 +43,7 @@ const badges = [
     issuer: "CISCO",
     image: "/badges/DATSCI.png",
     credly: "https://www.credly.com/badges/660952c8-d299-4b7f-8198-32ca94640497/public_url",
-    courseLink: "https://www.netacad.com/courses/data-science/introduction-data-science",
+    courseLink: "https://www.netacad.com/courses/introduction-data-science?courseLang=en-US",
   },
   {
     title: "Introduction to Cybersecurity Badge",
@@ -52,7 +52,7 @@ const badges = [
     issuer: "CISCO",
     image: "/badges/CS.png",
     credly: "https://www.credly.com/badges/27b4ea10-dbaf-48ed-a1bc-f6b0822a345d/public_url",
-    courseLink: "https://www.netacad.com/courses/cybersecurity/introduction-cybersecurity",
+    courseLink: "https://www.netacad.com/courses/introduction-to-cybersecurity?courseLang=en-US",
   },
 
 
@@ -235,17 +235,14 @@ export const CertnBadge = () => {
   }, [selectedBadgeIndex]);
 
   return (
-    <section id="certifications" className="py-32 relative overflow-hidden">
+    <section id="certifications" className="py-20 sm:py-24 md:py-32 relative overflow-hidden">
       <div
         className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-[var(--color-primary)]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"
       />
       <div className="absolute top-1/4 right-[-3rem] w-96 h-96 bg-[var(--color-primary)]/6 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-[var(--color-primary)]/7 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-2/3 right-1/3 w-80 h-80 bg-[var(--color-primary)]/5 rounded-full blur-3xl pointer-events-none" />
-      <div
-        className="container mx-auto 
-      px-6 relative z-10"
-      >
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <div
           className="text-center max-w-3xl 
@@ -390,34 +387,34 @@ export const CertnBadge = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3 max-w-6xl mx-auto">
             {visibleBadges.map((badge, idx) => (
               <article
                 key={badge.title}
-                className="group glass rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col min-h-[320px] md:min-h-[520px]"
+                className="group glass rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col min-h-[260px] md:min-h-[520px]"
               >
-                <div className="relative aspect-[4/3] bg-[var(--color-surface)]/40 overflow-hidden flex-shrink-0">
+                <div className="relative aspect-square sm:aspect-[4/3] bg-[var(--color-surface)]/40 overflow-hidden flex-shrink-0">
                   <img
                     src={badge.image}
                     alt={badge.title}
-                    className="w-full h-full object-contain p-3 sm:p-5 transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-contain p-2 sm:p-5 transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-                  <span className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white">
-                    <Award className="w-4 h-4 text-[var(--color-primary)]" />
+                  <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full glass_strong text-[10px] sm:text-xs font-medium text-white">
+                    <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[var(--color-primary)]" />
                     Badge
                   </span>
                 </div>
 
-                <div className="p-4 space-y-3 md:hidden flex flex-col flex-grow">
-                  <h5 className="text-sm font-semibold text-[var(--color-foreground)] line-clamp-2">
+                <div className="p-3 sm:p-4 space-y-2.5 md:hidden flex flex-col flex-grow">
+                  <h5 className="text-xs sm:text-sm font-semibold text-[var(--color-foreground)] line-clamp-2">
                     {badge.title}
                   </h5>
-                  <div className="grid grid-cols-1 gap-2 mt-auto">
+                  <div className="grid grid-cols-2 gap-2 mt-auto">
                     <button
                       type="button"
                       onClick={() => openBadgeDetails(idx)}
-                      className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
+                      className="inline-flex items-center justify-center gap-2 px-2.5 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-[11px] sm:text-sm"
                     >
                       View Description
                     </button>
@@ -425,7 +422,7 @@ export const CertnBadge = () => {
                       href={badge.credly}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
+                      className="inline-flex items-center justify-center gap-2 px-2.5 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-[11px] sm:text-sm"
                     >
                       View Proof
                       <ExternalLink className="w-4 h-4" />
@@ -504,7 +501,7 @@ export const CertnBadge = () => {
           <p className="text-sm text-[var(--color-muted-foreground)]">
             These are my <span className="text-white">badges</span> and
             <span className="text-white"> certifications </span>
-            afor the past years and months.
+            for the past years and months.
           </p>
         </div>
       </div>
@@ -566,7 +563,16 @@ export const CertnBadge = () => {
             <button
               type="button"
               onClick={closeBadgeDetails}
-              className="absolute top-3 right-3 p-2 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
+              className="absolute top-3 right-3 md:hidden p-2 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
+              aria-label="Close badge details"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <button
+              type="button"
+              onClick={closeBadgeDetails}
+              className="absolute top-3 right-3 hidden md:flex p-2 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
               aria-label="Close badge details"
             >
               <X className="w-4 h-4" />
@@ -594,7 +600,10 @@ export const CertnBadge = () => {
                   <span className="text-[var(--color-foreground)]">Acquisition Date:</span> {badges[selectedBadgeIndex].date}
                 </p>
                 <p>
-                  <span className="text-[var(--color-foreground)]">From:</span> {badges[selectedBadgeIndex].issuer}
+                  <span className="text-[var(--color-foreground)]">From:</span>{" "}
+                  <span className="inline-flex items-center rounded-full bg-[var(--color-primary)]/15 px-2.5 py-1 text-[var(--color-primary)] font-semibold tracking-wide">
+                    {badges[selectedBadgeIndex].issuer}
+                  </span>
                 </p>
               </div>
 

@@ -224,8 +224,8 @@ export const Hero = () => {
       <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-[var(--color-primary)]/7 rounded-full blur-3xl pointer-events-none" />
 
       {/*Content*/}
-      <div className="container mx-auto px-4 pt-32 pb-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-16 sm:pb-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 items-center">
           {/*left Column - Text Content*/}
           <div className="space-y-4">
             <div className="animate-fade-in">
@@ -258,7 +258,7 @@ export const Hero = () => {
                 className="flex-1 min-w-0 h-11 sm:h-14 whitespace-nowrap px-3 text-sm sm:flex-none sm:px-5 sm:text-lg"
                 onClick={handleContactClick}
               >
-                Contact Me <FaArrowRight className="hidden sm:inline-flex w-5 h-5" />
+                Contact Me <FaArrowRight className="inline-flex w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
               <AnimatedBorderButton
                 className="flex-1 min-w-0 h-11 sm:h-14 whitespace-nowrap px-3 text-sm sm:flex-none sm:px-8 sm:text-lg"
@@ -270,7 +270,7 @@ export const Hero = () => {
             </div>
 
             {/* Social Media Links */}
-            <div className="flex items-center gap-1 animate-fade-in animation-delay-500">
+            <div className="flex flex-wrap items-center gap-1 animate-fade-in animation-delay-500">
               <span className="text-sm text-[var(--color-muted-foreground)] mr-2">Follow me:</span>
               {[
                 { icon: FaGithub, href: "https://github.com/essrosall" },

@@ -183,13 +183,13 @@ export const Gallery = () => {
   }, [selectedArtwork, selectedIndex, displayedArtworks.length]);
 
   return (
-    <section id="gallery" className="py-32 relative overflow-hidden">
+    <section id="gallery" className="py-20 sm:py-24 md:py-32 relative overflow-hidden">
       <div className="absolute top-1/3 left-[-4rem] w-96 h-96 bg-[var(--color-primary)]/7 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-[-2rem] w-80 h-80 bg-[var(--color-primary)]/6 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-[var(--color-primary)]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/4 right-1/3 w-64 h-64 bg-[var(--color-primary)]/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[var(--color-secondary-foreground)] text-xs font-semibold tracking-[0.2em] uppercase animate-fade-in">
@@ -339,18 +339,9 @@ export const Gallery = () => {
       {/* Fullscreen Viewer */}
       {selectedArtwork && (
         <div
-          className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-start justify-center pt-24 md:pt-28 px-4 pb-6"
+          className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
           onClick={closeViewer}
         >
-          <button
-            type="button"
-            onClick={closeViewer}
-            className="absolute top-5 right-5 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
-            aria-label="Close artwork viewer"
-          >
-            <X className="w-5 h-5" />
-          </button>
-
           <button
             type="button"
             onClick={(event) => {
@@ -379,6 +370,14 @@ export const Gallery = () => {
             className="relative w-full max-w-4xl max-h-[88vh] flex flex-col items-center justify-center"
             onClick={(event) => event.stopPropagation()}
           >
+            <button
+              type="button"
+              onClick={closeViewer}
+              className="absolute top-3 right-3 md:top-4 md:right-4 z-20 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
+              aria-label="Close artwork viewer"
+            >
+              <X className="w-5 h-5" />
+            </button>
             <img
               src={selectedArtwork.image}
               alt={selectedArtwork.title}

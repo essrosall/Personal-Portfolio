@@ -727,7 +727,7 @@ export const Projects = () => {
               <button
                 type="button"
                 onClick={() => setIsZoomOpen(false)}
-                className="absolute top-3 right-3 z-30 p-2.5 rounded-lg glass_strong bg-black/60 text-white border border-white/25 hover:bg-[var(--color-primary)]/20 transition-all duration-300"
+                className="absolute top-3 right-3 z-30 p-2.5 rounded-full glass_strong bg-black/60 text-white border border-white/25 hover:bg-[var(--color-primary)]/20 transition-all duration-300"
                 aria-label="Close screenshot viewer"
               >
                 <X className="w-5 h-5" />
@@ -776,7 +776,7 @@ export const Projects = () => {
             </button>
 
             <div
-              className="relative w-full max-w-[92vw] max-h-[90vh] flex flex-col items-center justify-center"
+              className="relative w-full max-w-6xl max-h-[90vh] flex flex-col items-center justify-center"
               onClick={(event) => event.stopPropagation()}
               onTouchStart={(event) => {
                 setWebTouchStartX(event.touches[0].clientX);
@@ -798,7 +798,7 @@ export const Projects = () => {
               <button
                 type="button"
                 onClick={closeWebProject}
-                className="absolute top-3 right-3 z-30 p-2.5 rounded-lg glass_strong bg-black/60 text-white border border-white/25 hover:bg-[var(--color-primary)]/20 transition-all duration-300"
+                className="absolute top-3 right-3 z-30 p-2.5 rounded-full glass_strong bg-black/60 text-white border border-white/25 hover:bg-[var(--color-primary)]/20 transition-all duration-300"
                 aria-label="Close web design viewer"
               >
                 <X className="w-5 h-5" />

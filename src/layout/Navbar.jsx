@@ -14,9 +14,9 @@ import {
 const navLinks = [
   { label: "Home", href: "#home", Icon: Home, category: "Overview" },
   { label: "About", href: "#about", Icon: User, category: "Overview" },
+    { label: "Experience", href: "#experience", Icon: Briefcase, category: "Works" },
   { label: "Achievements", href: "#achievements", Icon: Trophy, category: "Works" },
   { label: "Gallery", href: "#gallery", Icon: GalleryVertical, category: "Works" },
-  { label: "Experience", href: "#experience", Icon: Briefcase, category: "Works" },
   { label: "Contact", href: "#contact", Icon: Mail, category: "Connect" },
 ];
 

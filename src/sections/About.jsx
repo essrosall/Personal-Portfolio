@@ -30,13 +30,13 @@ export const About = () => {
     const [showVisionModal, setShowVisionModal] = useState(false);
     const [showMissionModal, setShowMissionModal] = useState(false);
     return (
-        <section id="about" className="py-32 relative overflow-hidden">
+        <section id="about" className="py-20 sm:py-24 md:py-32 relative overflow-hidden">
             <div className="absolute top-1/3 left-[-3rem] w-80 h-80 bg-[var(--color-primary)]/8 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-[var(--color-primary)]/6 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-[var(--color-primary)]/7 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <div className="container mx-auto px-4 sm:px-6 relative z-10">
+                <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
                     <div className="space-y-8 max-w-2xl">
                         <div className="animate-fade-in">
                             <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[var(--color-secondary-foreground)] text-xs font-semibold tracking-[0.2em] uppercase">

@@ -174,7 +174,11 @@ export const Contact = () => {
                                 )}
                             </Button>
 
-                            {submitStatus.type && (
+                            <div
+                                className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                                    submitStatus.type ? "max-h-24 opacity-100 mt-4" : "max-h-0 opacity-0"
+                                }`}
+                            >
                                 <div
                                     className={`flex items-center gap-3 p-4 rounded-xl ${submitStatus.type === "Success"
                                             ? "bg-green-500/10 border border-green-500/20 text-green-400"
@@ -188,7 +192,7 @@ export const Contact = () => {
                                     )}
                                     <p className="text-sm">{submitStatus.message}</p>
                                 </div>
-                            )}
+                            </div>
                         </form>
                     </div>
                     {/* Contact Info */}
