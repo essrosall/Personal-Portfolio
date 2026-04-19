@@ -136,7 +136,20 @@ export const CertnBadge = () => {
   const [isCertificateZoomOpen, setIsCertificateZoomOpen] = useState(false);
   const [selectedCertificate, setSelectedCertificate] = useState(0);
   const [selectedBadgeIndex, setSelectedBadgeIndex] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const isBadgeCountDivisibleByThree = badges.length % 3 === 0;
+
+  // Handle window resize to detect mobile/desktop
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Limit badges on mobile view
+  const visibleBadges = badges;
 
   const closeCertificateViewer = () => {
     setIsCertificateZoomOpen(false);
@@ -378,12 +391,12 @@ export const CertnBadge = () => {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {badges.map((badge, idx) => (
+            {visibleBadges.map((badge, idx) => (
               <article
                 key={badge.title}
-                className="group glass rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300"
+                className="group glass rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col min-h-[320px] md:min-h-[520px]"
               >
-                <div className="relative aspect-[4/3] bg-[var(--color-surface)]/40 overflow-hidden">
+                <div className="relative aspect-[4/3] bg-[var(--color-surface)]/40 overflow-hidden flex-shrink-0">
                   <img
                     src={badge.image}
                     alt={badge.title}
@@ -396,8 +409,11 @@ export const CertnBadge = () => {
                   </span>
                 </div>
 
-                <div className="p-4 space-y-3 md:hidden">
-                  <div className="grid grid-cols-1 gap-2">
+                <div className="p-4 space-y-3 md:hidden flex flex-col flex-grow">
+                  <h5 className="text-sm font-semibold text-[var(--color-foreground)] line-clamp-2">
+                    {badge.title}
+                  </h5>
+                  <div className="grid grid-cols-1 gap-2 mt-auto">
                     <button
                       type="button"
                       onClick={() => openBadgeDetails(idx)}
@@ -417,18 +433,24 @@ export const CertnBadge = () => {
                   </div>
                 </div>
 
-                <div className="hidden md:block p-5 space-y-3">
-                  <h4 className="text-lg font-semibold text-[var(--color-foreground)] leading-snug">
-                    {badge.title}
-                  </h4>
-                  <p className="text-sm text-[var(--color-muted-foreground)] leading-relaxed">
+                <div className="hidden md:flex flex-col p-5 flex-grow">
+                  <div className="flex-shrink-0 mb-3">
+                    <h4 className="text-lg font-semibold text-[var(--color-foreground)] leading-snug mb-2">
+                      {badge.title}
+                    </h4>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="px-3 py-1 rounded-full bg-[var(--color-primary)]/15 text-[var(--color-primary)] text-xs font-semibold uppercase tracking-wide">
+                        {badge.issuer}
+                      </span>
+                      <span className="text-xs text-[var(--color-muted-foreground)]">
+                        {badge.date}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-sm text-[var(--color-muted-foreground)] leading-relaxed flex-grow">
                     {badge.description}
                   </p>
-                  <div className="flex items-center justify-between gap-4 text-sm text-[var(--color-muted-foreground)] flex-wrap">
-                    <span>{badge.issuer}</span>
-                    <span>{badge.date}</span>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2 pt-3 mt-4 border-t border-white/10 flex-shrink-0">
                     <a
                       href={badge.credly}
                       target="_blank"
@@ -451,6 +473,30 @@ export const CertnBadge = () => {
                 </div>
               </article>
             ))}
+
+            {/* Placeholder Badge Card - Show when badge count doesn't fill grid perfectly */}
+            {((isMobile && visibleBadges.length % 2 === 1) || (!isMobile && visibleBadges.length % 3 !== 0)) && (
+              <article className="glass rounded-2xl overflow-hidden border border-white/10 border-dashed flex flex-col items-center justify-center p-6 min-h-[320px] md:min-h-[520px]">
+                <div className="aspect-[4/3] w-full flex flex-col items-center justify-center">
+                  <div className="flex gap-1.5 mb-3">
+                    <div className="w-2 h-2 bg-[var(--color-primary)] rounded-full animate-dot-1"></div>
+                    <div className="w-2 h-2 bg-[var(--color-primary)] rounded-full animate-dot-2"></div>
+                    <div className="w-2 h-2 bg-[var(--color-primary)] rounded-full animate-dot-3"></div>
+                  </div>
+                  <p className="text-center text-sm font-medium text-[var(--color-primary)] px-2">
+                    Grinding XP for next badge...
+                  </p>
+                </div>
+                <div className="hidden md:flex flex-col items-center justify-center p-5 text-center">
+                  <p className="text-lg font-semibold text-[var(--color-foreground)] mb-2">
+                    Coming Soon™
+                  </p>
+                  <p className="text-sm text-[var(--color-muted-foreground)]">
+                    Currently leveling up my skills like it's a side quest. Check back soon for the next achievement!
+                  </p>
+                </div>
+              </article>
+            )}
           </div>
         </div>
 

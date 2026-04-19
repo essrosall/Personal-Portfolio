@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 
 const artworks = [
   {
@@ -102,6 +102,24 @@ export const Gallery = () => {
     }))
   );
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const [showAll, setShowAll] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isCollapsingArtworks, setIsCollapsingArtworks] = useState(false);
+  const [isExpandingArtworks, setIsExpandingArtworks] = useState(false);
+
+  // Handle window resize to detect mobile/desktop
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Limit artworks based on device and showAll state
+  const visibleArtworks = isMobile && !showAll
+    ? displayedArtworks.slice(0, 2)
+    : displayedArtworks;
 
   const selectedArtwork =
     selectedIndex === null ? null : displayedArtworks[selectedIndex];
@@ -122,6 +140,7 @@ export const Gallery = () => {
       }))
     );
     setSelectedIndex(null);
+    setShowAll(false);
   };
 
   const nextArtwork = () => {
@@ -196,46 +215,124 @@ export const Gallery = () => {
           </div>
         </div>
 
-        {/* Masonry Gallery Grid */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-          {displayedArtworks.map((artwork, idx) => (
-            <article
-              key={`${artwork.image}-${idx}`}
-              className="group glass rounded-2xl overflow-hidden animate-fade-in break-inside-avoid hover:shadow-[0_20px_60px_rgba(32,194,168,0.15)] transition-all duration-300 cursor-pointer"
-              style={{ animationDelay: `${(idx % 3) * 100}ms` }}
-              onClick={() => openViewer(idx)}
-            >
-              <div className={`relative overflow-hidden ${artwork.tileStyle}`}>
-                <img
-                  src={artwork.image}
-                  alt={artwork.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+        {/* Desktop Vertical Scrollable Canvas - 3 Columns */}
+        <div className={`hidden lg:grid lg:grid-cols-3 gap-6 max-h-[900px] overflow-y-auto pr-4 scroll-smooth${isCollapsingArtworks ? ' animate-fade-out-collapse' : isExpandingArtworks ? ' animate-fade-in-expand' : ''}`}>
+          {displayedArtworks.map((artwork, idx) => {
+            const actualIndex = displayedArtworks.indexOf(artwork);
+            return (
+              <article
+                key={`${artwork.image}-${idx}`}
+                className="group glass rounded-2xl overflow-hidden animate-fade-in hover:shadow-[0_20px_60px_rgba(32,194,168,0.15)] transition-all duration-300 cursor-pointer"
+                onClick={() => openViewer(actualIndex)}
+              >
+                <div className={`relative overflow-hidden aspect-[4/3]`}>
+                  <img
+                    src={artwork.image}
+                    alt={artwork.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
 
-                <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full glass_strong text-white">
-                  Click to view
-                </span>
+                  <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full glass_strong text-white">
+                    Click to view
+                  </span>
 
-                <div className="absolute inset-0 flex flex-col items-end justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="text-right">
-                    <h3 className="text-sm font-semibold text-white mb-1">
-                      {artwork.title}
-                    </h3>
+                  <div className="absolute inset-0 flex flex-col items-end justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="text-right">
+                      <h3 className="text-sm font-semibold text-white mb-1">
+                        {artwork.title}
+                      </h3>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="p-4">
-                <h3 className="font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors mb-1">
-                  {artwork.title}
-                </h3>
-                <p className="text-xs text-[var(--color-muted-foreground)]">
-                  {artwork.description}
-                </p>
-              </div>
-            </article>
-          ))}
+                <div className="p-4">
+                  <h3 className="font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors mb-1">
+                    {artwork.title}
+                  </h3>
+                  <p className="text-xs text-[var(--color-muted-foreground)]">
+                    {artwork.description}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        {/* Mobile Masonry Grid */}
+        <div className={`lg:hidden transition-all duration-700 overflow-hidden ${isCollapsingArtworks ? 'max-h-0' : 'max-h-[9999px]'}`}>
+          <div className={`columns-1 md:columns-2 gap-6 space-y-6 ${isExpandingArtworks ? 'animate-fade-in-expand' : ''}`}>
+          {visibleArtworks.map((artwork, idx) => {
+            const actualIndex = displayedArtworks.indexOf(artwork);
+            return (
+              <article
+                key={`${artwork.image}-${idx}`}
+                className="group glass rounded-2xl overflow-hidden animate-fade-in break-inside-avoid hover:shadow-[0_20px_60px_rgba(32,194,168,0.15)] transition-all duration-300 cursor-pointer"
+                style={{ animationDelay: `${(idx % 3) * 100}ms` }}
+                onClick={() => openViewer(actualIndex)}
+              >
+                <div className={`relative overflow-hidden ${artwork.tileStyle}`}>
+                  <img
+                    src={artwork.image}
+                    alt={artwork.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+
+                  <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full glass_strong text-white">
+                    Click to view
+                  </span>
+
+                  <div className="absolute inset-0 flex flex-col items-end justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="text-right">
+                      <h3 className="text-sm font-semibold text-white mb-1">
+                        {artwork.title}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4">
+                  <h3 className="font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors mb-1">
+                    {artwork.title}
+                  </h3>
+                  <p className="text-xs text-[var(--color-muted-foreground)]">
+                    {artwork.description}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
+          </div>
+        </div>
+
+        {/* View All / Hide Button - Mobile Only */}
+        <div className="lg:hidden flex justify-center mt-12">
+          {!showAll ? (
+            <button
+              type="button"
+              onClick={() => setShowAll(true)}
+              className="px-6 py-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm font-medium border border-[var(--color-primary)]/30 inline-flex items-center gap-2"
+            >
+              View All {displayedArtworks.length} Artworks
+              <ChevronDown className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                setIsCollapsingArtworks(true);
+                setTimeout(() => {
+                  setShowAll(false);
+                  setIsCollapsingArtworks(false);
+                }, 500);
+              }}
+              className="px-6 py-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm font-medium border border-[var(--color-primary)]/30 inline-flex items-center gap-2"
+            >
+              Hide Artworks
+              <ChevronUp className="w-4 h-4" />
+            </button>
+          )}
         </div>
       </div>
 

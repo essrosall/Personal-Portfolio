@@ -137,6 +137,23 @@ export const Projects = () => {
   const [webPreviewSlides, setWebPreviewSlides] = useState(
     () => webDesignProjects.map(() => 0)
   );
+  const [showAllWebProjects, setShowAllWebProjects] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isCollapsingWebProjects, setIsCollapsingWebProjects] = useState(false);
+
+  // Handle window resize to detect mobile/desktop
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Keep the first set static; animate only the extra items when toggling.
+  const baseVisibleCount = isMobile ? 2 : 2;
+  const primaryWebProjects = webDesignProjects.slice(0, baseVisibleCount);
+  const extraWebProjects = webDesignProjects.slice(baseVisibleCount);
 
   useEffect(() => {
     if (isHovering || isZoomOpen || isUserInteracting) return undefined;
@@ -253,6 +270,93 @@ export const Projects = () => {
       }
       return next;
     });
+  };
+
+  const renderWebProjectCard = (project) => {
+    const idx = webDesignProjects.indexOf(project);
+    return (
+      <article
+        key={project.title}
+        className="group glass rounded-2xl overflow-hidden animate-fade-in"
+        onMouseEnter={() => setHoveredWebCard(idx)}
+        onMouseLeave={() => {
+          setHoveredWebCard(null);
+          setWebPreviewSlides((prev) => {
+            const reset = [...prev];
+            reset[idx] = 0;
+            return reset;
+          });
+        }}
+        onTouchStart={(event) => {
+          setWebTouchedCardIndex(idx);
+          setWebTouchStartX(event.touches[0].clientX);
+          setDidSwipeWebPreview(false);
+          setSwipedWebCardIndex(null);
+        }}
+        onTouchMove={(event) => {
+          if (webTouchedCardIndex !== idx || webTouchStartX === null) return;
+          const delta = Math.abs(webTouchStartX - event.touches[0].clientX);
+          if (delta > 10) {
+            setDidSwipeWebPreview(true);
+          }
+        }}
+        onTouchEnd={(event) => {
+          if (webTouchedCardIndex !== idx || webTouchStartX === null) return;
+          const touchEndX = event.changedTouches[0].clientX;
+          const delta = webTouchStartX - touchEndX;
+          if (Math.abs(delta) > 35) {
+            moveWebPreviewSlide(idx, delta > 0 ? "next" : "prev");
+            setDidSwipeWebPreview(true);
+            setSwipedWebCardIndex(idx);
+          }
+          setWebTouchStartX(null);
+          setWebTouchedCardIndex(null);
+        }}
+      >
+        <button
+          type="button"
+          onClick={() => {
+            if (didSwipeWebPreview && swipedWebCardIndex === idx) {
+              setDidSwipeWebPreview(false);
+              setSwipedWebCardIndex(null);
+              return;
+            }
+            openWebProject(idx);
+          }}
+          className="w-full text-left"
+          aria-label={`Open ${project.title} preview`}
+        >
+          <div className="relative overflow-hidden aspect-video">
+            <img
+              src={project.screenshots[webPreviewSlides[idx]]}
+              alt={`${project.title} preview`}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
+            <span className="absolute bottom-3 right-3 px-3 py-1 rounded-full glass_strong text-xs text-white">
+              {webPreviewSlides[idx] + 1} / {project.screenshots.length}
+            </span>
+            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full glass_strong text-[10px] text-white md:hidden">
+              Swipe preview • Tap to open
+            </span>
+          </div>
+        </button>
+
+        <div className="p-4 sm:p-5 md:p-6">
+          <div className="flex items-start justify-between gap-2.5 sm:gap-3">
+            <h4 className="text-lg md:text-xl font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
+              {project.title}
+            </h4>
+            <span className="text-[11px] sm:text-xs md:text-sm text-[var(--color-primary)] shrink-0"> <FiCalendar className="w-3.5 h-3.5 inline-block mr-1.5 sm:mr-2 text-[var(--color-primary)]" />
+              {project.period}
+            </span>
+          </div>
+          <p className="text-sm text-[var(--color-muted-foreground)] mt-3 leading-relaxed">
+            {project.description}
+          </p>
+        </div>
+      </article>
+    );
   };
 
   return (
@@ -528,89 +632,45 @@ export const Projects = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-10xl mx-auto">
-            {webDesignProjects.map((project, idx) => (
-              <article
-                key={project.title}
-                className="group glass rounded-2xl overflow-hidden animate-fade-in"
-                onMouseEnter={() => setHoveredWebCard(idx)}
-                onMouseLeave={() => {
-                  setHoveredWebCard(null);
-                  setWebPreviewSlides((prev) => {
-                    const reset = [...prev];
-                    reset[idx] = 0;
-                    return reset;
-                  });
-                }}
-                onTouchStart={(event) => {
-                  setWebTouchedCardIndex(idx);
-                  setWebTouchStartX(event.touches[0].clientX);
-                  setDidSwipeWebPreview(false);
-                  setSwipedWebCardIndex(null);
-                }}
-                onTouchMove={(event) => {
-                  if (webTouchedCardIndex !== idx || webTouchStartX === null) return;
-                  const delta = Math.abs(webTouchStartX - event.touches[0].clientX);
-                  if (delta > 10) {
-                    setDidSwipeWebPreview(true);
-                  }
-                }}
-                onTouchEnd={(event) => {
-                  if (webTouchedCardIndex !== idx || webTouchStartX === null) return;
-                  const touchEndX = event.changedTouches[0].clientX;
-                  const delta = webTouchStartX - touchEndX;
-                  if (Math.abs(delta) > 35) {
-                    moveWebPreviewSlide(idx, delta > 0 ? "next" : "prev");
-                    setDidSwipeWebPreview(true);
-                    setSwipedWebCardIndex(idx);
-                  }
-                  setWebTouchStartX(null);
-                  setWebTouchedCardIndex(null);
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (didSwipeWebPreview && swipedWebCardIndex === idx) {
-                      setDidSwipeWebPreview(false);
-                      setSwipedWebCardIndex(null);
-                      return;
-                    }
-                    openWebProject(idx);
-                  }}
-                  className="w-full text-left"
-                  aria-label={`Open ${project.title} preview`}
-                >
-                  <div className="relative overflow-hidden aspect-video">
-                    <img
-                      src={project.screenshots[webPreviewSlides[idx]]}
-                      alt={`${project.title} preview`}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
-                    <span className="absolute bottom-3 right-3 px-3 py-1 rounded-full glass_strong text-xs text-white">
-                      {webPreviewSlides[idx] + 1} / {project.screenshots.length}
-                    </span>
-                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full glass_strong text-[10px] text-white md:hidden">
-                      Swipe preview • Tap to open
-                    </span>
-                  </div>
-                </button>
+            {primaryWebProjects.map(renderWebProjectCard)}
+          </div>
 
-                <div className="p-4 sm:p-5 md:p-6">
-                  <div className="flex items-start justify-between gap-2.5 sm:gap-3">
-                    <h4 className="text-lg md:text-xl font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
-                      {project.title}
-                    </h4>
-                    <span className="text-[11px] sm:text-xs md:text-sm text-[var(--color-primary)] shrink-0"> <FiCalendar className="w-3.5 h-3.5 inline-block mr-1.5 sm:mr-2 text-[var(--color-primary)]" />
-                      {project.period}
-                    </span>
-                  </div>
-                  <p className="text-sm text-[var(--color-muted-foreground)] mt-3 leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-              </article>
-            ))}
+          <div className={`transition-all duration-700 overflow-hidden ${showAllWebProjects || isCollapsingWebProjects ? 'max-h-[9999px] mt-5 sm:mt-6' : 'max-h-0'}`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-10xl mx-auto ${isCollapsingWebProjects ? 'animate-fade-out-collapse' : showAllWebProjects ? 'animate-fade-in-expand' : ''}`}>
+              {extraWebProjects.map(renderWebProjectCard)}
+            </div>
+          </div>
+
+          {/* View All / Hide Button */}
+          <div className="flex justify-center mt-12">
+            {!showAllWebProjects ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsCollapsingWebProjects(false);
+                  setShowAllWebProjects(true);
+                }}
+                className="px-6 py-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm font-medium border border-[var(--color-primary)]/30 inline-flex items-center gap-2"
+              >
+                View All {webDesignProjects.length} Projects
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsCollapsingWebProjects(true);
+                  setTimeout(() => {
+                    setShowAllWebProjects(false);
+                    setIsCollapsingWebProjects(false);
+                  }, 500);
+                }}
+                className="px-6 py-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm font-medium border border-[var(--color-primary)]/30 inline-flex items-center gap-2"
+              >
+                Hide Projects
+                <ChevronUp className="w-4 h-4" />
+              </button>
+            )}
           </div>
         </div>
 

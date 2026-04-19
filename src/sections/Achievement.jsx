@@ -164,19 +164,18 @@ export const Achievement = () => {
                     className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 pt-24 md:pt-28"
                     onClick={closeLogoEntryViewer}
                 >
-                    <button
-                        type="button"
-                        onClick={closeLogoEntryViewer}
-                        className="absolute top-5 right-5 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
-                        aria-label="Close logo entry viewer"
-                    >
-                        <X className="w-5 h-5" />
-                    </button>
-
                     <div
                         className="relative w-full max-w-5xl max-h-[90vh] flex items-center justify-center"
                         onClick={(event) => event.stopPropagation()}
                     >
+                        <button
+                            type="button"
+                            onClick={closeLogoEntryViewer}
+                            className="absolute top-3 right-3 md:top-4 md:right-4 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all z-10"
+                            aria-label="Close logo entry viewer"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
                         <img
                             src={logoContestAchievements[selectedLogoEntry].entryImage}
                             alt={logoContestAchievements[selectedLogoEntry].title}

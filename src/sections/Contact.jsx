@@ -110,10 +110,13 @@ export const Contact = () => {
                 </div>
 
                 {/* Contact Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 max-w-5xl mx-auto w-full items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 max-w-5xl mx-auto w-full items-stretch">
 
                     {/* RIGHT COLUMN: Contact Form */}
                     <div className="glass p-5 sm:p-8 rounded-3xl border border-[var(--color-primary)]/30 animate-fade-in animation-delay-400 w-full order-2 lg:order-2">
+                        <h3 className="text-xl font-semibold mb-6">
+                            Send Me a Message
+                        </h3>
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             {/* NAME */}
                             <div>
@@ -190,7 +193,7 @@ export const Contact = () => {
                     </div>
                     {/* Contact Info */}
                     <div className="space-y-6 animate-fade-in animation-delay-400 w-full order-1 lg:order-1">
-                        <div className="glass rounded-3xl p-5 sm:p-8 w-full">
+                        <div className="glass rounded-3xl p-5 sm:p-8 w-full border border-[var(--color-primary)]/30">
                             <h3 className="text-xl font-semibold mb-6">
                                 Contact Information
                             </h3>
@@ -216,7 +219,7 @@ export const Contact = () => {
                             </div>
                         </div>
 
-                        <div className="glass rounded-3xl p-5 sm:p-8 border border-[var(--color-primary)]/30 w-full">
+                        <div className="hidden lg:block glass rounded-3xl p-5 sm:p-8 border border-[var(--color-primary)]/30 w-full">
                             <div className="flex items-center gap-3 mb-4">
                                 <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
                                 <span className="font-medium">Currently Available</span>
@@ -225,6 +228,17 @@ export const Contact = () => {
                                 I'm currently open to new opportunities and exciting design projects. Whether you need a dedicated UI/UX designer to join your team or a freelance creative collaborator, let's talk!
                             </p>
                         </div>
+                    </div>
+
+                    {/* Currently Available - Mobile Only (Below Form) */}
+                    <div className="lg:hidden glass rounded-3xl p-5 sm:p-8 border border-[var(--color-primary)]/30 w-full order-3">
+                        <div className="flex items-center gap-3 mb-4">
+                            <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                            <span className="font-medium">Currently Available</span>
+                        </div>
+                        <p className="text-[var(--color-muted-foreground)] text-sm">
+                            I'm currently open to new opportunities and exciting design projects. Whether you need a dedicated UI/UX designer to join your team or a freelance creative collaborator, let's talk!
+                        </p>
                     </div>
                 </div>
             </div>

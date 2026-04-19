@@ -94,7 +94,7 @@ export const Navbar = () => {
         </div>
 
         {/*View Project Button*/}
-        <div className="hidden md:block shrink-0">
+        <div className="hidden md:flex shrink-0 items-center gap-2.5">
           <Button size="md" onClick={scrollToProjects}>
             <span className="whitespace-nowrap">View Projects</span>
           </Button>
@@ -141,7 +141,7 @@ export const Navbar = () => {
                 : "opacity-0 -translate-x-2 scale-90 pointer-events-none"
             }`}
             style={{ transitionDelay: isMobileMenuOpen ? "140ms" : "0ms" }}
-            aria-label="Close mobile menu"
+            aria-label="Close mobile menu"  
           >
             <ChevronRight className="w-4 h-4 text-[var(--color-foreground)]" />
           </button>
@@ -152,9 +152,9 @@ export const Navbar = () => {
                 isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
               }`}
             >
-              <div className="mt-1">
-                <p className="text-sm font-semibold text-[var(--color-foreground)]">John Rey A. Rosales</p>
-                <p className="text-xs text-[var(--color-muted-foreground)] mt-1">Aspiring UI/UX Designer and Web Developer</p>
+              <div className="mt-4">
+                <p className="text-base font-semibold text-[var(--color-foreground)]">John Rey A. Rosales</p>
+                <p className="text-sm text-[var(--color-muted-foreground)] mt-1.5">Aspiring UI/UX Designer and Web Developer</p>
               </div>
 
               <div className="relative">
@@ -163,7 +163,6 @@ export const Navbar = () => {
                   alt="John Rey Rosales"
                   className="w-20 h-20 rounded-lg object-cover border border-[var(--color-primary)]/40"
                 />
-                <span className="absolute -right-1.5 -bottom-1.5 w-3.5 h-3.5 rounded-full bg-green-400 ring-2 ring-[var(--color-background)] animate-pulse" />
               </div>
             </div>
 
@@ -213,7 +212,7 @@ export const Navbar = () => {
               }`}
               style={{ transitionDelay: isMobileMenuOpen ? "320ms" : "0ms" }}
             >
-              <Button className="w-full" onClick={scrollToProjects}>
+              <Button size="lg" className="w-full min-h-[54px] text-[17px]" onClick={scrollToProjects}>
                 View Projects
               </Button>
             </div>
