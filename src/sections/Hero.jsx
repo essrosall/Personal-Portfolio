@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { Button } from '@/Components/Button';
 import { AnimatedBorderButton } from "@/Components/AnimatedBorderButton";
 import {
@@ -114,12 +114,11 @@ export const Hero = () => {
 
             {/* Main Heading */}
             <div className="space-y-4">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in">
                 Turning <span className="text-[var(--color-primary)] glow_text">PIXELS </span>
                 <br />
                 into <span className="font-cursive italic font-normal text-white">code </span> and
                 <span className="text-[var(--color-primary)] glow_text"> IDEAS </span>
-                <br />
                 into <span className="font-cursive italic font-normal text-white">interfaces</span>.
               </h1>
               <p className="text-lg text-[var(--color-muted-foreground)] animate-fade-in">
@@ -128,11 +127,18 @@ export const Hero = () => {
             </div>
 
             {/* Call to Action Buttons */}
-            <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-              <Button size="lg" onClick={handleContactClick}>
-                Contact Me <FaArrowRight className="w-5 h-5" />
+            <div className="flex flex-nowrap items-center gap-3 sm:gap-4 animate-fade-in animation-delay-300">
+              <Button
+                size="lg"
+                className="flex-1 min-w-0 h-11 sm:h-14 whitespace-nowrap px-3 text-sm sm:flex-none sm:px-5 sm:text-lg"
+                onClick={handleContactClick}
+              >
+                Contact Me <FaArrowRight className="hidden sm:inline-flex w-5 h-5" />
               </Button>
-              <AnimatedBorderButton onClick={handleCVDownload}>
+              <AnimatedBorderButton
+                className="flex-1 min-w-0 h-11 sm:h-14 whitespace-nowrap px-3 text-sm sm:flex-none sm:px-8 sm:text-lg"
+                onClick={handleCVDownload}
+              >
                 <LuDownload className="w-5 h-5" />
                 Download CV
               </AnimatedBorderButton>

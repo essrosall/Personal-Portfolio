@@ -7,20 +7,17 @@ const contactInfo = [
     {
         icon: LuMail,
         label: "Email",
-        value: "rosales.johnrey.agpalza@gmail.com",
-        href: "mailto:rosales.johnrey.agpalza@gmail.com"
+        value: "rosales.johnrey.agpalza@gmail.com"
     },
     {
         icon: LuPhone,
         label: "Phone",
-        value: "+63 993 6768 737",
-        href: "tel:+639936768737"
+        value: "+63 993 6768 737"
     },
     {
         icon: LuMapPin,
         label: "Location",
-        value: "Quezon City, Metro Manila, Philippines",
-        href: "#"
+        value: "Quezon City, Metro Manila, Philippines"
     },
 ];
 
@@ -89,19 +86,19 @@ export const Contact = () => {
     };
 
     return (
-        <section id="contact" className="py-32 overflow-hidden relative">
+        <section id="contact" className="py-20 sm:py-32 overflow-hidden relative">
             <div className="absolute top-1/3 left-[-4rem] w-96 h-96 bg-[var(--color-primary)]/7 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-1/4 right-[-2rem] w-80 h-80 bg-[var(--color-primary)]/6 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-[var(--color-primary)]/5 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute top-1/4 right-1/3 w-64 h-64 bg-[var(--color-primary)]/5 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto px-4 sm:px-6 relative z-10">
                 {/* Section Header */}
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
                     <span className="text-[var(--color-secondary-foreground)] text-sm font-medium tracking-wider uppercase animate-fade-in">
                         Get In Touch
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)]">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)]">
                         Let's build{" "}
                         <span className="font-serif italic font-normal text-white">
                             something great.
@@ -113,10 +110,10 @@ export const Contact = () => {
                 </div>
 
                 {/* Contact Content Grid */}
-                <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 max-w-5xl mx-auto w-full">
 
                     {/* RIGHT COLUMN: Contact Form */}
-                    <div className="glass p-8 rounded-3xl border border-[var(--color-primary)]/30 animate-fade-in animation-delay-400">
+                    <div className="glass p-5 sm:p-8 rounded-3xl border border-[var(--color-primary)]/30 animate-fade-in animation-delay-400 w-full">
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             {/* NAME */}
                             <div>
@@ -192,33 +189,34 @@ export const Contact = () => {
                         </form>
                     </div>
                     {/* Contact Info */}
-                    <div className="space-y-6 animate-fade-in animation-delay-400">
-                        <div className="glass rounded-3xl p-8">
+                    <div className="space-y-6 animate-fade-in animation-delay-400 w-full">
+                        <div className="glass rounded-3xl p-5 sm:p-8 w-full">
                             <h3 className="text-xl font-semibold mb-6">
                                 Contact Information
                             </h3>
                             <div className="space-y-4">
                                 {contactInfo.map((item, i) => (
-                                    <a
+                                    <div
                                         key={i}
-                                        href={item.href}
-                                        className="flex items-center gap-4 p-4 rounded-xl hover:bg-[var(--color-surface)] transition-colors group"
+                                        className="glass grid grid-cols-[3rem_1fr] items-start gap-4 p-4 rounded-xl border border-[var(--color-primary)]/15"
                                     >
-                                        <div className="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 flex items-center justify-center group-hover:bg-[var(--color-primary)]/20 transition-colors">
-                                            <item.icon className="w-5 h-5 text-[var(--color-primary)]" />
+                                        <div className="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 flex items-center justify-center shrink-0">
+                                            <item.icon className="w-5 h-5 shrink-0 text-[var(--color-primary)]" />
                                         </div>
-                                        <div>
-                                            <div className="text-sm text-[var(--color-smuted-foreground)]">
+                                        <div className="min-w-0 leading-tight">
+                                            <div className="text-xs sm:text-sm font-medium uppercase tracking-wide text-[var(--color-muted-foreground)]">
                                                 {item.label}
                                             </div>
-                                            <div className="font-medium">{item.value}</div>
+                                            <div className="mt-1 font-medium break-words text-[15px] sm:text-base text-[var(--color-foreground)]">
+                                                {item.value}
+                                            </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 ))}
                             </div>
                         </div>
 
-                        <div className="glass rounded-3xl p-8 border border-[var(--color-primary)]/30">
+                        <div className="glass rounded-3xl p-5 sm:p-8 border border-[var(--color-primary)]/30 w-full">
                             <div className="flex items-center gap-3 mb-4">
                                 <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
                                 <span className="font-medium">Currently Available</span>

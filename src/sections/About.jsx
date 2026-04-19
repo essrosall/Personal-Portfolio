@@ -67,10 +67,7 @@ export const About = () => {
                                 </span>
                             </div>
                             <p className="text-md italic text-[var(--color-foreground)] leading-relaxed">
-                                My mission is to design and develop web experiences that are clean, user-centered, and just witty enough to make the interface feel human instead of corporate wallpaper.
-                            </p>
-                            <p className="mt-3 text-sm text-[var(--color-muted-foreground)]">
-                                Think of it as serious structure with a light sense of humor.
+                                "My mission is to design and develop web experiences that are clean, user-centered, and just witty enough to make the interface feel human instead of corporate wallpaper."
                             </p>
                         </div>
                     </div>

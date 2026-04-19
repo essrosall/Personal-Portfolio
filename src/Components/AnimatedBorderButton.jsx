@@ -1,16 +1,14 @@
-import { Download } from "lucide-react";
-
-export const AnimatedBorderButton = ({ children, ...props }) => {
+export const AnimatedBorderButton = ({ className = "", children, ...props }) => {
   return (
     <button
       {...props}
-      className="relative bg-transparent border border-[var(--color-muted-foreground)]/50 
+      className={`relative bg-transparent border border-[var(--color-muted-foreground)]/50 
         text-[var(--color-foreground)] hover:border-[var(--color-primary)]/50 transition-all 
         duration-1000 focus:outline-none focus-visible:ring-1 
         focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-1 
         disabled:opacity-50 disabled:cursor-not-allowed group 
         px-8 py-4 text-lg font-medium rounded-md overflow-visible 
-        animated-border"
+        animated-border ${className}`}
     >
       {/* Animated SVG Border */}
       <svg
