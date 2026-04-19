@@ -57,6 +57,21 @@ const artworks = [
     description: "Portrait-based layout with bold color and framing.",
     image: "/artworks/Yoo-Jimin-Poster.png",
   },
+  {
+    title: "Newspaper Design",
+    description: "Editorial layout composition with balanced typography and imagery.",
+    image: "/artworks/Newspaper-Design.png",
+  },
+  {
+    title: "Rhenz Abando Poster",
+    description: "Athletic portrait poster with dynamic energy and focus.",
+    image: "/artworks/Rhenz-Abando-Poster.png",
+  },
+  {
+    title: "TRASHURE Poster",
+    description: "Product showcase poster with clean, modern design approach.",
+    image: "/artworks/TRASHURE-Poster-simple.png",
+  },
 ];
 
 const tileStyles = [

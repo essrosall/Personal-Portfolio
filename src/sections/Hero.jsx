@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button } from '@/Components/Button';
 import { AnimatedBorderButton } from "@/Components/AnimatedBorderButton";
+import { supabase } from "@/lib/supabaseClient";
 import {
-  FaArrowRight, FaGithub, FaFacebookSquare, FaBehance,
+  FaArrowRight, FaHeart, FaGithub, FaFacebookSquare, FaBehance,
   FaLinkedin, FaChevronDown, FaJava, FaCss3Alt,
   FaHtml5, FaPython, FaReact, FaFigma, FaGitAlt
 } from "react-icons/fa";
@@ -35,6 +36,9 @@ const skills = [
 
 export const Hero = () => {
   const CV_PATH = "/Rosales_ATS resume.pdf";
+  const LOVE_DEVICE_STORAGE_KEY = "portfolio-love-device-id";
+  const LOVE_COUNT_STORAGE_KEY = "portfolio-love-count";
+  const LOVE_LIKED_STORAGE_KEY = "portfolio-love-liked";
 
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -44,6 +48,10 @@ export const Hero = () => {
     y: 0,
     visible: false,
   });
+  const [hasSentLove, setHasSentLove] = useState(false);
+  const [loveCount, setLoveCount] = useState(0);
+  const [isLoveTooltipVisible, setIsLoveTooltipVisible] = useState(false);
+  const [isLoveSyncing, setIsLoveSyncing] = useState(false);
 
  
 
@@ -78,6 +86,66 @@ export const Hero = () => {
     return () => clearTimeout(timer);
   }, [text, isDeleting, roleIndex]);
 
+  useEffect(() => {
+    const savedLiked = localStorage.getItem(LOVE_LIKED_STORAGE_KEY);
+    const savedCount = localStorage.getItem(LOVE_COUNT_STORAGE_KEY);
+
+    if (savedLiked) {
+      setHasSentLove(savedLiked === "true");
+    }
+
+    if (savedCount) {
+      const parsed = Number(savedCount);
+      if (!Number.isNaN(parsed)) {
+        setLoveCount(parsed);
+      }
+    }
+
+    const getOrCreateDeviceId = () => {
+      const existing = localStorage.getItem(LOVE_DEVICE_STORAGE_KEY);
+      if (existing) return existing;
+
+      const generated =
+        globalThis.crypto?.randomUUID?.() ??
+        `device-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+      localStorage.setItem(LOVE_DEVICE_STORAGE_KEY, generated);
+      return generated;
+    };
+
+    const loadFromSupabase = async () => {
+      if (!supabase) return;
+
+      try {
+        const deviceId = getOrCreateDeviceId();
+        const { data, error } = await supabase.rpc("get_profile_like_state", {
+          p_device_id: deviceId,
+        });
+
+        if (error) {
+          throw error;
+        }
+
+        const row = Array.isArray(data) ? data[0] : null;
+        if (!row) return;
+
+        const remoteCount = Number(row.current_count);
+        const remoteLiked = Boolean(row.liked);
+
+        if (!Number.isNaN(remoteCount)) {
+          setLoveCount(remoteCount);
+          localStorage.setItem(LOVE_COUNT_STORAGE_KEY, String(remoteCount));
+        }
+
+        setHasSentLove(remoteLiked);
+        localStorage.setItem(LOVE_LIKED_STORAGE_KEY, String(remoteLiked));
+      } catch {
+        // Keep local fallback values if Supabase is unavailable.
+      }
+    };
+
+    loadFromSupabase();
+  }, []);
+
   const handleContactClick = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -89,6 +157,63 @@ export const Hero = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const fallbackToggleLove = () => {
+    const nextLoved = !hasSentLove;
+    const delta = nextLoved ? 1 : -1;
+    const nextCount = Math.max(0, loveCount + delta);
+
+    setHasSentLove(nextLoved);
+    setLoveCount(nextCount);
+    localStorage.setItem(LOVE_LIKED_STORAGE_KEY, String(nextLoved));
+    localStorage.setItem(LOVE_COUNT_STORAGE_KEY, String(nextCount));
+  };
+
+  const handleSendLove = async () => {
+    if (isLoveSyncing) return;
+
+    setIsLoveSyncing(true);
+    setIsLoveTooltipVisible(true);
+    try {
+      if (!supabase) {
+        fallbackToggleLove();
+      } else {
+        const deviceId = localStorage.getItem(LOVE_DEVICE_STORAGE_KEY);
+        const safeDeviceId =
+          deviceId ??
+          (globalThis.crypto?.randomUUID?.() ??
+            `device-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`);
+
+        localStorage.setItem(LOVE_DEVICE_STORAGE_KEY, safeDeviceId);
+
+        const { data, error } = await supabase.rpc("toggle_profile_like", {
+          p_device_id: safeDeviceId,
+        });
+
+        if (error) {
+          throw error;
+        }
+
+        const row = Array.isArray(data) ? data[0] : null;
+        const remoteCount = Number(row?.new_count);
+        const remoteLiked = Boolean(row?.liked);
+
+        if (!Number.isNaN(remoteCount)) {
+          setLoveCount(remoteCount);
+          localStorage.setItem(LOVE_COUNT_STORAGE_KEY, String(remoteCount));
+        }
+
+        setHasSentLove(remoteLiked);
+        localStorage.setItem(LOVE_LIKED_STORAGE_KEY, String(remoteLiked));
+      }
+    } catch {
+      fallbackToggleLove();
+    } finally {
+      setIsLoveSyncing(false);
+    }
+
+    window.setTimeout(() => setIsLoveTooltipVisible(false), 1200);
   };
 
   return (
@@ -104,7 +229,7 @@ export const Hero = () => {
           {/*left Column - Text Content*/}
           <div className="space-y-4">
             <div className="animate-fade-in">
-              <span className="inline-flex items-center gap-2 px-4  rounded-full glass text-sm text-[var(--color-primary)]">
+              <span className="inline-flex items-center gap-2 px-4 rounded-full glass text-sm text-[var(--color-primary)]">
                 <span className="w-2 h-2 bg-[var(--color-primary)] rounded-sm animate-pulse" />
                 Aspiring&nbsp;
                 <span className="font-semibold">{text}</span>
@@ -119,7 +244,7 @@ export const Hero = () => {
                 <br />
                 into <span className="font-cursive italic font-normal text-white">code </span> and
                 <span className="text-[var(--color-primary)] glow_text"> IDEAS </span>
-                into <span className="font-cursive italic font-normal text-white">interfaces</span>.
+                into <span className="font-cursive italic font-normal text-white">interfaces</span>
               </h1>
               <p className="text-lg text-[var(--color-muted-foreground)] animate-fade-in">
                 I'm an aspiring Web Developer and UI/UX Designer dedicated to building clean, responsive, and user-centered digital experiences from the ground up. By blending visual storytelling with intuitive interactions, I ensure every pixel serves a purpose and every user journey feels effortless.
@@ -176,6 +301,38 @@ export const Hero = () => {
               via-transparent to-[var(--color-primary)]/10 
               blur-2xl animate-pulse-glow"/>
               <div className="group relative glass rounded-3xl p-2 glow-border">
+                <div className="absolute top-3 right-3 z-30">
+                  <div
+                    className={`absolute -top-10 right-0 rounded-lg border border-white/10 bg-black/65 px-2.5 py-1 text-[10px] font-medium text-white whitespace-nowrap shadow-lg pointer-events-none transition-all duration-200 ${
+                      isLoveTooltipVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
+                    }`}
+                  >
+                    {hasSentLove ? "Thank you" : "Send love"}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleSendLove}
+                    onMouseEnter={() => setIsLoveTooltipVisible(true)}
+                    onMouseLeave={() => setIsLoveTooltipVisible(false)}
+                    onFocus={() => setIsLoveTooltipVisible(true)}
+                    onBlur={() => setIsLoveTooltipVisible(false)}
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-xs font-medium transition-all duration-200 backdrop-blur-md ${
+                      hasSentLove
+                        ? "border-red-300/60 bg-red-500/15 text-red-100"
+                        : "border-white/20 bg-white/10 text-[var(--color-foreground)] hover:border-[var(--color-primary)]/40 hover:bg-[var(--color-primary)]/15"
+                    }`}
+                    disabled={isLoveSyncing}
+                    aria-label={hasSentLove ? "Thank you" : "Send love"}
+                    title={hasSentLove ? "Thank you" : "Send love"}
+                  >
+                    <span className={`grid h-5 w-5 place-items-center rounded-full ${hasSentLove ? "bg-red-500/20" : "bg-[var(--color-primary)]/20"}`}>
+                      <FaHeart className={`h-3 w-3 ${hasSentLove ? "text-red-300" : "text-[var(--color-primary)]"}`} />
+                    </span>
+                    <span className="tabular-nums">{loveCount}</span>
+                  </button>
+                </div>
+
                 <div
                   className={`absolute px-3 py-1.5 rounded-lg glass text-xs font-medium text-[var(--color-foreground)] whitespace-nowrap pointer-events-none transition-all duration-150 z-20 ${
                     profileTooltip.visible ? "opacity-100 scale-100" : "opacity-0 scale-95"

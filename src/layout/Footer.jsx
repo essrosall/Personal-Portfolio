@@ -24,16 +24,16 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="pt-20 pb-10 border-t border-white/10 bg-[var(--color-background)] relative overflow-hidden">
+    <footer className="pt-14 sm:pt-20 pb-10 border-t border-white/10 bg-[var(--color-background)] relative overflow-hidden">
       
       {/* Subtle background glow to tie in with the rest of the site */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-[var(--color-primary)]/50 to-transparent" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[var(--color-primary)]/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         
         {/* Top Section: 3-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12 mb-14 sm:mb-16">
           
           {/* Column 1: Brand & Tagline */}
           <div className="md:col-span-5 lg:col-span-4">
@@ -52,7 +52,7 @@ export const Footer = () => {
           {/* Column 2: Social Links */}
           <div className="md:col-span-7 lg:col-span-4 lg:mx-auto">
             <h4 className="text-white font-medium mb-5 tracking-wider uppercase text-xs">Connect Online</h4>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -67,7 +67,7 @@ export const Footer = () => {
           </div>
 
           {/* Column 3: Navigation Grid */}
-          <div className="md:col-span-12 lg:col-span-4 flex flex-row gap-16 lg:justify-end">
+          <div className="md:col-span-12 lg:col-span-4 grid grid-cols-2 gap-8 sm:gap-12 lg:flex lg:flex-row lg:gap-16 lg:justify-end">
             <div>
               <h4 className="text-white font-medium mb-5 tracking-wider uppercase text-xs">Explore</h4>
               <nav className="flex flex-col gap-3">
@@ -109,7 +109,8 @@ export const Footer = () => {
           {/* Sharp Back to Top Button */}
           <button
             onClick={scrollToTop}
-            className="group fixed bottom-6 right-4 z-40 md:static md:bottom-auto md:right-auto md:z-auto flex items-center justify-center w-10 h-10 rounded-xl glass border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)] text-[var(--color-muted-foreground)] hover:text-[var(--color-primary-foreground)] transition-all shadow-lg"
+            className="group fixed right-4 z-40 md:static md:bottom-auto md:right-auto md:z-auto flex items-center justify-center w-10 h-10 rounded-xl glass border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)] text-[var(--color-muted-foreground)] hover:text-[var(--color-primary-foreground)] transition-all shadow-lg"
+            style={{ bottom: "max(1rem, env(safe-area-inset-bottom))" }}
             aria-label="Scroll to top"
           >
             <MoveUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform animate-bounce" />

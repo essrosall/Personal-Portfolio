@@ -86,7 +86,7 @@ export const Contact = () => {
     };
 
     return (
-        <section id="contact" className="py-20 sm:py-32 overflow-hidden relative">
+        <section id="contact" className="py-16 sm:py-24 md:py-32 overflow-hidden relative">
             <div className="absolute top-1/3 left-[-4rem] w-96 h-96 bg-[var(--color-primary)]/7 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-1/4 right-[-2rem] w-80 h-80 bg-[var(--color-primary)]/6 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-[var(--color-primary)]/5 rounded-full blur-3xl pointer-events-none" />
@@ -94,11 +94,11 @@ export const Contact = () => {
 
             <div className="container mx-auto px-4 sm:px-6 relative z-10">
                 {/* Section Header */}
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
                     <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[var(--color-secondary-foreground)] text-xs font-semibold tracking-[0.2em] uppercase animate-fade-in">
                         Get In Touch
                     </span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)]">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 mb-5 sm:mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)]">
                         Let's build{" "}
                         <span className="font-serif italic font-normal text-white">
                             something great.
@@ -110,10 +110,10 @@ export const Contact = () => {
                 </div>
 
                 {/* Contact Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 max-w-5xl mx-auto w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 max-w-5xl mx-auto w-full items-start">
 
                     {/* RIGHT COLUMN: Contact Form */}
-                    <div className="glass p-5 sm:p-8 rounded-3xl border border-[var(--color-primary)]/30 animate-fade-in animation-delay-400 w-full">
+                    <div className="glass p-5 sm:p-8 rounded-3xl border border-[var(--color-primary)]/30 animate-fade-in animation-delay-400 w-full order-2 lg:order-2">
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             {/* NAME */}
                             <div>
@@ -189,7 +189,7 @@ export const Contact = () => {
                         </form>
                     </div>
                     {/* Contact Info */}
-                    <div className="space-y-6 animate-fade-in animation-delay-400 w-full">
+                    <div className="space-y-6 animate-fade-in animation-delay-400 w-full order-1 lg:order-1">
                         <div className="glass rounded-3xl p-5 sm:p-8 w-full">
                             <h3 className="text-xl font-semibold mb-6">
                                 Contact Information

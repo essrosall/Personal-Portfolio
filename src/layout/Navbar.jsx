@@ -5,7 +5,6 @@ import {
   ChevronLeft,
   ChevronRight,
   GalleryVertical,
-  Heart,
   Home,
   Mail,
   Trophy,
@@ -26,8 +25,6 @@ const mobileNavGroups = ["Overview", "Works", "Connect"];
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [hasLikedPortfolio, setHasLikedPortfolio] = useState(false);
-  const [visitorLikes, setVisitorLikes] = useState(128);
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
@@ -41,6 +38,18 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
   // NEW: Bulletproof smooth scrolling function
   const scrollToProjects = (e) => {
     e.preventDefault();
@@ -53,20 +62,13 @@ export const Navbar = () => {
     }
   };
 
-  const handlePortfolioLike = () => {
-    setHasLikedPortfolio((prev) => {
-      setVisitorLikes((count) => count + (prev ? -1 : 1));
-      return !prev;
-    });
-  };
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 transition-all duration-700 ${
-        isScrolled ? "glass_strong py-4 shadow-lg" : "bg-transparent py-5"
+        isScrolled ? "glass_strong py-3 md:py-4 shadow-lg" : "bg-transparent py-3 md:py-5"
       } z-50`}
     >
-      <nav className="container mx-auto px-6 flex items-center justify-between relative z-10 gap-4">
+      <nav className="container mx-auto px-4 sm:px-6 flex items-center justify-between relative z-10 gap-3 sm:gap-4">
         
         <a href="#" className="shrink-0 inline-flex items-center hover:opacity-90 transition-opacity" aria-label="Go to home">
           <img
@@ -144,7 +146,7 @@ export const Navbar = () => {
             <ChevronRight className="w-4 h-4 text-[var(--color-foreground)]" />
           </button>
 
-          <div className="h-full overflow-y-auto px-5 pt-5 pb-6 flex flex-col">
+          <div className="h-full overflow-y-auto px-5 pt-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] flex flex-col">
             <div
               className={`flex items-start justify-between gap-3 transition-all duration-500 ${
                 isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
@@ -170,26 +172,6 @@ export const Navbar = () => {
                 isMobileMenuOpen ? "opacity-100" : "opacity-0"
               }`}
             />
-
-            <div
-              className={`glass rounded-xl border border-[var(--color-primary)]/20 p-3 mb-4 transition-all duration-500 ${
-                isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-              }`}
-              style={{ transitionDelay: isMobileMenuOpen ? "90ms" : "0ms" }}
-            >
-              <p className="text-xs text-[var(--color-muted-foreground)]">Enjoying the portfolio so far?</p>
-              <button
-                type="button"
-                onClick={handlePortfolioLike}
-                className="mt-2 w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-surface)]/60 hover:bg-[var(--color-surface)]/90 transition-colors text-sm"
-              >
-                <Heart
-                  className={`w-4 h-4 ${hasLikedPortfolio ? "fill-red-400 text-red-400" : "text-[var(--color-primary)]"}`}
-                />
-                {hasLikedPortfolio ? "Thanks for the love!" : "Send some love"}
-                <span className="text-[var(--color-muted-foreground)]">({visitorLikes})</span>
-              </button>
-            </div>
 
             <nav className="flex flex-col gap-4">
               {mobileNavGroups.map((group, groupIdx) => (

@@ -3,7 +3,7 @@ import { FiCalendar } from "react-icons/fi";
 
 const experience = [
     {
-        period: "September 2025 - Present",
+        period: "Sept. 2025 - Present",
         role: "IT Support Intern",
         company: "Concentrix Philippines - ETON",
         description: "Maintained optimal operational performance in a fast-paced BPO environment by configuring hardware, troubleshooting network connectivity, and efficiently resolving IT support tickets.",
@@ -12,7 +12,7 @@ const experience = [
         logo: "/logo/concentrix.jpg",
     },
     {
-        period: "September 2023 - September 2024",
+        period: "Sept. 2023 - Sept. 2024",
         role: "Layout Artist & Graphic Designer",
         company: "TAPP.Ph Printing Services",
         description: "I collaborated directly with clients to design and deliver visually appealing print apparel, digital assets, and website layouts under tight deadlines.",
