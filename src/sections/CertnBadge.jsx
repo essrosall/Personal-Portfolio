@@ -11,38 +11,48 @@ import { useEffect, useState } from "react";
 const badges = [
   {
     title: "Network Defense",
+    description: "Advanced network security and defense techniques from Cisco Networking Academy.",
     date: "March 22, 2026",
     issuer: "CISCO",
     image: "/badges/DEF.png",
     credly: "https://www.credly.com/badges/c60a0b9b-aed1-4e6c-be94-06c1e501c0df/public_url",
+    courseLink: "https://www.netacad.com/courses/network-security/network-defense",
   },
   {
     title: "AI Fundamentals with IBM SkillsBuild",
+    description: "Core AI concepts and practical foundations through IBM SkillsBuild learning modules.",
     date: "March 13, 2026",
     issuer: "IBM",
     image: "/badges/AI.png",
     credly: "https://www.credly.com/badges/081690b6-d900-4c7d-840a-22ebf7dd4a78/public_url",
+    courseLink: "https://skillsbuild.org/",
   },
   {
     title: "Artificial Intelligence Fundamentals",
+    description: "Essential artificial intelligence fundamentals and introductory machine learning concepts.",
     date: "March 13, 2026",
     issuer: "IBM",
     image: "/badges/IBM.png",
     credly: "https://www.credly.com/badges/7eb1e9d0-67ae-4728-8847-cb81726d4086/public_url",
+    courseLink: "https://skillsbuild.org/",
   },
   {
     title: "Introduction to Data Science",
+    description: "Foundational data science workflow, analytics mindset, and practical introductory skills.",
     date: "February 27, 2026",
     issuer: "CISCO",
     image: "/badges/DATSCI.png",
     credly: "https://www.credly.com/badges/660952c8-d299-4b7f-8198-32ca94640497/public_url",
+    courseLink: "https://www.netacad.com/courses/data-science/introduction-data-science",
   },
   {
     title: "Introduction to Cybersecurity Badge",
+    description: "Cybersecurity basics covering threats, protection strategies, and digital safety awareness.",
     date: " February 05, 2026",
     issuer: "CISCO",
     image: "/badges/CS.png",
     credly: "https://www.credly.com/badges/27b4ea10-dbaf-48ed-a1bc-f6b0822a345d/public_url",
+    courseLink: "https://www.netacad.com/courses/cybersecurity/introduction-cybersecurity",
   },
 
 
@@ -125,6 +135,7 @@ export const CertnBadge = () => {
   const [activeCertificate, setActiveCertificate] = useState(0);
   const [isCertificateZoomOpen, setIsCertificateZoomOpen] = useState(false);
   const [selectedCertificate, setSelectedCertificate] = useState(0);
+  const [selectedBadgeIndex, setSelectedBadgeIndex] = useState(null);
   const isBadgeCountDivisibleByThree = badges.length % 3 === 0;
 
   const closeCertificateViewer = () => {
@@ -149,6 +160,14 @@ export const CertnBadge = () => {
     setSelectedCertificate(
       (prev) => (prev - 1 + certifications.length) % certifications.length
     );
+  };
+
+  const openBadgeDetails = (index) => {
+    setSelectedBadgeIndex(index);
+  };
+
+  const closeBadgeDetails = () => {
+    setSelectedBadgeIndex(null);
   };
 
   useEffect(() => {
@@ -186,6 +205,21 @@ export const CertnBadge = () => {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isCertificateZoomOpen]);
+
+  useEffect(() => {
+    if (selectedBadgeIndex === null) {
+      return undefined;
+    }
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        closeBadgeDetails();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedBadgeIndex]);
 
   return (
     <section id="certifications" className="py-32 relative overflow-hidden">
@@ -250,7 +284,7 @@ export const CertnBadge = () => {
         </div>
 
         <article className="group glass rounded-2xl overflow-hidden animate-fade-in animation-delay-300 max-w-5xl mx-auto">
-          <div className="relative overflow-hidden w-full h-[360px] md:h-[560px] lg:h-[640px] bg-gradient-to-b from-[var(--color-surface)]/85 to-[var(--color-background)]/75">
+          <div className="relative overflow-hidden w-full h-[240px] md:h-[560px] lg:h-[640px] bg-gradient-to-b from-[var(--color-surface)]/85 to-[var(--color-background)]/75">
             <button
               type="button"
               onClick={() => {
@@ -263,7 +297,7 @@ export const CertnBadge = () => {
               <img
                 src={certifications[activeCertificate].image}
                 alt={certifications[activeCertificate].title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
               />
             </button>
             <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
@@ -291,14 +325,14 @@ export const CertnBadge = () => {
             </button>
           </div>
 
-          <div className="p-6 space-y-4">
-            <h4 className="text-xl font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
+          <div className="p-4 sm:p-6 space-y-3 sm:space-y-4 min-h-[230px] sm:min-h-0 flex flex-col">
+            <h4 className="text-base sm:text-xl font-semibold leading-snug min-h-[3rem] sm:min-h-0 text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
               {certifications[activeCertificate].title}
             </h4>
-            <p className="text-sm text-[var(--color-muted-foreground)]">
+            <p className="text-xs sm:text-sm leading-relaxed min-h-[3.5rem] sm:min-h-0 text-[var(--color-muted-foreground)] overflow-hidden">
               {certifications[activeCertificate].description}
             </p>
-            <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center justify-between gap-3 sm:gap-4 flex-wrap min-h-[2.25rem]">
               <div className="flex items-center gap-2 text-sm text-[var(--color-secondary-foreground)]">
                 <Calendar className="w-4 h-4" />
                 <span>{certifications[activeCertificate].date}</span>
@@ -316,7 +350,7 @@ export const CertnBadge = () => {
               )}
             </div>
 
-            <div className="flex items-center justify-center gap-2 pt-1">
+            <div className="flex items-center justify-center gap-2 pt-1 mt-auto">
               {certifications.map((_, idx) => (
                 <button
                   key={idx}
@@ -343,8 +377,8 @@ export const CertnBadge = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {badges.map((badge) => (
+          <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {badges.map((badge, idx) => (
               <article
                 key={badge.title}
                 className="group glass rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300"
@@ -353,7 +387,7 @@ export const CertnBadge = () => {
                   <img
                     src={badge.image}
                     alt={badge.title}
-                    className="w-full h-full object-contain p-5 transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-contain p-3 sm:p-5 transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
                   <span className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white">
@@ -362,23 +396,58 @@ export const CertnBadge = () => {
                   </span>
                 </div>
 
-                <div className="p-5 space-y-3">
+                <div className="p-4 space-y-3 md:hidden">
+                  <div className="grid grid-cols-1 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => openBadgeDetails(idx)}
+                      className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
+                    >
+                      View Description
+                    </button>
+                    <a
+                      href={badge.credly}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
+                    >
+                      View Proof
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="hidden md:block p-5 space-y-3">
                   <h4 className="text-lg font-semibold text-[var(--color-foreground)] leading-snug">
                     {badge.title}
                   </h4>
+                  <p className="text-sm text-[var(--color-muted-foreground)] leading-relaxed">
+                    {badge.description}
+                  </p>
                   <div className="flex items-center justify-between gap-4 text-sm text-[var(--color-muted-foreground)] flex-wrap">
                     <span>{badge.issuer}</span>
                     <span>{badge.date}</span>
                   </div>
-                  <a
-                    href={badge.credly}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
-                  >
-                    View Proof
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <a
+                      href={badge.credly}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
+                    >
+                      View Proof
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                    <a
+                      href={badge.courseLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
+                    >
+                      Try It
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
                 </div>
               </article>
             ))}
@@ -435,6 +504,64 @@ export const CertnBadge = () => {
             >
               <ChevronRight className="w-5 h-5" />
             </button>
+          </div>
+        </div>
+      )}
+
+      {selectedBadgeIndex !== null && (
+        <div
+          className="fixed inset-0 z-[9998] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={closeBadgeDetails}
+        >
+          <div
+            className="relative w-full max-w-md glass rounded-2xl border border-white/15 p-5"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={closeBadgeDetails}
+              className="absolute top-3 right-3 p-2 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
+              aria-label="Close badge details"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="space-y-4">
+              <div className="w-full aspect-[4/3] rounded-xl overflow-hidden bg-[var(--color-surface)]/40 border border-white/10">
+                <img
+                  src={badges[selectedBadgeIndex].image}
+                  alt={badges[selectedBadgeIndex].title}
+                  className="w-full h-full object-contain p-5"
+                />
+              </div>
+
+              <h4 className="text-lg font-semibold text-[var(--color-foreground)] pr-8 leading-snug">
+                {badges[selectedBadgeIndex].title}
+              </h4>
+
+              <p className="text-sm text-[var(--color-muted-foreground)] leading-relaxed">
+                {badges[selectedBadgeIndex].description}
+              </p>
+
+              <div className="text-sm text-[var(--color-muted-foreground)] space-y-1">
+                <p>
+                  <span className="text-[var(--color-foreground)]">Acquisition Date:</span> {badges[selectedBadgeIndex].date}
+                </p>
+                <p>
+                  <span className="text-[var(--color-foreground)]">From:</span> {badges[selectedBadgeIndex].issuer}
+                </p>
+              </div>
+
+              <a
+                href={badges[selectedBadgeIndex].courseLink}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] hover:underline transition-colors"
+              >
+                Try it on your own
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         </div>
       )}

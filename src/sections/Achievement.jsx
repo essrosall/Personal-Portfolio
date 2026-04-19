@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { X, Trophy, Medal } from "lucide-react";
 
 const logoContestAchievements = [
     {
@@ -7,6 +7,7 @@ const logoContestAchievements = [
         description:
             "My first official contest submission that established my visual identity direction and marked my first footprint in QCU's design scene.",
         period: "2024",
+        placement: 1,
         awardImage: "/competition/1.jpg",
         entryImage: "/competition/ACH1.png",
     },
@@ -15,6 +16,7 @@ const logoContestAchievements = [
         description:
             "A refined concept iteration focused on stronger symbolism and clearer brand storytelling for the university community.",
         period: "2024",
+        placement: 2,
         awardImage: "/competition/2.jpg",
         entryImage: "/competition/ACH2.png",
     },
@@ -23,10 +25,29 @@ const logoContestAchievements = [
         description:
             "A bold and polished final variation that highlights my growth in composition, balance, and meaningful visual communication.",
         period: "2024",
+        placement: 3,
         awardImage: "/competition/3.jpg",
         entryImage: "/competition/ACH3.png",
     },
 ];
+
+const placementBadge = {
+    1: {
+        Icon: Trophy,
+        label: "1st Place",
+        className: "text-amber-300 bg-amber-400/10 border border-amber-300/30",
+    },
+    2: {
+        Icon: Medal,
+        label: "2nd Place",
+        className: "text-slate-300 bg-slate-300/10 border border-slate-300/30",
+    },
+    3: {
+        Icon: Medal,
+        label: "3rd Place",
+        className: "text-orange-300 bg-orange-400/10 border border-orange-300/30",
+    },
+};
 
 export const Achievement = () => {
     const [isLogoEntryZoomOpen, setIsLogoEntryZoomOpen] = useState(false);
@@ -63,19 +84,18 @@ export const Achievement = () => {
             <div className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-[var(--color-primary)]/7 rounded-full blur-3xl pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10">
-                <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
-                    <span className="text-[var(--color-secondary-foreground)] text-sm font-medium tracking-wider uppercase">
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[var(--color-secondary-foreground)] text-xs font-semibold tracking-[0.2em] uppercase animate-fade-in">
                         Achievement Spotlight
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-[var(--color-secondary-foreground)]">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)]">
                         QCU logo contest
                         <span className="font-cursive italic font-normal text-white">{" "}footprint.</span>
                     </h2>
-                    <p className="text-[var(--color-muted-foreground)]">
+                    <p className="text-[var(--color-muted-foreground)] animate-fade-in animation-delay-200">
                         A showcase of the logo contest entries I created for QCU, highlighting the work I left behind in the university through design and recognition.
                     </p>
                 </div>
-
                 <div className="max-w-12xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         {logoContestAchievements.map((item, idx) => (
@@ -97,7 +117,7 @@ export const Achievement = () => {
                                     <button
                                         type="button"
                                         onClick={() => openLogoEntryViewer(idx)}
-                                        className="absolute z-20 right-4 top-[62%] md:top-[64%] -translate-y-1/2 w-24 h-24 md:w-28 md:h-28 rounded-xl overflow-hidden border border-white/20 shadow-xl bg-[var(--color-background)]/90 cursor-zoom-in"
+                                        className="absolute z-20 right-3 sm:right-4 top-[72%] sm:top-[68%] md:top-[64%] -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-xl overflow-hidden border border-white/20 shadow-xl bg-[var(--color-background)]/90 cursor-zoom-in"
                                         aria-label={`Open ${item.title} logo entry`}
                                     >
                                         <img
@@ -112,10 +132,23 @@ export const Achievement = () => {
                                     </span>
                                 </div>
 
-                                <div className="p-5 pr-28 md:pr-32 lg:pr-36 space-y-3">
-                                    <h4 className="text-base md:text-lg font-semibold leading-snug text-[var(--color-foreground)] max-w-[72%]">
-                                        {item.title}
-                                    </h4>
+                                <div className="p-5 space-y-3">
+                                    <div className="flex items-start justify-between gap-3">
+                                        <h4 className="flex-1 min-w-0 text-base md:text-lg font-semibold leading-snug text-[var(--color-foreground)]">
+                                            {item.title}
+                                        </h4>
+                                        {(() => {
+                                            const badge = placementBadge[item.placement] ?? placementBadge[3];
+                                            const Icon = badge.Icon;
+
+                                            return (
+                                                <div className={`shrink-0 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide ${badge.className}`}>
+                                                    <Icon className="w-3.5 h-3.5" />
+                                                    <span>{badge.label}</span>
+                                                </div>
+                                            );
+                                        })()}
+                                    </div>
                                     <p className="text-sm text-[var(--color-muted-foreground)] leading-relaxed">
                                         {item.description}
                                     </p>

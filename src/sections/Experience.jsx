@@ -37,9 +37,9 @@ export const Experience = () => {
             <div className="container mx-auto px-6 relative z-10">
 
                 {/*Section Header*/}
-                <div className="max-w-3xl mb-16">
-                    <span className="text-[var(--color-secondary-foreground)] text-sm font-medium tracking-wider uppercase animate-fade-in">Career Journey</span>
-                    <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)]">
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[var(--color-secondary-foreground)] text-xs font-semibold tracking-[0.2em] uppercase animate-fade-in">Career Journey</span>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)]">
                         Experience that <span className="font-serif italic font-normal text-white">
                             speaks volumes.</span>
                     </h2>

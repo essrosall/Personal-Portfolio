@@ -7,7 +7,7 @@ export const AnimatedBorderButton = ({ className = "", children, ...props }) => 
         duration-1000 focus:outline-none focus-visible:ring-1 
         focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-1 
         disabled:opacity-50 disabled:cursor-not-allowed group 
-        px-8 py-4 text-lg font-medium rounded-md overflow-visible 
+        inline-flex items-center justify-center px-8 py-4 text-lg font-medium rounded-md overflow-visible 
         animated-border ${className}`}
     >
       {/* Animated SVG Border */}
@@ -29,7 +29,7 @@ export const AnimatedBorderButton = ({ className = "", children, ...props }) => 
           className="animated-border-path"
         />
       </svg>
-      <span className="relative z-10 flex items-center justify-center gap-2">
+      <span className="relative z-10 flex h-full items-center justify-center gap-2 leading-none">
 
         {children}
 
