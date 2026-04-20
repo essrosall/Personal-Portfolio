@@ -217,6 +217,15 @@ export const Gallery = () => {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [selectedArtwork, selectedIndex, displayedArtworks.length]);
 
+  useEffect(() => {
+    const isViewerOpen = selectedArtwork !== null;
+    document.body.classList.toggle("viewer-open", isViewerOpen);
+
+    return () => {
+      document.body.classList.remove("viewer-open");
+    };
+  }, [selectedArtwork]);
+
   return (
     <section id="gallery" className="py-20 sm:py-24 md:py-32 relative overflow-hidden">
       <div className="absolute top-1/3 left-[-4rem] w-96 h-96 bg-[var(--color-primary)]/7 rounded-full blur-3xl pointer-events-none" />

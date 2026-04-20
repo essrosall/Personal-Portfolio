@@ -53,6 +53,15 @@ export const Hero = () => {
   const [isLoveTooltipVisible, setIsLoveTooltipVisible] = useState(false);
   const [isLoveSyncing, setIsLoveSyncing] = useState(false);
 
+  const normalizeRpcRow = (data) => {
+    if (Array.isArray(data)) return data[0] ?? null;
+    if (data && typeof data === "object") return data;
+    return null;
+  };
+
+  const parseLikedValue = (value) =>
+    value === true || value === "true" || value === 1 || value === "1";
+
  
 
   useEffect(() => {
@@ -125,11 +134,11 @@ export const Hero = () => {
           throw error;
         }
 
-        const row = Array.isArray(data) ? data[0] : null;
+        const row = normalizeRpcRow(data);
         if (!row) return;
 
         const remoteCount = Number(row.current_count);
-        const remoteLiked = Boolean(row.liked);
+        const remoteLiked = parseLikedValue(row.liked);
 
         if (!Number.isNaN(remoteCount)) {
           setLoveCount(remoteCount);
@@ -195,9 +204,13 @@ export const Hero = () => {
           throw error;
         }
 
-        const row = Array.isArray(data) ? data[0] : null;
+        const row = normalizeRpcRow(data);
+        if (!row) {
+          throw new Error("Invalid like response");
+        }
+
         const remoteCount = Number(row?.new_count);
-        const remoteLiked = Boolean(row?.liked);
+        const remoteLiked = parseLikedValue(row?.liked);
 
         if (!Number.isNaN(remoteCount)) {
           setLoveCount(remoteCount);
@@ -208,7 +221,9 @@ export const Hero = () => {
         localStorage.setItem(LOVE_LIKED_STORAGE_KEY, String(remoteLiked));
       }
     } catch {
-      fallbackToggleLove();
+      if (!supabase) {
+        fallbackToggleLove();
+      }
     } finally {
       setIsLoveSyncing(false);
     }

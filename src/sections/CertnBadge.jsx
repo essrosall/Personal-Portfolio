@@ -234,6 +234,15 @@ export const CertnBadge = () => {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [selectedBadgeIndex]);
 
+  useEffect(() => {
+    const isAnyViewerOpen = isCertificateZoomOpen || selectedBadgeIndex !== null;
+    document.body.classList.toggle("viewer-open", isAnyViewerOpen);
+
+    return () => {
+      document.body.classList.remove("viewer-open");
+    };
+  }, [isCertificateZoomOpen, selectedBadgeIndex]);
+
   return (
     <section id="certifications" className="py-20 sm:py-24 md:py-32 relative overflow-hidden">
       <div

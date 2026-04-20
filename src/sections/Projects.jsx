@@ -306,6 +306,19 @@ export const Projects = () => {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isZoomOpen, selectedWebProjectIndex, selectedMobileProjectIndex]);
 
+  useEffect(() => {
+    const isAnyViewerOpen =
+      isZoomOpen ||
+      selectedWebProjectIndex !== null ||
+      selectedMobileProjectIndex !== null;
+
+    document.body.classList.toggle("viewer-open", isAnyViewerOpen);
+
+    return () => {
+      document.body.classList.remove("viewer-open");
+    };
+  }, [isZoomOpen, selectedWebProjectIndex, selectedMobileProjectIndex]);
+
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % capstoneProject.screenshots.length);
   };
@@ -474,7 +487,7 @@ export const Projects = () => {
                 href={project.figmaLink}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-semibold hover:brightness-110 transition-all shrink-0"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-semibold hover:brightness-110 transition-all shrink-0"
                 aria-label={`Open ${project.title} in Figma`}
                 title="Click to view simple prototype"
               >

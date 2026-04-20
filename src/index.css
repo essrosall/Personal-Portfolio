@@ -242,6 +242,12 @@
       0 0 80px color-mix(in srgb, var(--color-primary) 25%, transparent);
     }
 
+body.viewer-open .hide-when-viewer-open {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.75rem);
+}
+
 @keyframes spin-loading {
   0% {
     transform: rotate(0deg);

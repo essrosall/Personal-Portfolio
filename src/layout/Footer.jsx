@@ -109,7 +109,7 @@ export const Footer = () => {
           {/* Sharp Back to Top Button */}
           <button
             onClick={scrollToTop}
-            className="group fixed right-4 z-40 md:static md:bottom-auto md:right-auto md:z-auto flex items-center justify-center w-12 h-12 rounded-xl glass border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)] text-[var(--color-muted-foreground)] hover:text-[var(--color-primary-foreground)] transition-all shadow-lg"
+            className="hide-when-viewer-open group fixed right-4 z-40 md:static md:bottom-auto md:right-auto md:z-auto flex items-center justify-center w-12 h-12 rounded-xl glass border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)] text-[var(--color-muted-foreground)] hover:text-[var(--color-primary-foreground)] transition-all shadow-lg"
             style={{ bottom: "max(1rem, env(safe-area-inset-bottom))" }}
             aria-label="Scroll to top"
           >
