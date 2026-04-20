@@ -53,9 +53,29 @@ const artworks = [
     image: "/artworks/Jordan-Clarkson-Poster.png",
   },
   {
+    title: "Brownlee Poster",
+    description: "Sports portrait poster built around bold contrast and motion.",
+    image: "/artworks/Brownlee.png",
+  },
+  {
+    title: "Congrats Gilas",
+    description: "Celebratory sports artwork with energetic composition and team pride.",
+    image: "/artworks/Congrats GILAS.png",
+  },
+  {
     title: "Yoo Jimin Poster",
     description: "Portrait-based layout with bold color and framing.",
     image: "/artworks/Yoo-Jimin-Poster.png",
+  },
+  {
+    title: "Hatred",
+    description: "Dark expressive artwork focused on mood, tension, and contrast.",
+    image: "/artworks/Hatred.png",
+  },
+  {
+    title: "Rome",
+    description: "City-inspired visual study with a dramatic editorial feel.",
+    image: "/artworks/ROME.png",
   },
   {
     title: "Newspaper Design",
@@ -63,9 +83,24 @@ const artworks = [
     image: "/artworks/Newspaper-Design.png",
   },
   {
+    title: "Soft Dev Infographics",
+    description: "Information design piece built around structure, clarity, and hierarchy.",
+    image: "/artworks/SOFT DEV Infograpics.png",
+  },
+  {
+    title: "Tokyo",
+    description: "Atmospheric poster work with a modern city-inspired visual language.",
+    image: "/artworks/TOKYO.png",
+  },
+  {
     title: "Rhenz Abando Poster",
     description: "Athletic portrait poster with dynamic energy and focus.",
     image: "/artworks/Rhenz-Abando-Poster.png",
+  },
+  {
+    title: "Weight of Shadows",
+    description: "Concept-driven piece balancing silhouette, tone, and emotional depth.",
+    image: "/artworks/Weight Of Shadows.png",
   },
   {
     title: "TRASHURE Poster",

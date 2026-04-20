@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Calendar, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ExternalLink, FileText, X } from "lucide-react";
-import { FiCalendar } from "react-icons/fi";
+import { FiCalendar, FiFigma } from "react-icons/fi";
 
 const capstoneProject = {
   maintitle: "TRASHURE",
@@ -41,6 +41,7 @@ const webDesignProjects = [
     period: "2025-2026",
     description:
       "Admin-focused web dashboard for monitoring verified waste entries, tracking user points, and managing reward redemptions.",
+    figmaLink: "",
     screenshots: [
       "/projects/figma/WEB/TRASHURE/1.png",
       "/projects/figma/WEB/TRASHURE/2.png",
@@ -54,6 +55,7 @@ const webDesignProjects = [
     period: "2025-2026",
     description:
       "Kiosk interface concept tailored for quick user interaction, real-time verification feedback, and points allocation flow.",
+    figmaLink: "",
     screenshots: [
       "/projects/figma/WEB/KIOSK/1.png",
       "/projects/figma/WEB/KIOSK/2.png",
@@ -69,6 +71,7 @@ const webDesignProjects = [
     period: "2024",
     description:
       "Semi-low fidelity web workflow exploration focused on process clarity, information hierarchy, and streamlined user paths.",
+    figmaLink: "",
     screenshots: [
       "/projects/figma/WEB/PHISOPS/1.png",
       "/projects/figma/WEB/PHISOPS/2.png",
@@ -83,6 +86,7 @@ const webDesignProjects = [
     period: "2023-2024",
     description:
       "Simple website design with clear navigation structure and practical visual sections for school information delivery.",
+    figmaLink: "",
     screenshots: [
       "/projects/figma/WEB/LEAN/1.png",
       "/projects/figma/WEB/LEAN/2.png",
@@ -94,6 +98,7 @@ const webDesignProjects = [
     period: "2023-2024",
     description:
       "Web design system for a school management platform featuring dashboard modules, records views, and admin tooling.",
+    figmaLink: "",
     screenshots: [
       "/projects/figma/WEB/SMS/1.png",
       "/projects/figma/WEB/SMS/2.png",
@@ -108,6 +113,7 @@ const webDesignProjects = [
     period: "2022",
     description:
       "Voting platform interface concept with emphasis on ballot readability, accessibility, and transparent user confirmation steps.",
+    figmaLink: "",
     screenshots: [
       "/projects/figma/WEB/QCU/1.png",
       "/projects/figma/WEB/QCU/2.png",
@@ -115,6 +121,55 @@ const webDesignProjects = [
       "/projects/figma/WEB/QCU/4.png",
       "/projects/figma/WEB/QCU/5.png",
       "/projects/figma/WEB/QCU/6.png",
+    ],
+  },
+];
+
+const mobileDesignProjects = [
+  {
+    title: "COF Mobile App",
+    description:
+      "Mobile interface concept with a clean phone-first workflow and compact visual hierarchy.",
+    figmaLink: "https://www.figma.com/proto/33LBW7xsEsjmuJ1sKJA3UC/Coffee-Ordering-System?node-id=0-1&t=yNcRpewkqKwTJsM4-1",
+    screenshots: [
+      "/projects/figma/MOBILE/COF/1.png",
+      "/projects/figma/MOBILE/COF/2.png",
+      "/projects/figma/MOBILE/COF/3.png",
+      "/projects/figma/MOBILE/COF/4.png",
+      "/projects/figma/MOBILE/COF/5.png",
+      "/projects/figma/MOBILE/COF/6.png",
+      "/projects/figma/MOBILE/COF/7.png",
+    ],
+  },
+  {
+    title: "Sprout Mobile App",
+    description:
+      "App prototype focused on friendly interaction design, smooth navigation, and modern mobile presentation.",
+    figmaLink: "https://www.figma.com/proto/qHfp3PdwCNZ6cNlPxZBapD/Plant-Doctor-Clone?node-id=0-1&t=sGIFZ6yD4ju7PgcB-1",
+    screenshots: [
+      "/projects/figma/MOBILE/SPROUT/1.png",
+      "/projects/figma/MOBILE/SPROUT/2.png",
+      "/projects/figma/MOBILE/SPROUT/3.png",
+      "/projects/figma/MOBILE/SPROUT/4.png",
+      "/projects/figma/MOBILE/SPROUT/5.png",
+      "/projects/figma/MOBILE/SPROUT/6.png",
+      "/projects/figma/MOBILE/SPROUT/7.png",
+      "/projects/figma/MOBILE/SPROUT/8.png",
+    ],
+  },
+  {
+    title: "Ulayum Mobile App",
+    description:
+      "Mobile-first concept with a polished phone frame flow and clear screen-by-screen progression.",
+    figmaLink: "https://www.figma.com/proto/4lFyMAvkcO4FAZVE0jDZTQ/UlaYum?node-id=0-1&t=rfESIqiluQdrtIVm-1",
+    screenshots: [
+      "/projects/figma/MOBILE/ULAYUM/1.png",
+      "/projects/figma/MOBILE/ULAYUM/2.png",
+      "/projects/figma/MOBILE/ULAYUM/3.png",
+      "/projects/figma/MOBILE/ULAYUM/4.png",
+      "/projects/figma/MOBILE/ULAYUM/5.png",
+      "/projects/figma/MOBILE/ULAYUM/6.png",
+      "/projects/figma/MOBILE/ULAYUM/7.png",
     ],
   },
 ];
@@ -140,6 +195,17 @@ export const Projects = () => {
   const [showAllWebProjects, setShowAllWebProjects] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isCollapsingWebProjects, setIsCollapsingWebProjects] = useState(false);
+  const [mobilePreviewSlides, setMobilePreviewSlides] = useState(
+    () => mobileDesignProjects.map(() => 0)
+  );
+  const [selectedMobileProjectIndex, setSelectedMobileProjectIndex] = useState(null);
+  const [activeMobileSlide, setActiveMobileSlide] = useState(0);
+  const [mobileCardTouchStartX, setMobileCardTouchStartX] = useState(null);
+  const [mobileTouchedCardIndex, setMobileTouchedCardIndex] = useState(null);
+  const [didSwipeMobilePreview, setDidSwipeMobilePreview] = useState(false);
+  const [swipedMobileCardIndex, setSwipedMobileCardIndex] = useState(null);
+  const [mobileViewerTouchStartX, setMobileViewerTouchStartX] = useState(null);
+  const [showAllMobileProjects, setShowAllMobileProjects] = useState(false);
 
   // Handle window resize to detect mobile/desktop
   useEffect(() => {
@@ -150,10 +216,29 @@ export const Projects = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    if (selectedMobileProjectIndex !== null) return undefined;
+
+    const intervalId = window.setInterval(() => {
+      setMobilePreviewSlides((prev) =>
+        prev.map((slide, index) => {
+          const totalSlides = mobileDesignProjects[index].screenshots.length;
+          return (slide + 1) % totalSlides;
+        })
+      );
+    }, 2200);
+
+    return () => window.clearInterval(intervalId);
+  }, [selectedMobileProjectIndex]);
+
   // Keep the first set static; animate only the extra items when toggling.
   const baseVisibleCount = isMobile ? 2 : 2;
   const primaryWebProjects = webDesignProjects.slice(0, baseVisibleCount);
   const extraWebProjects = webDesignProjects.slice(baseVisibleCount);
+  const visibleMobileProjects =
+    isMobile && !showAllMobileProjects
+      ? mobileDesignProjects.slice(0, 1)
+      : mobileDesignProjects;
 
   useEffect(() => {
     if (isHovering || isZoomOpen || isUserInteracting) return undefined;
@@ -190,6 +275,9 @@ export const Projects = () => {
         if (selectedWebProjectIndex !== null) {
           closeWebProject();
         }
+        if (selectedMobileProjectIndex !== null) {
+          closeMobileProject();
+        }
         return;
       }
 
@@ -198,6 +286,8 @@ export const Projects = () => {
           nextSlide();
         } else if (selectedWebProjectIndex !== null) {
           nextWebSlide();
+        } else if (selectedMobileProjectIndex !== null) {
+          nextMobileSlide();
         }
       }
 
@@ -206,13 +296,15 @@ export const Projects = () => {
           prevSlide();
         } else if (selectedWebProjectIndex !== null) {
           prevWebSlide();
+        } else if (selectedMobileProjectIndex !== null) {
+          prevMobileSlide();
         }
       }
     };
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isZoomOpen, selectedWebProjectIndex]);
+  }, [isZoomOpen, selectedWebProjectIndex, selectedMobileProjectIndex]);
 
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % capstoneProject.screenshots.length);
@@ -270,6 +362,138 @@ export const Projects = () => {
       }
       return next;
     });
+  };
+
+  const moveMobilePreviewSlide = (cardIndex, direction) => {
+    setMobilePreviewSlides((prev) => {
+      const next = [...prev];
+      const total = mobileDesignProjects[cardIndex].screenshots.length;
+      if (direction === "next") {
+        next[cardIndex] = (next[cardIndex] + 1) % total;
+      } else {
+        next[cardIndex] = (next[cardIndex] - 1 + total) % total;
+      }
+      return next;
+    });
+  };
+
+  const openMobileProject = (projectIndex) => {
+    setSelectedMobileProjectIndex(projectIndex);
+    setActiveMobileSlide(0);
+  };
+
+  const closeMobileProject = () => {
+    setSelectedMobileProjectIndex(null);
+    setActiveMobileSlide(0);
+  };
+
+  const nextMobileSlide = () => {
+    if (selectedMobileProjectIndex === null) return;
+    const selectedProject = mobileDesignProjects[selectedMobileProjectIndex];
+    setActiveMobileSlide((prev) => (prev + 1) % selectedProject.screenshots.length);
+  };
+
+  const prevMobileSlide = () => {
+    if (selectedMobileProjectIndex === null) return;
+    const selectedProject = mobileDesignProjects[selectedMobileProjectIndex];
+    setActiveMobileSlide(
+      (prev) =>
+        (prev - 1 + selectedProject.screenshots.length) %
+        selectedProject.screenshots.length
+    );
+  };
+
+  const renderMobileProjectCard = (project) => {
+    const idx = mobileDesignProjects.indexOf(project);
+    const mobileFrameClass = "relative w-full max-w-[320px] aspect-[9/19.5] rounded-[2.4rem] border-[10px] border-[#0a0d12] bg-[#050608] shadow-[0_30px_90px_rgba(0,0,0,0.5)] overflow-hidden";
+    return (
+      <article
+        key={project.title}
+        className="group glass rounded-2xl overflow-hidden animate-fade-in"
+        onTouchStart={(event) => {
+          setMobileTouchedCardIndex(idx);
+          setMobileCardTouchStartX(event.touches[0].clientX);
+          setDidSwipeMobilePreview(false);
+          setSwipedMobileCardIndex(null);
+        }}
+        onTouchMove={(event) => {
+          if (mobileTouchedCardIndex !== idx || mobileCardTouchStartX === null) return;
+          const delta = Math.abs(mobileCardTouchStartX - event.touches[0].clientX);
+          if (delta > 10) {
+            setDidSwipeMobilePreview(true);
+          }
+        }}
+        onTouchEnd={(event) => {
+          if (mobileTouchedCardIndex !== idx || mobileCardTouchStartX === null) return;
+          const touchEndX = event.changedTouches[0].clientX;
+          const delta = mobileCardTouchStartX - touchEndX;
+          if (Math.abs(delta) > 35) {
+            moveMobilePreviewSlide(idx, delta > 0 ? "next" : "prev");
+            setDidSwipeMobilePreview(true);
+            setSwipedMobileCardIndex(idx);
+          }
+          setMobileCardTouchStartX(null);
+          setMobileTouchedCardIndex(null);
+        }}
+      >
+        <button
+          type="button"
+          onClick={() => {
+            if (didSwipeMobilePreview && swipedMobileCardIndex === idx) {
+              setDidSwipeMobilePreview(false);
+              setSwipedMobileCardIndex(null);
+              return;
+            }
+            openMobileProject(idx);
+          }}
+          className="w-full text-left"
+          aria-label={`Open ${project.title} preview`}
+        >
+          <div className="flex items-center justify-center px-4 py-5 sm:px-6 sm:py-6 bg-gradient-to-b from-[var(--color-surface)]/30 to-[var(--color-background)]/60">
+            <div className={mobileFrameClass}>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(32,194,168,0.18),transparent_52%)]" />
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 w-28 h-6 rounded-full bg-[#0b0f16]" />
+              <img
+                src={project.screenshots[mobilePreviewSlides[idx]]}
+                alt={`${project.title} preview`}
+                className="absolute inset-0 h-full w-full object-cover object-center"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent h-24" />
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 rounded-full bg-white/20" />
+            </div>
+          </div>
+        </button>
+
+        <div className="p-4 sm:p-5 md:p-6">
+          <div className="flex items-start justify-between gap-2.5 sm:gap-3">
+            <h4 className="text-lg md:text-xl font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
+              {project.title}
+            </h4>
+            {!!project.figmaLink && (
+              <a
+                href={project.figmaLink}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-semibold hover:brightness-110 transition-all shrink-0"
+                aria-label={`Open ${project.title} in Figma`}
+                title="Click to view simple prototype"
+              >
+                <FiFigma className="w-4 h-4" />
+                <span>View Prototype</span>
+              </a>
+            )}
+          </div>
+          {!!project.figmaLink && (
+            <p className="text-xs text-[var(--color-primary)] mt-2 font-medium">
+              Click the Figma button to view a simple prototype.
+            </p>
+          )}
+          <p className="text-sm text-[var(--color-muted-foreground)] mt-3 leading-relaxed">
+            {project.description}
+          </p>
+        </div>
+      </article>
+    );
   };
 
   const renderWebProjectCard = (project) => {
@@ -347,10 +571,28 @@ export const Projects = () => {
             <h4 className="text-lg md:text-xl font-semibold text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
               {project.title}
             </h4>
-            <span className="text-[11px] sm:text-xs md:text-sm text-[var(--color-primary)] shrink-0"> <FiCalendar className="w-3.5 h-3.5 inline-block mr-1.5 sm:mr-2 text-[var(--color-primary)]" />
-              {project.period}
-            </span>
+            {project.figmaLink ? (
+              <a
+                href={project.figmaLink}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-semibold shadow-[0_10px_24px_rgba(32,194,168,0.35)] hover:brightness-110 transition-all shrink-0"
+                aria-label={`Open ${project.title} in Figma`}
+                title="Click to view simple prototype"
+              >
+                <FiFigma className="w-4 h-4" />
+                <span>View Prototype</span>
+              </a>
+            ) : (
+              <span className="inline-flex items-center gap-2 px-3 py-2 rounded-full glass text-xs text-[var(--color-muted-foreground)] border border-[var(--color-primary)]/25 shrink-0">
+                <FiFigma className="w-4 h-4" />
+                <span>Prototype Soon</span>
+              </span>
+            )}
           </div>
+          <p className="text-xs text-[var(--color-primary)] mt-2 font-medium">
+            Click the Figma button to view a simple prototype.
+          </p>
           <p className="text-sm text-[var(--color-muted-foreground)] mt-3 leading-relaxed">
             {project.description}
           </p>
@@ -641,43 +883,85 @@ export const Projects = () => {
             </div>
           </div>
 
-          {/* View All / Hide Button */}
-          <div className="flex justify-center mt-12">
-            {!showAllWebProjects ? (
-              <button
-                type="button"
-                onClick={() => {
-                  setIsCollapsingWebProjects(false);
-                  setShowAllWebProjects(true);
-                }}
-                className="px-6 py-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm font-medium border border-[var(--color-primary)]/30 inline-flex items-center gap-2"
-              >
-                View All {webDesignProjects.length} Projects
-                <ChevronDown className="w-4 h-4" />
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => {
-                  setIsCollapsingWebProjects(true);
-                  setTimeout(() => {
-                    setShowAllWebProjects(false);
+            {/* View All / Hide Button */}
+            <div className="flex justify-center mt-12">
+              {!showAllWebProjects ? (
+                <button
+                  type="button"
+                  onClick={() => {
                     setIsCollapsingWebProjects(false);
-                  }, 500);
-                }}
-                className="px-6 py-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm font-medium border border-[var(--color-primary)]/30 inline-flex items-center gap-2"
-              >
-                Hide Projects
-                <ChevronUp className="w-4 h-4" />
-              </button>
+                    setShowAllWebProjects(true);
+                  }}
+                  className="px-6 py-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm font-medium border border-[var(--color-primary)]/30 inline-flex items-center gap-2"
+                >
+                  View All {webDesignProjects.length} Projects
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsCollapsingWebProjects(true);
+                    setTimeout(() => {
+                      setShowAllWebProjects(false);
+                      setIsCollapsingWebProjects(false);
+                    }, 500);
+                  }}
+                  className="px-6 py-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm font-medium border border-[var(--color-primary)]/30 inline-flex items-center gap-2"
+                >
+                  Hide Projects
+                  <ChevronUp className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+
+            <div className="text-center mx-auto max-w-3xl mt-20 sm:mt-24 mb-12 sm:mb-14">
+            <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]">
+              <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]"><span className="font-cursive text-white italic">Mobile Prototype </span>
+               Showcase
+            </h3>
+              </h3>
+              <p className="text-[var(--color-muted-foreground)]">
+                Three mobile-first Figma concepts presented in a phone frame, built for swipe previews on touch devices and autoplay previews on desktop.
+              </p>
+              <p className="text-sm text-[var(--color-primary)] mt-3">
+                All mobile design works shown below were created in Figma.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6 max-w-7xl mx-auto">
+              {visibleMobileProjects.map(renderMobileProjectCard)}
+            </div>
+
+            {isMobile && (
+              <div className="flex justify-center mt-8">
+                {!showAllMobileProjects ? (
+                  <button
+                    type="button"
+                    onClick={() => setShowAllMobileProjects(true)}
+                    className="px-6 py-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm font-medium border border-[var(--color-primary)]/30 inline-flex items-center gap-2"
+                  >
+                    Show More Mobile Projects
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setShowAllMobileProjects(false)}
+                    className="px-6 py-3 rounded-full glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm font-medium border border-[var(--color-primary)]/30 inline-flex items-center gap-2"
+                  >
+                    Show Less
+                    <ChevronUp className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
             )}
-          </div>
         </div>
 
         {/* Fullscreen Viewer */}
         {isZoomOpen && (
           <div
-            className="fixed inset-0 z-[9999] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-[12000] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
             onClick={() => setIsZoomOpen(false)}
           >
             <button
@@ -727,7 +1011,7 @@ export const Projects = () => {
               <button
                 type="button"
                 onClick={() => setIsZoomOpen(false)}
-                className="absolute top-3 right-3 z-30 p-2.5 rounded-full glass_strong bg-black/60 text-white border border-white/25 hover:bg-[var(--color-primary)]/20 transition-all duration-300"
+                className="absolute top-6 right-4 sm:right-5 z-[10010] p-3 rounded-full glass_strong bg-black/85 text-white border-2 border-white/45 shadow-[0_10px_30px_rgba(0,0,0,0.45)] hover:bg-[var(--color-primary)]/25 transition-all duration-300"
                 aria-label="Close screenshot viewer"
               >
                 <X className="w-5 h-5" />
@@ -746,9 +1030,83 @@ export const Projects = () => {
           </div>
         )}
 
+        {selectedMobileProjectIndex !== null && (
+          <div
+            className="fixed inset-0 z-[12000] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+            onClick={closeMobileProject}
+          >
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                prevMobileSlide();
+              }}
+              className="hidden sm:block absolute left-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
+              aria-label="Previous mobile frame"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                nextMobileSlide();
+              }}
+              className="hidden sm:block absolute right-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
+              aria-label="Next mobile frame"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            <div
+              className="relative w-full max-w-xl h-[90vh] flex items-center justify-center"
+              onClick={(event) => event.stopPropagation()}
+              onTouchStart={(event) => {
+                setMobileViewerTouchStartX(event.touches[0].clientX);
+              }}
+              onTouchEnd={(event) => {
+                if (mobileViewerTouchStartX === null) return;
+                const touchEndX = event.changedTouches[0].clientX;
+                const delta = mobileViewerTouchStartX - touchEndX;
+                if (Math.abs(delta) > 35) {
+                  if (delta > 0) {
+                    nextMobileSlide();
+                  } else {
+                    prevMobileSlide();
+                  }
+                }
+                setMobileViewerTouchStartX(null);
+              }}
+            >
+              <button
+                type="button"
+                onClick={closeMobileProject}
+                className="absolute top-6 right-4 sm:right-5 z-[10010] p-3 rounded-full glass_strong bg-black/85 text-white border-2 border-white/45 shadow-[0_10px_30px_rgba(0,0,0,0.45)] hover:bg-[var(--color-primary)]/25 transition-all duration-300"
+                aria-label="Close mobile design viewer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="relative w-full max-w-[340px] aspect-[9/19.5] rounded-[2.6rem] border-[10px] border-[#0a0d12] bg-[#050608] shadow-[0_30px_90px_rgba(0,0,0,0.55)] overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(32,194,168,0.18),transparent_52%)]" />
+                <div className="absolute top-3 left-1/2 -translate-x-1/2 w-28 h-6 rounded-full bg-[#0b0f16]" />
+                <img
+                  src={mobileDesignProjects[selectedMobileProjectIndex].screenshots[activeMobileSlide]}
+                  alt={`${mobileDesignProjects[selectedMobileProjectIndex].title} frame ${activeMobileSlide + 1}`}
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent h-24" />
+              </div>
+
+              <p className="absolute bottom-2 left-0 right-0 text-xs text-white/65 text-center sm:hidden">Swipe the phone frame to browse</p>
+            </div>
+          </div>
+        )}
+
         {selectedWebProjectIndex !== null && (
           <div
-            className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-[12000] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
             onClick={closeWebProject}
           >
             <button
@@ -798,7 +1156,7 @@ export const Projects = () => {
               <button
                 type="button"
                 onClick={closeWebProject}
-                className="absolute top-3 right-3 z-30 p-2.5 rounded-full glass_strong bg-black/60 text-white border border-white/25 hover:bg-[var(--color-primary)]/20 transition-all duration-300"
+                className="absolute top-6 right-4 sm:right-5 z-[10010] p-3 rounded-full glass_strong bg-black/85 text-white border-2 border-white/45 shadow-[0_10px_30px_rgba(0,0,0,0.45)] hover:bg-[var(--color-primary)]/25 transition-all duration-300"
                 aria-label="Close web design viewer"
               >
                 <X className="w-5 h-5" />
