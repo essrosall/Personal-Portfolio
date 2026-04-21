@@ -41,7 +41,7 @@ const webDesignProjects = [
     period: "2025-2026",
     description:
       "Admin-focused web dashboard for monitoring verified waste entries, tracking user points, and managing reward redemptions.",
-    figmaLink: "",
+    figmaLink: "https://www.figma.com/proto/kJiLTQDU1YqszdtupPFxjH/Trashure?node-id=110-595&t=DXZiBTjXyuG7Wwje-1",
     screenshots: [
       "/projects/figma/WEB/TRASHURE/1.png",
       "/projects/figma/WEB/TRASHURE/2.png",
@@ -55,7 +55,7 @@ const webDesignProjects = [
     period: "2025-2026",
     description:
       "Kiosk interface concept tailored for quick user interaction, real-time verification feedback, and points allocation flow.",
-    figmaLink: "",
+    figmaLink: "https://www.figma.com/proto/uNqeUsBdLO3dFXxXrW1JTs/Automated-Enrollment-System?node-id=118-33&t=14kdL3ElqDGsC8NL-1",
     screenshots: [
       "/projects/figma/WEB/KIOSK/1.png",
       "/projects/figma/WEB/KIOSK/2.png",
@@ -71,7 +71,7 @@ const webDesignProjects = [
     period: "2024",
     description:
       "Semi-low fidelity web workflow exploration focused on process clarity, information hierarchy, and streamlined user paths.",
-    figmaLink: "",
+    figmaLink: "https://www.figma.com/proto/DdTLv8TfbRHMEZH6Qajag5/Low-Fidelity-Gamification?node-id=0-1&t=upa34x3BEIPSx0bT-1",
     screenshots: [
       "/projects/figma/WEB/PHISOPS/1.png",
       "/projects/figma/WEB/PHISOPS/2.png",
@@ -469,6 +469,8 @@ export const Projects = () => {
               <img
                 src={project.screenshots[mobilePreviewSlides[idx]]}
                 alt={`${project.title} preview`}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover object-center"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent h-24" />
@@ -567,6 +569,8 @@ export const Projects = () => {
             <img
               src={project.screenshots[webPreviewSlides[idx]]}
               alt={`${project.title} preview`}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
@@ -687,6 +691,8 @@ export const Projects = () => {
               <img
                 src={capstoneProject.screenshots[activeSlide]}
                 alt={`${capstoneProject.title} screenshot ${activeSlide + 1}`}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover object-center p-0 transition-all duration-700 ease-out md:group-hover:scale-105"
               />
             </button>
@@ -1033,6 +1039,7 @@ export const Projects = () => {
               <img
                 src={capstoneProject.screenshots[activeSlide]}
                 alt={`${capstoneProject.title} screenshot ${activeSlide + 1}`}
+                decoding="async"
                 className="max-w-full max-h-[76vh] sm:max-h-[78vh] object-contain rounded-2xl shadow-2xl"
               />
               <p className="mt-4 text-sm text-white/80">
@@ -1107,6 +1114,7 @@ export const Projects = () => {
                 <img
                   src={mobileDesignProjects[selectedMobileProjectIndex].screenshots[activeMobileSlide]}
                   alt={`${mobileDesignProjects[selectedMobileProjectIndex].title} frame ${activeMobileSlide + 1}`}
+                  decoding="async"
                   className="absolute inset-0 h-full w-full object-cover object-center"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent h-24" />
@@ -1178,6 +1186,7 @@ export const Projects = () => {
               <img
                 src={webDesignProjects[selectedWebProjectIndex].screenshots[activeWebSlide]}
                 alt={`${webDesignProjects[selectedWebProjectIndex].title} frame ${activeWebSlide + 1}`}
+                decoding="async"
                 className="max-w-full max-h-[76vh] sm:max-h-[78vh] object-contain rounded-2xl shadow-2xl"
               />
               <p className="mt-4 text-sm text-white/80 text-center">

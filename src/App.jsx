@@ -14,14 +14,14 @@ function App() {
     <Navbar />
     <main>
       <Hero />
-      <About />
-      <Experience />
-      <Achievement />
-      <Projects />
-      <Gallery />     
-      <CertnBadge/>
-      <Contact />
-      <Footer />
+      <div className="defer-section"><About /></div>
+      <div className="defer-section"><Experience /></div>
+      <div className="defer-section"><Achievement /></div>
+      <div className="defer-section"><Projects /></div>
+      <div className="defer-section"><Gallery /></div>
+      <div className="defer-section"><CertnBadge/></div>
+      <div className="defer-section"><Contact /></div>
+      <div className="defer-section"><Footer /></div>
     </main>
   </div>
 

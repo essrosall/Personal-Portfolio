@@ -108,6 +108,8 @@ export const Achievement = () => {
                                         <img
                                             src={item.awardImage}
                                             alt={`${item.title} award certificate`}
+                                            loading="lazy"
+                                            decoding="async"
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
                                     </div>
@@ -123,6 +125,8 @@ export const Achievement = () => {
                                         <img
                                             src={item.entryImage}
                                             alt={`${item.title} logo entry`}
+                                            loading="lazy"
+                                            decoding="async"
                                             className="w-full h-full object-contain p-1.5 transition-transform duration-300 ease-out group-hover:scale-105"
                                         />
                                     </button>
@@ -179,6 +183,7 @@ export const Achievement = () => {
                         <img
                             src={logoContestAchievements[selectedLogoEntry].entryImage}
                             alt={logoContestAchievements[selectedLogoEntry].title}
+                            decoding="async"
                             className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
                         />
                     </div>

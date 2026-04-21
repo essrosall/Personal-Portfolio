@@ -93,6 +93,8 @@ export const Experience = () => {
                                                 <img 
                                                     src={exp.logo} 
                                                     alt={`${exp.company} logo`} 
+                                                    loading="lazy"
+                                                    decoding="async"
                                                     className="w-full h-full object-cover rounded-full bg-transparent" 
                                                 />
                                             </div>

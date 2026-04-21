@@ -41,6 +41,8 @@ export const Footer = () => {
               <img
                 src="/logo/JRLOGO.png"
                 alt="JR Logo"
+                loading="lazy"
+                decoding="async"
                 className="h-10 sm:h-11 w-auto object-contain"
               />
             </a>

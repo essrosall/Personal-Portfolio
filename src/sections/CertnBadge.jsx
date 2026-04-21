@@ -316,6 +316,8 @@ export const CertnBadge = () => {
               <img
                 src={certifications[activeCertificate].image}
                 alt={certifications[activeCertificate].title}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
               />
             </button>
@@ -406,6 +408,8 @@ export const CertnBadge = () => {
                   <img
                     src={badge.image}
                     alt={badge.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain p-2 sm:p-5 transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
@@ -545,6 +549,7 @@ export const CertnBadge = () => {
             <img
               src={certifications[selectedCertificate].image}
               alt={certifications[selectedCertificate].title}
+              decoding="async"
               className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
             />
 
@@ -592,6 +597,7 @@ export const CertnBadge = () => {
                 <img
                   src={badges[selectedBadgeIndex].image}
                   alt={badges[selectedBadgeIndex].title}
+                  decoding="async"
                   className="w-full h-full object-contain p-5"
                 />
               </div>

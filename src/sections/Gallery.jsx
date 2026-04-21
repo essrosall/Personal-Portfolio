@@ -273,6 +273,8 @@ export const Gallery = () => {
                   <img
                     src={artwork.image}
                     alt={artwork.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
@@ -319,6 +321,8 @@ export const Gallery = () => {
                   <img
                     src={artwork.image}
                     alt={artwork.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
@@ -425,6 +429,7 @@ export const Gallery = () => {
             <img
               src={selectedArtwork.image}
               alt={selectedArtwork.title}
+              decoding="async"
               className="max-w-full max-h-[74vh] object-contain rounded-2xl shadow-2xl"
             />
             <div className="mt-6 text-center">

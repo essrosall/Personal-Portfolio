@@ -377,6 +377,9 @@ export const Hero = () => {
                   <img
                     src="/logo/Profile.png"
                     alt="Profile Picture"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                     className="w-full aspect-[4/5] object-cover transition-transform duration-700 ease-out hover:scale-110"
                   />
                 </div>

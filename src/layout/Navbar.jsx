@@ -74,6 +74,9 @@ export const Navbar = () => {
           <img
             src="/logo/JRLOGO.png"
             alt="JR Logo"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             className="h-11 w-auto object-contain"
           />
         </a>
@@ -161,6 +164,8 @@ export const Navbar = () => {
                 <img
                   src="/logo/Profile.png"
                   alt="John Rey Rosales"
+                  loading="lazy"
+                  decoding="async"
                   className="w-20 h-20 rounded-lg object-cover border border-[var(--color-primary)]/40"
                 />
               </div>

@@ -216,6 +216,11 @@
   animation-delay: 900ms;
 }
 
+.defer-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
+}
+
 @keyframes animated-border {
   0% {
     stroke-dashoffset: 500;
@@ -227,14 +232,34 @@
 
 }
 
-.group:hover .animated-border-path {
-  animation: animated-border 2s linear infinite;
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .animated-border-path {
+    animation: animated-border 2s linear infinite;
+  }
+
+  .animated-border:hover {
+    background-color: color-mix(in srgb, #26c4b8 15%, transparent);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 0 20px color-mix(in srgb, #26c4b8 40%, transparent);
+  }
 }
 
-.animated-border:hover {
-  background-color: color-mix(in srgb, #26c4b8 15%, transparent);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 0 20px color-mix(in srgb, #26c4b8 40%, transparent);
+@media (hover: none) {
+  .animated-border {
+    transition-duration: 180ms;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .animated-border:active {
+    background-color: color-mix(in srgb, #26c4b8 15%, transparent);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 0 20px color-mix(in srgb, #26c4b8 40%, transparent);
+  }
+
+  .animated-border:active .animated-border-path {
+    animation: animated-border 1.4s linear infinite;
+  }
 }
 .timeline-glow {
     box-shadow: 0 0 40px
