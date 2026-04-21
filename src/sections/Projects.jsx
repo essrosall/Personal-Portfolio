@@ -86,7 +86,7 @@ const webDesignProjects = [
     period: "2023-2024",
     description:
       "Simple website design with clear navigation structure and practical visual sections for school information delivery.",
-    figmaLink: "",
+    figmaLink: "https://www.figma.com/proto/uNqeUsBdLO3dFXxXrW1JTs/Automated-Enrollment-System?node-id=0-1&t=upa34x3BEIPSx0bT-1",
     screenshots: [
       "/projects/figma/WEB/LEAN/1.png",
       "/projects/figma/WEB/LEAN/2.png",
@@ -98,7 +98,7 @@ const webDesignProjects = [
     period: "2023-2024",
     description:
       "Web design system for a school management platform featuring dashboard modules, records views, and admin tooling.",
-    figmaLink: "",
+    figmaLink: "https://www.figma.com/proto/uNqeUsBdLO3dFXxXrW1JTs/Automated-Enrollment-System?node-id=118-33&t=TWPtKy9dXu8wg1JX-1",
     screenshots: [
       "/projects/figma/WEB/SMS/1.png",
       "/projects/figma/WEB/SMS/2.png",
@@ -113,7 +113,7 @@ const webDesignProjects = [
     period: "2022",
     description:
       "Voting platform interface concept with emphasis on ballot readability, accessibility, and transparent user confirmation steps.",
-    figmaLink: "",
+    figmaLink: "https://www.figma.com/proto/bFEnhmYPg3zA0EE58kw96K/QCU-Voting-System?node-id=0-1&t=xcCFBitawCnxsjBK-1",
     screenshots: [
       "/projects/figma/WEB/QCU/1.png",
       "/projects/figma/WEB/QCU/2.png",
@@ -489,7 +489,7 @@ export const Projects = () => {
                 href={project.figmaLink}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-semibold hover:brightness-110 transition-all shrink-0"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-semibold transition-all shrink-0"
                 aria-label={`Open ${project.title} in Figma`}
                 title="Click to view simple prototype"
               >
@@ -593,7 +593,7 @@ export const Projects = () => {
                 href={project.figmaLink}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-semibold shadow-[0_10px_24px_rgba(32,194,168,0.35)] hover:brightness-110 transition-all shrink-0"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-semibold transition-all shrink-0"
                 aria-label={`Open ${project.title} in Figma`}
                 title="Click to view simple prototype"
               >
@@ -936,7 +936,7 @@ export const Projects = () => {
 
             <div className="text-center mx-auto max-w-3xl mt-20 sm:mt-24 mb-12 sm:mb-14">
             <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]">
-              <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]"><span className="font-cursive text-white italic">Mobile Prototype </span>
+              <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]"><span className="font-cursive text-white italic">Mobile Design </span>
                Showcase
             </h3>
               </h3>
