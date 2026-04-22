@@ -418,7 +418,7 @@ export const Projects = () => {
 
   const renderMobileProjectCard = (project) => {
     const idx = mobileDesignProjects.indexOf(project);
-    const mobileFrameClass = "relative w-full max-w-[320px] aspect-[9/19.5] rounded-[2.4rem] border-[10px] border-[#0a0d12] bg-[#050608] shadow-[0_30px_90px_rgba(0,0,0,0.5)] overflow-hidden";
+    const mobileFrameClass = "relative w-full max-w-[320px] aspect-[9/19.5] rounded-[2.4rem] border-[10px] border-[#0a0d12] bg-[#050608] overflow-hidden";
     return (
       <article
         key={project.title}
@@ -473,7 +473,7 @@ export const Projects = () => {
                 decoding="async"
                 className="absolute inset-0 h-full w-full object-cover object-center"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent h-24" />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent h-24 theme-light-overlay-hidden" />
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 rounded-full bg-white/20" />
             </div>
           </div>
@@ -573,11 +573,11 @@ export const Projects = () => {
               decoding="async"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
-            <span className="absolute bottom-3 right-3 px-3 py-1 rounded-full glass_strong text-xs text-white">
+            <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent theme-light-overlay-hidden" />
+            <span className="absolute bottom-3 right-3 px-3 py-1 rounded-full glass_strong text-xs text-white theme-light-dark-chip">
               {webPreviewSlides[idx] + 1} / {project.screenshots.length}
             </span>
-            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full glass_strong text-[10px] text-white md:hidden">
+            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full glass_strong text-[10px] text-white md:hidden theme-light-dark-chip">
               Swipe preview • Tap to open
             </span>
           </div>
@@ -633,7 +633,7 @@ export const Projects = () => {
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 sm:mt-5 mb-5 sm:mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)] ">
             Our latest major build:
-            <span className="font-cursive italic font-normal text-white"> {" "}TRASHURE.
+            <span className="font-cursive italic font-normal theme-light-title-foreground"> {" "}TRASHURE.
             </span>
           </h2>
           <p className="text-[var(--color-muted-foreground)] animate-fade-in animation-delay-200">
@@ -697,13 +697,13 @@ export const Projects = () => {
               />
             </button>
 
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent theme-light-overlay-hidden" />
 
-            <span className="pointer-events-none absolute bottom-3 right-3 px-3 py-1 rounded-full glass_strong text-xs text-white">
+            <span className="pointer-events-none absolute bottom-3 right-3 px-3 py-1 rounded-full glass_strong text-xs text-white theme-light-dark-chip">
               {activeSlide + 1} / {capstoneProject.screenshots.length}
             </span>
 
-            <span className="pointer-events-none absolute top-3 left-3 px-2.5 py-1 rounded-full glass_strong text-[10px] text-white md:hidden">
+            <span className="pointer-events-none absolute top-3 left-3 px-2.5 py-1 rounded-full glass_strong text-[10px] text-white md:hidden theme-light-dark-chip">
               Swipe preview • Tap to open
             </span>
 
@@ -880,7 +880,7 @@ export const Projects = () => {
             <span className="text-[var(--color-secondary-foreground)] text-sm font-medium tracking-wider uppercase animate-fade-in">
               UI/UX Category
             </span>
-            <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]"><span className="font-cursive text-white italic">Web Design  </span>
+            <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-primary)]"><span className="font-cursive theme-light-title-foreground italic">Web Design  </span>
                Showcase
             </h3>
             <p className="text-[var(--color-muted-foreground)]">
@@ -936,9 +936,9 @@ export const Projects = () => {
 
             <div className="text-center mx-auto max-w-3xl mt-20 sm:mt-24 mb-12 sm:mb-14">
             <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]">
-              <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]"><span className="font-cursive text-white italic">Mobile Design </span>
-               Showcase
-            </h3>
+                <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-primary)]"><span className="font-cursive theme-light-title-foreground italic">Mobile Design </span>
+                Showcase
+              </h3>
               </h3>
               <p className="text-[var(--color-muted-foreground)]">
                 Three mobile-first Figma concepts presented in a phone frame, built for swipe previews on touch devices and autoplay previews on desktop.
@@ -1117,7 +1117,7 @@ export const Projects = () => {
                   decoding="async"
                   className="absolute inset-0 h-full w-full object-cover object-center"
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent h-24" />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/25 via-black/8 to-transparent h-24 theme-light-overlay-hidden" />
               </div>
 
               <p className="absolute bottom-2 left-0 right-0 text-xs text-white/65 text-center sm:hidden">Swipe the phone frame to browse</p>

@@ -241,7 +241,7 @@ export const Gallery = () => {
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)]">
             Random artworks &
-            <span className="font-serif italic font-normal text-white">
+            <span className="font-serif italic font-normal theme-light-title-foreground">
               {" "}graphic designs.
             </span>
           </h2>
@@ -277,9 +277,9 @@ export const Gallery = () => {
                     decoding="async"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300 theme-light-overlay-hidden" />
 
-                  <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full glass_strong text-white">
+                  <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full glass_strong text-white theme-light-dark-chip">
                     Click to view
                   </span>
 
@@ -325,9 +325,9 @@ export const Gallery = () => {
                     decoding="async"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300 theme-light-overlay-hidden" />
 
-                  <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full glass_strong text-white">
+                  <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full glass_strong text-white theme-light-dark-chip">
                     Click to view
                   </span>
 

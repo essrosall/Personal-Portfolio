@@ -272,7 +272,7 @@ export const CertnBadge = () => {
             Professional learning
             <span
               className="font-cursive italic 
-            font-normal text-white"
+            font-normal theme-light-title-foreground"
             >
               {" "}milestones.
             </span>
@@ -321,9 +321,9 @@ export const CertnBadge = () => {
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
               />
             </button>
-            <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent theme-light-overlay-hidden" />
 
-            <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white">
+            <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white theme-light-dark-chip">
               <Award className="w-4 h-4 text-[var(--color-primary)]" />
               Certified
             </div>
@@ -388,7 +388,7 @@ export const CertnBadge = () => {
           </div>
         </article>
 
-        <div className="mt-16 animate-fade-in animation-delay-300">
+        <div className="mt-24 sm:mt-28 animate-fade-in animation-delay-300">
           <div className="text-center mb-8">
             <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-secondary-foreground)]">
               Badges
@@ -402,7 +402,7 @@ export const CertnBadge = () => {
             {visibleBadges.map((badge, idx) => (
               <article
                 key={badge.title}
-                className="group glass rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col min-h-[260px] md:min-h-[520px]"
+                className="group glass rounded-2xl overflow-hidden border border-[var(--color-border)]/70 hover:border-[var(--color-primary)]/30 transition-all duration-300 flex flex-col min-h-[260px] md:min-h-[520px]"
               >
                 <div className="relative aspect-square sm:aspect-[4/3] bg-[var(--color-surface)]/40 overflow-hidden flex-shrink-0">
                   <img
@@ -412,8 +412,8 @@ export const CertnBadge = () => {
                     decoding="async"
                     className="w-full h-full object-contain p-2 sm:p-5 transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-                  <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full glass_strong text-[10px] sm:text-xs font-medium text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-black/8 to-transparent theme-light-overlay-hidden" />
+                  <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full glass_strong text-[10px] sm:text-xs font-medium text-white theme-light-dark-chip">
                     <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[var(--color-primary)]" />
                     Badge
                   </span>
@@ -460,7 +460,7 @@ export const CertnBadge = () => {
                   <p className="text-sm text-[var(--color-muted-foreground)] leading-relaxed flex-grow">
                     {badge.description}
                   </p>
-                  <div className="flex flex-wrap items-center gap-2 pt-3 mt-4 border-t border-white/10 flex-shrink-0">
+                  <div className="flex flex-wrap items-center gap-2 pt-3 mt-4 border-t border-[var(--color-border)]/70 flex-shrink-0">
                     <a
                       href={badge.credly}
                       target="_blank"
@@ -486,7 +486,7 @@ export const CertnBadge = () => {
 
             {/* Placeholder Badge Card - Show when badge count doesn't fill grid perfectly */}
             {((isMobile && visibleBadges.length % 2 === 1) || (!isMobile && visibleBadges.length % 3 !== 0)) && (
-              <article className="glass rounded-2xl overflow-hidden border border-white/10 border-dashed flex flex-col items-center justify-center p-6 min-h-[320px] md:min-h-[520px]">
+              <article className="glass rounded-2xl overflow-hidden border border-[var(--color-border)]/70 border-dashed flex flex-col items-center justify-center p-6 min-h-[320px] md:min-h-[520px]">
                 <div className="aspect-[4/3] w-full flex flex-col items-center justify-center">
                   <div className="flex gap-1.5 mb-3">
                     <div className="w-2 h-2 bg-[var(--color-primary)] rounded-full animate-dot-1"></div>
@@ -512,8 +512,8 @@ export const CertnBadge = () => {
 
         <div className="text-center mt-8 animate-fade-in animation-delay-300">
           <p className="text-sm text-[var(--color-muted-foreground)]">
-            These are my <span className="text-white">badges</span> and
-            <span className="text-white"> certifications </span>
+            These are my <span className="theme-light-title-foreground">badges</span> and
+            <span className="theme-light-title-foreground"> certifications </span>
             for the past years and months.
           </p>
         </div>

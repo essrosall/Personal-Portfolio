@@ -40,7 +40,7 @@ export const Experience = () => {
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[var(--color-secondary-foreground)] text-xs font-semibold tracking-[0.2em] uppercase animate-fade-in">Career Journey</span>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)]">
-                        Experience that <span className="font-serif italic font-normal text-white">
+                        Experience that <span className="font-serif italic font-normal theme-light-title-foreground">
                             speaks volumes.</span>
                     </h2>
                     <p

@@ -90,7 +90,7 @@ export const Achievement = () => {
                     </span>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)]">
                         QCU logo contest
-                        <span className="font-cursive italic font-normal text-white">{" "}footprint.</span>
+                        <span className="font-cursive italic font-normal theme-light-title-foreground">{" "}footprint.</span>
                     </h2>
                     <p className="text-[var(--color-muted-foreground)] animate-fade-in animation-delay-200">
                         A showcase of the logo contest entries I created for QCU, highlighting the work I left behind in the university through design and recognition.
@@ -114,7 +114,7 @@ export const Achievement = () => {
                                         />
                                     </div>
 
-                                    <div className="absolute inset-0 z-[1] bg-black/15" />
+                                    <div className="absolute inset-0 z-[1] bg-black/15 theme-light-overlay-hidden" />
 
                                     <button
                                         type="button"
@@ -131,7 +131,7 @@ export const Achievement = () => {
                                         />
                                     </button>
 
-                                    <span className="absolute z-10 left-4 top-4 text-[10px] uppercase tracking-wide px-2.5 py-1 rounded-full glass_strong text-white">
+                                    <span className="absolute z-10 left-4 top-4 text-[10px] uppercase tracking-wide px-2.5 py-1 rounded-full glass_strong text-white theme-light-dark-chip">
                                         Award Certificate
                                     </span>
                                 </div>

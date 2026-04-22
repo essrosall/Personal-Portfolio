@@ -100,7 +100,7 @@ export const Contact = () => {
                     </span>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 mb-5 sm:mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)]">
                         Let's build{" "}
-                        <span className="font-serif italic font-normal text-white">
+                        <span className="font-serif italic font-normal text-[var(--color-foreground)]">
                             something great.
                         </span>
                     </h2>
@@ -114,13 +114,13 @@ export const Contact = () => {
 
                     {/* RIGHT COLUMN: Contact Form */}
                     <div className="glass p-5 sm:p-8 rounded-3xl border border-[var(--color-primary)]/30 animate-fade-in animation-delay-400 w-full order-2 lg:order-2">
-                        <h3 className="text-xl font-semibold mb-6">
+                        <h3 className="text-xl font-semibold mb-6 text-[var(--color-foreground)]">
                             Send Me a Message
                         </h3>
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             {/* NAME */}
                             <div>
-                                <label htmlFor="name" className="block text-sm font-medium mb-2 text-white/80">
+                                <label htmlFor="name" className="block text-sm font-medium mb-2 text-[var(--color-muted-foreground)]">
                                     Name
                                 </label>
                                 <input
@@ -130,13 +130,13 @@ export const Contact = () => {
                                     placeholder="e.g., Alex Smith"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    className="w-full px-4 py-3 bg-[var(--color-surface)] rounded-xl border border-[var(--color-muted-foreground)]/30 hover:border-white/50 focus:ring-1 focus:ring-[var(--color-primary)] outline-none transition-all text-white"
+                                    className="w-full px-4 py-3 bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)]/80 hover:border-[var(--color-primary)]/50 focus:ring-1 focus:ring-[var(--color-primary)] outline-none transition-all text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)]"
                                 />
                             </div>
 
                             {/* EMAIL */}
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium mb-2 text-white/80">
+                                <label htmlFor="email" className="block text-sm font-medium mb-2 text-[var(--color-muted-foreground)]">
                                     Email
                                 </label>
                                 <input
@@ -146,13 +146,13 @@ export const Contact = () => {
                                     placeholder="hello@example.com"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="w-full px-4 py-3 bg-[var(--color-surface)] rounded-xl border border-[var(--color-muted-foreground)]/30 hover:border-white/50 focus:ring-1 focus:ring-[var(--color-primary)] outline-none transition-all text-white"
+                                    className="w-full px-4 py-3 bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)]/80 hover:border-[var(--color-primary)]/50 focus:ring-1 focus:ring-[var(--color-primary)] outline-none transition-all text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)]"
                                 />
                             </div>
 
                             {/* MESSAGE */}
                             <div>
-                                <label htmlFor="message" className="block text-sm font-medium mb-2 text-white/80">
+                                <label htmlFor="message" className="block text-sm font-medium mb-2 text-[var(--color-muted-foreground)]">
                                     Message
                                 </label>
                                 <textarea
@@ -162,7 +162,7 @@ export const Contact = () => {
                                     placeholder="How can I help bring your vision to life?"
                                     value={formData.message}
                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                    className="w-full px-4 py-3 bg-[var(--color-surface)] rounded-xl border border-[var(--color-muted-foreground)]/30 hover:border-white/50 focus:ring-1 focus:ring-[var(--color-primary)] outline-none transition-all resize-none text-white"
+                                    className="w-full px-4 py-3 bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)]/80 hover:border-[var(--color-primary)]/50 focus:ring-1 focus:ring-[var(--color-primary)] outline-none transition-all resize-none text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)]"
                                 />
                             </div>
 
@@ -198,7 +198,7 @@ export const Contact = () => {
                     {/* Contact Info */}
                     <div className="space-y-6 animate-fade-in animation-delay-400 w-full order-1 lg:order-1">
                         <div className="glass rounded-3xl p-5 sm:p-8 w-full border border-[var(--color-primary)]/30">
-                            <h3 className="text-xl font-semibold mb-6">
+                                <h3 className="text-xl font-semibold mb-6 text-[var(--color-foreground)]">
                                 Contact Information
                             </h3>
                             <div className="space-y-4">

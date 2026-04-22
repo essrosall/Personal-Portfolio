@@ -5,6 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/MYLOGO.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ess.Rosall Portfolio</title>
+    <script>
+      (function () {
+        try {
+          var storageKey = "portfolio-theme";
+          var storedTheme = localStorage.getItem(storageKey);
+          var preferredTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+          var theme = storedTheme === "light" || storedTheme === "dark" ? storedTheme : preferredTheme;
+          document.documentElement.dataset.theme = theme;
+        } catch (error) {
+          document.documentElement.dataset.theme = "dark";
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

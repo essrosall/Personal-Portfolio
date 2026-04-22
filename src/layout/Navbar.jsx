@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/Components/Button";
+import { THEME_CHANGE_EVENT, useThemeMode } from "@/lib/useThemeMode";
 import {
   Briefcase,
   ChevronLeft,
@@ -7,8 +8,10 @@ import {
   GalleryVertical,
   Home,
   Mail,
+  MoonStar,
   Trophy,
   User,
+  SunMedium,
 } from "lucide-react";
 
 const navLinks = [
@@ -21,11 +24,30 @@ const navLinks = [
 ];
 
 const mobileNavGroups = ["Overview", "Works", "Connect"];
+const THEME_STORAGE_KEY = "portfolio-theme";
+
+const getInitialTheme = () => {
+  if (typeof window === "undefined") {
+    return "dark";
+  }
+
+  const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+  if (storedTheme === "light" || storedTheme === "dark") {
+    return storedTheme;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+};
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [theme, setTheme] = useState(getInitialTheme);
+  const currentTheme = useThemeMode();
   const currentYear = new Date().getFullYear();
+  const isLightTheme = theme === "light";
+  const logoSrc = currentTheme === "light" ? "/logo/JRLOGODARK.png" : "/logo/JRLOGO.png";
+  const profileSrc = currentTheme === "light" ? "/logo/ProfileLight.png" : "/logo/Profile.png";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +72,27 @@ export const Navbar = () => {
     };
   }, [isMobileMenuOpen]);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.theme = theme;
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    window.dispatchEvent(new CustomEvent(THEME_CHANGE_EVENT, { detail: { theme } }));
+
+    root.classList.add("theme-transition");
+    const timeoutId = window.setTimeout(() => {
+      root.classList.remove("theme-transition");
+    }, 260);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      root.classList.remove("theme-transition");
+    };
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
+  };
+
   // NEW: Bulletproof smooth scrolling function
   const scrollToProjects = (e) => {
     e.preventDefault();
@@ -72,7 +115,7 @@ export const Navbar = () => {
         
         <a href="#" className="shrink-0 inline-flex items-center hover:opacity-90 transition-opacity" aria-label="Go to home">
           <img
-            src="/logo/JRLOGO.png"
+            src={logoSrc}
             alt="JR Logo"
             loading="eager"
             fetchPriority="high"
@@ -98,6 +141,17 @@ export const Navbar = () => {
 
         {/*View Project Button*/}
         <div className="hidden md:flex shrink-0 items-center gap-2.5">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="inline-flex items-center gap-2 rounded-full glass px-3.5 py-2 text-sm text-[var(--color-foreground)] hover:bg-[var(--color-surface)]/80 transition-all duration-300"
+            aria-label={isLightTheme ? "Switch to dark mode" : "Switch to light mode"}
+            aria-pressed={isLightTheme}
+            title={isLightTheme ? "Switch to dark mode" : "Switch to light mode"}
+          >
+            {isLightTheme ? <SunMedium className="w-4 h-4" /> : <MoonStar className="w-4 h-4" />}
+            <span className="whitespace-nowrap">{isLightTheme ? "Light" : "Dark"}</span>
+          </button>
           <Button size="md" onClick={scrollToProjects}>
             <span className="whitespace-nowrap">View Projects</span>
           </Button>
@@ -114,6 +168,19 @@ export const Navbar = () => {
           </button>
         )}
       </nav>
+
+      <button
+        type="button"
+        onClick={toggleTheme}
+        className={`md:hidden fixed right-4 bottom-20 z-[70] inline-flex h-12 w-12 items-center justify-center rounded-full glass_strong border border-[var(--color-border)]/60 text-[var(--color-foreground)] shadow-[0_16px_40px_rgba(0,0,0,0.18)] transition-all duration-300 active:scale-95 ${
+          isMobileMenuOpen ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100"
+        }`}
+        aria-label={isLightTheme ? "Switch to dark mode" : "Switch to light mode"}
+        aria-pressed={isLightTheme}
+        title={isLightTheme ? "Switch to dark mode" : "Switch to light mode"}
+      >
+        {isLightTheme ? <SunMedium className="w-5 h-5" /> : <MoonStar className="w-5 h-5" />}
+      </button>
 
       {/* Mobile Slide-In Menu */}
       <div
@@ -162,7 +229,7 @@ export const Navbar = () => {
 
               <div className="relative">
                 <img
-                  src="/logo/Profile.png"
+                  src={profileSrc}
                   alt="John Rey Rosales"
                   loading="lazy"
                   decoding="async"

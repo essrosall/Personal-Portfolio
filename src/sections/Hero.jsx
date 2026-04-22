@@ -14,6 +14,7 @@ import {
 import {
   DiIllustrator, DiPhotoshop
 } from "react-icons/di";
+import { useThemeMode } from "@/lib/useThemeMode";
 
 const roles = ["UI/UX Designer", "Web Developer", "Graphic designer"];
 
@@ -52,6 +53,8 @@ export const Hero = () => {
   const [loveCount, setLoveCount] = useState(0);
   const [isLoveTooltipVisible, setIsLoveTooltipVisible] = useState(false);
   const [isLoveSyncing, setIsLoveSyncing] = useState(false);
+  const currentTheme = useThemeMode();
+  const profileSrc = currentTheme === "light" ? "/logo/ProfileLight.png" : "/logo/Profile.png";
 
   const normalizeRpcRow = (data) => {
     if (Array.isArray(data)) return data[0] ?? null;
@@ -257,9 +260,9 @@ export const Hero = () => {
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in">
                 Turning <span className="text-[var(--color-primary)] glow_text">PIXELS </span>
                 <br />
-                into <span className="font-cursive italic font-normal text-white">code </span> and
+                into <span className="font-cursive italic font-normal theme-light-title-foreground">code </span> and
                 <span className="text-[var(--color-primary)] glow_text"> IDEAS </span>
-                into <span className="font-cursive italic font-normal text-white">interfaces</span>
+                into <span className="font-cursive italic font-normal theme-light-title-foreground">interfaces</span>
               </h1>
               <p className="text-lg text-[var(--color-muted-foreground)] animate-fade-in">
                 I'm an aspiring Web Developer and UI/UX Designer dedicated to building clean, responsive, and user-centered digital experiences from the ground up. By blending visual storytelling with intuitive interactions, I ensure every pixel serves a purpose and every user journey feels effortless.
@@ -344,7 +347,9 @@ export const Hero = () => {
                     <span className={`grid h-5 w-5 place-items-center rounded-full ${hasSentLove ? "bg-red-500/20" : "bg-[var(--color-primary)]/20"}`}>
                       <FaHeart className={`h-3 w-3 ${hasSentLove ? "text-red-300" : "text-[var(--color-primary)]"}`} />
                     </span>
-                    <span className="tabular-nums">{loveCount}</span>
+                    <span className={`tabular-nums ${hasSentLove ? (currentTheme === "dark" ? "text-white" : "text-red-800") : "text-[var(--color-primary)]"}`}>
+                      {loveCount}
+                    </span>
                   </button>
                 </div>
 
@@ -375,7 +380,7 @@ export const Hero = () => {
                   }
                 >
                   <img
-                    src="/logo/Profile.png"
+                    src={profileSrc}
                     alt="Profile Picture"
                     loading="eager"
                     fetchPriority="high"
@@ -385,7 +390,7 @@ export const Hero = () => {
                 </div>
 
                 {/*Floating badge*/}
-                <div className="absolute -bottom-4 -right-4 glass rounded-xl px-3 py-2 sm:px-4 sm:py-3 animate-float ">
+                <div className="absolute -bottom-4 -right-4 glass rounded-xl px-3 py-2 sm:px-4 sm:py-3 animate-float theme-light-dark-chip">
                   <div className="flex items-center gap-3">
                     <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
                     <span className="text-xs sm:text-sm font-medium">Available for work</span>
@@ -393,7 +398,7 @@ export const Hero = () => {
                 </div>
 
                 {/*Stats Badge*/}
-                <div className="absolute -top-4 -left-4 glass rounded-xl px-3 py-2 sm:px-4 sm:py-3 animate-float animation-delay-500">
+                <div className="absolute -top-4 -left-4 glass rounded-xl px-3 py-2 sm:px-4 sm:py-3 animate-float animation-delay-500 theme-light-dark-chip">
                   <div className="text-2xl sm:text-3xl font-bold text-[var(--color-primary)]">1</div>
                   <div className="text-xs text-[var(--color-muted-foreground)]">Year Experience</div>
                 </div>
