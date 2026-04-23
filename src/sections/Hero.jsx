@@ -66,6 +66,55 @@ export const Hero = () => {
   const parseLikedValue = (value) =>
     value === true || value === "true" || value === 1 || value === "1";
 
+  const getOrCreateDeviceId = () => {
+    const existing = localStorage.getItem(LOVE_DEVICE_STORAGE_KEY);
+    if (existing) return existing;
+
+    const generated =
+      globalThis.crypto?.randomUUID?.() ??
+      `device-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    localStorage.setItem(LOVE_DEVICE_STORAGE_KEY, generated);
+    return generated;
+  };
+
+  const parseRemoteCount = (row) => {
+    const value = row?.new_count ?? row?.current_count ?? row?.count ?? row?.total_likes;
+    const parsed = Number(value);
+    return Number.isNaN(parsed) ? null : parsed;
+  };
+
+  const parseRemoteLiked = (row) => parseLikedValue(row?.liked ?? row?.is_liked);
+
+  const syncLoveStateFromSupabase = async () => {
+    if (!supabase) return;
+
+    try {
+      const deviceId = getOrCreateDeviceId();
+      const { data, error } = await supabase.rpc("get_profile_like_state", {
+        p_device_id: deviceId,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      const row = normalizeRpcRow(data);
+      if (!row) return;
+
+      const remoteCount = parseRemoteCount(row);
+      const remoteLiked = parseRemoteLiked(row);
+
+      if (remoteCount !== null) {
+        setLoveCount(remoteCount);
+        localStorage.setItem(LOVE_COUNT_STORAGE_KEY, String(remoteCount));
+      }
+
+      setHasSentLove(remoteLiked);
+      localStorage.setItem(LOVE_LIKED_STORAGE_KEY, String(remoteLiked));
+    } catch {
+    }
+  };
+
  
 
   useEffect(() => {
@@ -114,48 +163,26 @@ export const Hero = () => {
       }
     }
 
-    const getOrCreateDeviceId = () => {
-      const existing = localStorage.getItem(LOVE_DEVICE_STORAGE_KEY);
-      if (existing) return existing;
+    syncLoveStateFromSupabase();
 
-      const generated =
-        globalThis.crypto?.randomUUID?.() ??
-        `device-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-      localStorage.setItem(LOVE_DEVICE_STORAGE_KEY, generated);
-      return generated;
-    };
+    const syncInterval = window.setInterval(() => {
+      syncLoveStateFromSupabase();
+    }, 12000);
 
-    const loadFromSupabase = async () => {
-      if (!supabase) return;
-
-      try {
-        const deviceId = getOrCreateDeviceId();
-        const { data, error } = await supabase.rpc("get_profile_like_state", {
-          p_device_id: deviceId,
-        });
-
-        if (error) {
-          throw error;
-        }
-
-        const row = normalizeRpcRow(data);
-        if (!row) return;
-
-        const remoteCount = Number(row.current_count);
-        const remoteLiked = parseLikedValue(row.liked);
-
-        if (!Number.isNaN(remoteCount)) {
-          setLoveCount(remoteCount);
-          localStorage.setItem(LOVE_COUNT_STORAGE_KEY, String(remoteCount));
-        }
-
-        setHasSentLove(remoteLiked);
-        localStorage.setItem(LOVE_LIKED_STORAGE_KEY, String(remoteLiked));
-      } catch {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        syncLoveStateFromSupabase();
       }
     };
 
-    loadFromSupabase();
+    window.addEventListener("focus", syncLoveStateFromSupabase);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.clearInterval(syncInterval);
+      window.removeEventListener("focus", syncLoveStateFromSupabase);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   const handleContactClick = () => {
@@ -223,10 +250,10 @@ export const Hero = () => {
           throw new Error("Invalid like response");
         }
 
-        const remoteCount = Number(row?.new_count);
-        const remoteLiked = parseLikedValue(row?.liked);
+        const remoteCount = parseRemoteCount(row);
+        const remoteLiked = parseRemoteLiked(row);
 
-        if (!Number.isNaN(remoteCount)) {
+        if (remoteCount !== null) {
           setLoveCount(remoteCount);
           localStorage.setItem(LOVE_COUNT_STORAGE_KEY, String(remoteCount));
         }
@@ -297,7 +324,7 @@ export const Hero = () => {
                 Contact Me <FaArrowRight className="inline-flex w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
               <AnimatedBorderButton
-                className="w-full sm:flex-1 min-w-0 h-11 sm:h-14 whitespace-nowrap px-3 text-sm sm:flex-none sm:px-8 sm:text-lg"
+                className="w-full sm:w-auto min-w-0 h-11 sm:h-14 whitespace-nowrap px-3 text-sm sm:flex-none sm:px-8 sm:text-lg"
                 onClick={handleCVDownload}
               >
                 <LuDownload className="w-5 h-5" />
