@@ -7,6 +7,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 const badges = [
   {
@@ -582,13 +583,13 @@ export const CertnBadge = () => {
         </div>
       )}
 
-      {selectedBadgeIndex !== null && (
+      {selectedBadgeIndex !== null && createPortal(
         <div
           className="fixed inset-0 z-[9998] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={closeBadgeDetails}
         >
           <div
-            className="relative w-full max-w-md glass rounded-2xl border border-white/15 p-5"
+            className="relative w-full max-w-md glass rounded-2xl border border-white/15 p-5 max-h-[88vh] overflow-y-auto md:max-h-none md:overflow-visible"
             onClick={(event) => event.stopPropagation()}
           >
             <button
@@ -650,7 +651,8 @@ export const CertnBadge = () => {
               </a>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
     </section>

@@ -281,10 +281,10 @@ export const Hero = () => {
             </div>
 
             {/* Call to Action Buttons */}
-            <div className="flex flex-nowrap items-center gap-3 sm:gap-4 animate-fade-in animation-delay-300">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4 animate-fade-in animation-delay-300">
               <Button
                 size="lg"
-                className="sm:hidden flex-1 min-w-0 h-11 whitespace-nowrap px-3 text-sm"
+                className="sm:hidden w-full h-11 whitespace-nowrap px-3 text-sm"
                 onClick={handleViewProjectsClick}
               >
                 View Projects <FiFolder className="inline-flex w-4 h-4" />
@@ -297,7 +297,7 @@ export const Hero = () => {
                 Contact Me <FaArrowRight className="inline-flex w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
               <AnimatedBorderButton
-                className="flex-1 min-w-0 h-11 sm:h-14 whitespace-nowrap px-3 text-sm sm:flex-none sm:px-8 sm:text-lg"
+                className="w-full sm:flex-1 min-w-0 h-11 sm:h-14 whitespace-nowrap px-3 text-sm sm:flex-none sm:px-8 sm:text-lg"
                 onClick={handleCVDownload}
               >
                 <LuDownload className="w-5 h-5" />
