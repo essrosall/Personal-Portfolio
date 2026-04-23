@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/Components/Button";
 import { THEME_CHANGE_EVENT, useThemeMode } from "@/lib/useThemeMode";
 import {
@@ -43,6 +43,7 @@ export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [theme, setTheme] = useState(getInitialTheme);
+  const mobilePanelRef = useRef(null);
   const currentTheme = useThemeMode();
   const currentYear = new Date().getFullYear();
   const isLightTheme = theme === "light";
@@ -73,6 +74,24 @@ export const Navbar = () => {
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handleOutsideTap = (event) => {
+      if (!mobilePanelRef.current) return;
+
+      const target = event.target;
+      if (target instanceof Node && !mobilePanelRef.current.contains(target)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handleOutsideTap, true);
+    return () => {
+      document.removeEventListener("pointerdown", handleOutsideTap, true);
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
     const root = document.documentElement;
     root.dataset.theme = theme;
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
@@ -93,23 +112,15 @@ export const Navbar = () => {
     setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
   };
 
-  // NEW: Bulletproof smooth scrolling function
-  const scrollToProjects = (e) => {
-    e.preventDefault();
-    const projectsSection = document.getElementById("projects");
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false); // Closes the mobile menu automatically
-    } else {
-      console.warn("Could not find a section with id='projects'");
-    }
+  const scrollToProjects = () => {
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 transition-all duration-700 ${
         isScrolled ? "glass_strong py-3 md:py-4 shadow-lg" : "bg-transparent py-3 md:py-5"
-      } z-50`}
+      } ${isMobileMenuOpen ? "z-[13050]" : "z-50"}`}
     >
       <nav className="container mx-auto px-4 sm:px-6 flex items-center justify-between relative z-10 gap-3 sm:gap-4">
         
@@ -172,8 +183,8 @@ export const Navbar = () => {
       <button
         type="button"
         onClick={toggleTheme}
-        className={`md:hidden fixed right-4 bottom-20 z-[70] inline-flex h-12 w-12 items-center justify-center rounded-full glass_strong border border-[var(--color-border)]/60 text-[var(--color-foreground)] shadow-[0_16px_40px_rgba(0,0,0,0.18)] transition-all duration-300 active:scale-95 ${
-          isMobileMenuOpen ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100"
+        className={`md:hidden fixed right-16 top-3 z-[70] inline-flex h-11 w-11 items-center justify-center rounded-full glass_strong border border-[var(--color-border)]/60 text-[var(--color-foreground)] shadow-[0_16px_40px_rgba(0,0,0,0.18)] transition-all duration-300 active:scale-95 ${
+          isMobileMenuOpen ? "pointer-events-none opacity-0 scale-90" : "opacity-100"
         }`}
         aria-label={isLightTheme ? "Switch to dark mode" : "Switch to light mode"}
         aria-pressed={isLightTheme}
@@ -198,6 +209,7 @@ export const Navbar = () => {
         />
 
         <aside
+          ref={mobilePanelRef}
           className={`pointer-events-auto absolute top-0 right-0 h-dvh w-[86%] max-w-[360px] glass_strong bg-[var(--color-background)]/90 border-l border-[var(--color-border)]/50 shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
@@ -239,9 +251,29 @@ export const Navbar = () => {
             </div>
 
             <div
+              className={`mt-5 transition-all duration-500 ${
+                isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+              }`}
+              style={{ transitionDelay: isMobileMenuOpen ? "90ms" : "0ms" }}
+            >
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl glass_strong px-4 py-3 text-sm font-medium text-[var(--color-foreground)] border border-[var(--color-border)]/60 hover:bg-[var(--color-surface)]/80 transition-all duration-300"
+                aria-label={isLightTheme ? "Switch to dark mode" : "Switch to light mode"}
+                aria-pressed={isLightTheme}
+                title={isLightTheme ? "Switch to dark mode" : "Switch to light mode"}
+              >
+                {isLightTheme ? <SunMedium className="w-4 h-4" /> : <MoonStar className="w-4 h-4" />}
+                <span>{isLightTheme ? "Light Mode" : "Dark Mode"}</span>
+              </button>
+            </div>
+
+            <div
               className={`mt-4 mb-5 h-px bg-gradient-to-r from-transparent via-[var(--color-primary)]/50 to-transparent transition-all duration-500 ${
                 isMobileMenuOpen ? "opacity-100" : "opacity-0"
               }`}
+              style={{ transitionDelay: isMobileMenuOpen ? "120ms" : "0ms" }}
             />
 
             <nav className="flex flex-col gap-4">
@@ -278,24 +310,13 @@ export const Navbar = () => {
               ))}
             </nav>
 
-            <div
-              className={`mt-5 transition-all duration-500 ${
-                isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-              }`}
-              style={{ transitionDelay: isMobileMenuOpen ? "320ms" : "0ms" }}
-            >
-              <Button size="lg" className="w-full min-h-[54px] text-[17px]" onClick={scrollToProjects}>
-                View Projects
-              </Button>
-            </div>
-
             <p
               className={`mt-auto pt-5 text-xs text-[var(--color-muted-foreground)] transition-all duration-500 ${
                 isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
               }`}
               style={{ transitionDelay: isMobileMenuOpen ? "380ms" : "0ms" }}
             >
-              Portfolio v1.0 • © {currentYear}
+              EssRosall Portfolio v1.0 • © {currentYear}
             </p>
           </div>
         </aside>

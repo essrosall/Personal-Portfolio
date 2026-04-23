@@ -64,8 +64,13 @@ export const Achievement = () => {
 
     useEffect(() => {
         if (!isLogoEntryZoomOpen) {
+            document.body.style.overflow = "";
+            document.body.style.overscrollBehavior = "";
             return undefined;
         }
+
+        document.body.style.overflow = "hidden";
+        document.body.style.overscrollBehavior = "none";
 
         const onKeyDown = (event) => {
             if (event.key === "Escape") {
@@ -74,7 +79,11 @@ export const Achievement = () => {
         };
 
         window.addEventListener("keydown", onKeyDown);
-        return () => window.removeEventListener("keydown", onKeyDown);
+        return () => {
+            window.removeEventListener("keydown", onKeyDown);
+            document.body.style.overflow = "";
+            document.body.style.overscrollBehavior = "";
+        };
     }, [isLogoEntryZoomOpen]);
 
     return (
@@ -165,11 +174,11 @@ export const Achievement = () => {
 
             {isLogoEntryZoomOpen && (
                 <div
-                    className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 pt-24 md:pt-28"
+                    className="fixed inset-0 z-[9999] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
                     onClick={closeLogoEntryViewer}
                 >
                     <div
-                        className="relative w-full max-w-5xl max-h-[90vh] flex items-center justify-center"
+                        className="relative w-full max-w-5xl max-h-[92vh] flex items-center justify-center"
                         onClick={(event) => event.stopPropagation()}
                     >
                         <button
@@ -184,7 +193,7 @@ export const Achievement = () => {
                             src={logoContestAchievements[selectedLogoEntry].entryImage}
                             alt={logoContestAchievements[selectedLogoEntry].title}
                             decoding="async"
-                            className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
+                            className="max-w-[92vw] max-h-[88vh] object-contain rounded-2xl shadow-2xl"
                         />
                     </div>
                 </div>

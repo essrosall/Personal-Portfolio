@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Calendar, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ExternalLink, FileText, X } from "lucide-react";
 import { FiCalendar, FiFigma } from "react-icons/fi";
 
@@ -473,7 +474,6 @@ export const Projects = () => {
                 decoding="async"
                 className="absolute inset-0 h-full w-full object-cover object-center"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent h-24 theme-light-overlay-hidden" />
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 rounded-full bg-white/20" />
             </div>
           </div>
@@ -489,18 +489,18 @@ export const Projects = () => {
                 href={project.figmaLink}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-semibold transition-all shrink-0"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-small transition-all shrink-0"
                 aria-label={`Open ${project.title} in Figma`}
-                title="Click to view simple prototype"
+                title="Click to view in Figma"
               >
                 <FiFigma className="w-4 h-4" />
-                <span>View Prototype</span>
+                <span>View in Figma</span>
               </a>
             )}
           </div>
           {!!project.figmaLink && (
             <p className="text-xs text-[var(--color-primary)] mt-2 font-medium">
-              Click the Figma button to view a simple prototype.
+              Click to view in Figma and browse the frame set.
             </p>
           )}
           <p className="text-sm text-[var(--color-muted-foreground)] mt-3 leading-relaxed">
@@ -573,11 +573,11 @@ export const Projects = () => {
               decoding="async"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent theme-light-overlay-hidden" />
-            <span className="absolute bottom-3 right-3 px-3 py-1 rounded-full glass_strong text-xs text-white theme-light-dark-chip">
+            <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
+            <span className="absolute bottom-3 right-3 px-3 py-1 rounded-full glass_strong text-xs text-white theme-light-content-chip">
               {webPreviewSlides[idx] + 1} / {project.screenshots.length}
             </span>
-            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full glass_strong text-[10px] text-white md:hidden theme-light-dark-chip">
+            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full glass_strong text-[10px] text-white md:hidden theme-light-content-chip">
               Swipe preview • Tap to open
             </span>
           </div>
@@ -593,23 +593,25 @@ export const Projects = () => {
                 href={project.figmaLink}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-semibold transition-all shrink-0"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-primary)] text-[var(--color-primary-foreground)] text-xs font-small transition-all shrink-0"
                 aria-label={`Open ${project.title} in Figma`}
-                title="Click to view simple prototype"
+                title="Click to view in Figma"
               >
                 <FiFigma className="w-4 h-4" />
-                <span>View Prototype</span>
+                <span>View in Figma</span>
               </a>
             ) : (
-              <span className="inline-flex items-center gap-2 px-3 py-2 rounded-full glass text-xs text-[var(--color-muted-foreground)] border border-[var(--color-primary)]/25 shrink-0">
+              <span className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass text-xs text-[var(--color-muted-foreground)] border border-[var(--color-primary)]/25 shrink-0">
                 <FiFigma className="w-4 h-4" />
-                <span>Prototype Soon</span>
+                <span>Frames Soon</span>
               </span>
             )}
           </div>
-          <p className="text-xs text-[var(--color-primary)] mt-2 font-medium">
-            Click the Figma button to view a simple prototype.
-          </p>
+          {project.figmaLink && (
+            <p className="text-xs text-[var(--color-primary)] mt-2 font-medium">
+              Click to view in Figma and browse the frame set.
+            </p>
+          )}
           <p className="text-sm text-[var(--color-muted-foreground)] mt-3 leading-relaxed">
             {project.description}
           </p>
@@ -633,7 +635,7 @@ export const Projects = () => {
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 sm:mt-5 mb-5 sm:mb-6 animate-fade-in animation-delay-100 text-[var(--color-secondary-foreground)] ">
             Our latest major build:
-            <span className="font-cursive italic font-normal theme-light-title-foreground"> {" "}TRASHURE.
+            <span className="font-cursive italic font-normal text-white theme-light-content-text"> {" "}TRASHURE.
             </span>
           </h2>
           <p className="text-[var(--color-muted-foreground)] animate-fade-in animation-delay-200">
@@ -658,7 +660,6 @@ export const Projects = () => {
             }}
             onTouchMove={(event) => {
               if (touchStartX === null) return;
-              // Keep touchmove lightweight; swipe is confirmed on touchend threshold.
               void event;
             }}
             onTouchEnd={(event) => {
@@ -697,13 +698,13 @@ export const Projects = () => {
               />
             </button>
 
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent theme-light-overlay-hidden" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
 
-            <span className="pointer-events-none absolute bottom-3 right-3 px-3 py-1 rounded-full glass_strong text-xs text-white theme-light-dark-chip">
+            <span className="pointer-events-none absolute bottom-3 right-3 px-3 py-1 rounded-full glass_strong text-xs text-white theme-light-content-chip">
               {activeSlide + 1} / {capstoneProject.screenshots.length}
             </span>
 
-            <span className="pointer-events-none absolute top-3 left-3 px-2.5 py-1 rounded-full glass_strong text-[10px] text-white md:hidden theme-light-dark-chip">
+            <span className="pointer-events-none absolute top-3 left-3 px-2.5 py-1 rounded-full glass_strong text-[10px] text-white md:hidden theme-light-content-chip">
               Swipe preview • Tap to open
             </span>
 
@@ -780,8 +781,8 @@ export const Projects = () => {
                 {capstoneProject.abstract}
               </p>
 
-              <p className="text-sm md:text-base text-white mt-3">
-                <span className="font-semibold text-white">Role:</span>{" "}
+              <p className="text-sm md:text-base text-[var(--color-foreground)] theme-light-content-text mt-3">
+                <span className="font-semibold text-[var(--color-foreground)] theme-light-content-text">Role:</span>{" "}
                 {capstoneProject.role}
               </p>
             </div>
@@ -880,7 +881,7 @@ export const Projects = () => {
             <span className="text-[var(--color-secondary-foreground)] text-sm font-medium tracking-wider uppercase animate-fade-in">
               UI/UX Category
             </span>
-            <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-primary)]"><span className="font-cursive theme-light-title-foreground italic">Web Design  </span>
+            <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]"><span className="font-cursive text-white theme-light-content-text italic">Web Design  </span>
                Showcase
             </h3>
             <p className="text-[var(--color-muted-foreground)]">
@@ -935,16 +936,17 @@ export const Projects = () => {
             </div>
 
             <div className="text-center mx-auto max-w-3xl mt-20 sm:mt-24 mb-12 sm:mb-14">
-            <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]">
-                <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-primary)]"><span className="font-cursive theme-light-title-foreground italic">Mobile Design </span>
-                Showcase
-              </h3>
-              </h3>
+            <h3 className="text-3xl md:text-4xl font-bold mt-4 mb-4 text-[var(--color-secondary-foreground)]"><span className="font-cursive text-white theme-light-content-text italic">Mobile Design </span>
+               Showcase
+            </h3>
               <p className="text-[var(--color-muted-foreground)]">
                 Three mobile-first Figma concepts presented in a phone frame, built for swipe previews on touch devices and autoplay previews on desktop.
               </p>
               <p className="text-sm text-[var(--color-primary)] mt-3">
-                All mobile design works shown below were created in Figma.
+                  These mobile designs were built as frame-based concepts in Figma.
+                </p>
+                <p className="text-xs text-[var(--color-muted-foreground)] mt-2">
+                  Swipe through the cards to preview each frame set.
               </p>
             </div>
 
@@ -978,223 +980,227 @@ export const Projects = () => {
         </div>
 
         {/* Fullscreen Viewer */}
-        {isZoomOpen && (
-          <div
-            className="fixed inset-0 z-[12000] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
-            onClick={() => setIsZoomOpen(false)}
-          >
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                prevSlide();
-              }}
-              className="hidden sm:block absolute left-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
-              aria-label="Previous screenshot"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                nextSlide();
-              }}
-              className="hidden sm:block absolute right-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
-              aria-label="Next screenshot"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            <div
-              className="relative w-full max-w-6xl max-h-[90vh] flex flex-col items-center justify-center"
-              onClick={(event) => event.stopPropagation()}
-              onTouchStart={(event) => {
-                setTouchStartX(event.touches[0].clientX);
-              }}
-              onTouchEnd={(event) => {
-                if (touchStartX === null) return;
-                const touchEndX = event.changedTouches[0].clientX;
-                const delta = touchStartX - touchEndX;
-                if (Math.abs(delta) > 35) {
-                  if (delta > 0) {
-                    nextSlide();
-                  } else {
-                    prevSlide();
-                  }
-                }
-                setTouchStartX(null);
-              }}
-            >
-              <button
-                type="button"
+        {createPortal(
+          <>
+            {isZoomOpen && (
+              <div
+                className="fixed inset-0 z-[12000] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
                 onClick={() => setIsZoomOpen(false)}
-                className="absolute top-6 right-4 sm:right-5 z-[10010] p-3 rounded-full glass_strong bg-black/85 text-white border-2 border-white/45 shadow-[0_10px_30px_rgba(0,0,0,0.45)] hover:bg-[var(--color-primary)]/25 transition-all duration-300"
-                aria-label="Close screenshot viewer"
               >
-                <X className="w-5 h-5" />
-              </button>
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    prevSlide();
+                  }}
+                  className="hidden sm:block absolute left-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
+                  aria-label="Previous screenshot"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
 
-              <img
-                src={capstoneProject.screenshots[activeSlide]}
-                alt={`${capstoneProject.title} screenshot ${activeSlide + 1}`}
-                decoding="async"
-                className="max-w-full max-h-[76vh] sm:max-h-[78vh] object-contain rounded-2xl shadow-2xl"
-              />
-              <p className="mt-4 text-sm text-white/80">
-                {capstoneProject.maintitle} • Frame {activeSlide + 1} of {capstoneProject.screenshots.length}
-              </p>
-              <p className="mt-1 text-xs text-white/65 sm:hidden">Swipe image area to browse</p>
-            </div>
-          </div>
-        )}
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    nextSlide();
+                  }}
+                  className="hidden sm:block absolute right-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
+                  aria-label="Next screenshot"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
 
-        {selectedMobileProjectIndex !== null && (
-          <div
-            className="fixed inset-0 z-[12000] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
-            onClick={closeMobileProject}
-          >
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                prevMobileSlide();
-              }}
-              className="hidden sm:block absolute left-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
-              aria-label="Previous mobile frame"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
+                <div
+                  className="relative w-full max-w-6xl max-h-[90vh] flex flex-col items-center justify-center"
+                  onClick={(event) => event.stopPropagation()}
+                  onTouchStart={(event) => {
+                    setTouchStartX(event.touches[0].clientX);
+                  }}
+                  onTouchEnd={(event) => {
+                    if (touchStartX === null) return;
+                    const touchEndX = event.changedTouches[0].clientX;
+                    const delta = touchStartX - touchEndX;
+                    if (Math.abs(delta) > 35) {
+                      if (delta > 0) {
+                        nextSlide();
+                      } else {
+                        prevSlide();
+                      }
+                    }
+                    setTouchStartX(null);
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setIsZoomOpen(false)}
+                    className="fixed top-4 right-4 sm:top-5 sm:right-5 z-[10010] p-3 rounded-full bg-white text-black border-2 border-black/10 hover:bg-white/90 transition-all duration-300"
+                    aria-label="Close screenshot viewer"
+                  >
+                    <X className="w-5 h-5 text-black" />
+                  </button>
 
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                nextMobileSlide();
-              }}
-              className="hidden sm:block absolute right-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
-              aria-label="Next mobile frame"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            <div
-              className="relative w-full max-w-xl h-[90vh] flex items-center justify-center"
-              onClick={(event) => event.stopPropagation()}
-              onTouchStart={(event) => {
-                setMobileViewerTouchStartX(event.touches[0].clientX);
-              }}
-              onTouchEnd={(event) => {
-                if (mobileViewerTouchStartX === null) return;
-                const touchEndX = event.changedTouches[0].clientX;
-                const delta = mobileViewerTouchStartX - touchEndX;
-                if (Math.abs(delta) > 35) {
-                  if (delta > 0) {
-                    nextMobileSlide();
-                  } else {
-                    prevMobileSlide();
-                  }
-                }
-                setMobileViewerTouchStartX(null);
-              }}
-            >
-              <button
-                type="button"
-                onClick={closeMobileProject}
-                className="absolute top-6 right-4 sm:right-5 z-[10010] p-3 rounded-full glass_strong bg-black/85 text-white border-2 border-white/45 shadow-[0_10px_30px_rgba(0,0,0,0.45)] hover:bg-[var(--color-primary)]/25 transition-all duration-300"
-                aria-label="Close mobile design viewer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="relative w-full max-w-[340px] aspect-[9/19.5] rounded-[2.6rem] border-[10px] border-[#0a0d12] bg-[#050608] shadow-[0_30px_90px_rgba(0,0,0,0.55)] overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(32,194,168,0.18),transparent_52%)]" />
-                <div className="absolute top-3 left-1/2 -translate-x-1/2 w-28 h-6 rounded-full bg-[#0b0f16]" />
-                <img
-                  src={mobileDesignProjects[selectedMobileProjectIndex].screenshots[activeMobileSlide]}
-                  alt={`${mobileDesignProjects[selectedMobileProjectIndex].title} frame ${activeMobileSlide + 1}`}
-                  decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover object-center"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/25 via-black/8 to-transparent h-24 theme-light-overlay-hidden" />
+                  <img
+                    src={capstoneProject.screenshots[activeSlide]}
+                    alt={`${capstoneProject.title} screenshot ${activeSlide + 1}`}
+                    decoding="async"
+                    className="max-w-full max-h-[76vh] sm:max-h-[78vh] object-contain rounded-2xl shadow-2xl"
+                  />
+                  <p className="mt-4 text-sm text-white/80">
+                    {capstoneProject.maintitle} • Frame {activeSlide + 1} of {capstoneProject.screenshots.length}
+                  </p>
+                  <p className="mt-1 text-xs text-white/65 sm:hidden">Swipe image area to browse</p>
+                </div>
               </div>
+            )}
 
-              <p className="absolute bottom-2 left-0 right-0 text-xs text-white/65 text-center sm:hidden">Swipe the phone frame to browse</p>
-            </div>
-          </div>
-        )}
-
-        {selectedWebProjectIndex !== null && (
-          <div
-            className="fixed inset-0 z-[12000] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
-            onClick={closeWebProject}
-          >
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                prevWebSlide();
-              }}
-              className="hidden sm:block absolute left-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
-              aria-label="Previous frame"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                nextWebSlide();
-              }}
-              className="hidden sm:block absolute right-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
-              aria-label="Next frame"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            <div
-              className="relative w-full max-w-6xl max-h-[90vh] flex flex-col items-center justify-center"
-              onClick={(event) => event.stopPropagation()}
-              onTouchStart={(event) => {
-                setWebTouchStartX(event.touches[0].clientX);
-              }}
-              onTouchEnd={(event) => {
-                if (webTouchStartX === null) return;
-                const touchEndX = event.changedTouches[0].clientX;
-                const delta = webTouchStartX - touchEndX;
-                if (Math.abs(delta) > 35) {
-                  if (delta > 0) {
-                    nextWebSlide();
-                  } else {
-                    prevWebSlide();
-                  }
-                }
-                setWebTouchStartX(null);
-              }}
-            >
-              <button
-                type="button"
-                onClick={closeWebProject}
-                className="absolute top-6 right-4 sm:right-5 z-[10010] p-3 rounded-full glass_strong bg-black/85 text-white border-2 border-white/45 shadow-[0_10px_30px_rgba(0,0,0,0.45)] hover:bg-[var(--color-primary)]/25 transition-all duration-300"
-                aria-label="Close web design viewer"
+            {selectedMobileProjectIndex !== null && (
+              <div
+                className="fixed inset-0 z-[12000] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+                onClick={closeMobileProject}
               >
-                <X className="w-5 h-5" />
-              </button>
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    prevMobileSlide();
+                  }}
+                  className="hidden sm:block absolute left-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
+                  aria-label="Previous mobile frame"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
 
-              <img
-                src={webDesignProjects[selectedWebProjectIndex].screenshots[activeWebSlide]}
-                alt={`${webDesignProjects[selectedWebProjectIndex].title} frame ${activeWebSlide + 1}`}
-                decoding="async"
-                className="max-w-full max-h-[76vh] sm:max-h-[78vh] object-contain rounded-2xl shadow-2xl"
-              />
-              <p className="mt-4 text-sm text-white/80 text-center">
-                {webDesignProjects[selectedWebProjectIndex].title} • Frame {activeWebSlide + 1} of {webDesignProjects[selectedWebProjectIndex].screenshots.length}
-              </p>
-              <p className="mt-1 text-xs text-white/65 text-center sm:hidden">Swipe image area to browse</p>
-            </div>
-          </div>
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    nextMobileSlide();
+                  }}
+                  className="hidden sm:block absolute right-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
+                  aria-label="Next mobile frame"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+
+                <div
+                  className="relative w-full max-w-xl h-[90vh] flex items-center justify-center"
+                  onClick={(event) => event.stopPropagation()}
+                  onTouchStart={(event) => {
+                    setMobileViewerTouchStartX(event.touches[0].clientX);
+                  }}
+                  onTouchEnd={(event) => {
+                    if (mobileViewerTouchStartX === null) return;
+                    const touchEndX = event.changedTouches[0].clientX;
+                    const delta = mobileViewerTouchStartX - touchEndX;
+                    if (Math.abs(delta) > 35) {
+                      if (delta > 0) {
+                        nextMobileSlide();
+                      } else {
+                        prevMobileSlide();
+                      }
+                    }
+                    setMobileViewerTouchStartX(null);
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={closeMobileProject}
+                    className="fixed top-4 right-4 sm:top-5 sm:right-5 z-[10010] p-3 rounded-full bg-white text-black border-2 border-black/10 hover:bg-white/90 transition-all duration-300"
+                    aria-label="Close mobile design viewer"
+                  >
+                    <X className="w-5 h-5 text-black" />
+                  </button>
+
+                  <div className="relative w-full max-w-[340px] aspect-[9/19.5] rounded-[2.6rem] border-[10px] border-[#0a0d12] bg-[#050608] overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(32,194,168,0.18),transparent_52%)]" />
+                    <div className="absolute top-3 left-1/2 -translate-x-1/2 w-28 h-6 rounded-full bg-[#0b0f16]" />
+                    <img
+                      src={mobileDesignProjects[selectedMobileProjectIndex].screenshots[activeMobileSlide]}
+                      alt={`${mobileDesignProjects[selectedMobileProjectIndex].title} frame ${activeMobileSlide + 1}`}
+                      decoding="async"
+                      className="absolute inset-0 h-full w-full object-cover object-center"
+                    />
+                  </div>
+
+                  <p className="absolute bottom-2 left-0 right-0 text-xs text-white/65 text-center sm:hidden">Swipe the phone frame to browse</p>
+                </div>
+              </div>
+            )}
+
+            {selectedWebProjectIndex !== null && (
+              <div
+                className="fixed inset-0 z-[12000] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+                onClick={closeWebProject}
+              >
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    prevWebSlide();
+                  }}
+                  className="hidden sm:block absolute left-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
+                  aria-label="Previous frame"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    nextWebSlide();
+                  }}
+                  className="hidden sm:block absolute right-5 top-1/2 -translate-y-1/2 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all duration-500"
+                  aria-label="Next frame"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+
+                <div
+                  className="relative w-full max-w-6xl max-h-[90vh] flex flex-col items-center justify-center"
+                  onClick={(event) => event.stopPropagation()}
+                  onTouchStart={(event) => {
+                    setWebTouchStartX(event.touches[0].clientX);
+                  }}
+                  onTouchEnd={(event) => {
+                    if (webTouchStartX === null) return;
+                    const touchEndX = event.changedTouches[0].clientX;
+                    const delta = webTouchStartX - touchEndX;
+                    if (Math.abs(delta) > 35) {
+                      if (delta > 0) {
+                        nextWebSlide();
+                      } else {
+                        prevWebSlide();
+                      }
+                    }
+                    setWebTouchStartX(null);
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={closeWebProject}
+                    className="fixed top-4 right-4 sm:top-5 sm:right-5 z-[10010] p-3 rounded-full bg-white text-black border-2 border-black/10 hover:bg-white/90 transition-all duration-300"
+                    aria-label="Close web design viewer"
+                  >
+                    <X className="w-5 h-5 text-black" />
+                  </button>
+
+                  <img
+                    src={webDesignProjects[selectedWebProjectIndex].screenshots[activeWebSlide]}
+                    alt={`${webDesignProjects[selectedWebProjectIndex].title} frame ${activeWebSlide + 1}`}
+                    decoding="async"
+                    className="max-w-full max-h-[76vh] sm:max-h-[78vh] object-contain rounded-2xl shadow-2xl"
+                  />
+                  <p className="mt-4 text-sm text-white/80 text-center">
+                    {webDesignProjects[selectedWebProjectIndex].title} • Frame {activeWebSlide + 1} of {webDesignProjects[selectedWebProjectIndex].screenshots.length}
+                  </p>
+                  <p className="mt-1 text-xs text-white/65 text-center sm:hidden">Swipe image area to browse</p>
+                </div>
+              </div>
+            )}
+          </>,
+          document.body
         )}
       </div>
     </section>

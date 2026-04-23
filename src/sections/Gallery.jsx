@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { X, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 
 const artworks = [
@@ -221,8 +222,18 @@ export const Gallery = () => {
     const isViewerOpen = selectedArtwork !== null;
     document.body.classList.toggle("viewer-open", isViewerOpen);
 
+    if (isViewerOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.overscrollBehavior = "none";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.overscrollBehavior = "";
+    }
+
     return () => {
       document.body.classList.remove("viewer-open");
+      document.body.style.overflow = "";
+      document.body.style.overscrollBehavior = "";
     };
   }, [selectedArtwork]);
 
@@ -267,6 +278,7 @@ export const Gallery = () => {
               <article
                 key={`${artwork.image}-${idx}`}
                 className="group glass rounded-2xl overflow-hidden animate-fade-in hover:shadow-[0_20px_60px_rgba(32,194,168,0.15)] transition-all duration-300 cursor-pointer"
+                style={{ contentVisibility: "auto", containIntrinsicSize: "420px" }}
                 onClick={() => openViewer(actualIndex)}
               >
                 <div className={`relative overflow-hidden aspect-[4/3]`}>
@@ -283,13 +295,6 @@ export const Gallery = () => {
                     Click to view
                   </span>
 
-                  <div className="absolute inset-0 flex flex-col items-end justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="text-right">
-                      <h3 className="text-sm font-semibold text-white mb-1">
-                        {artwork.title}
-                      </h3>
-                    </div>
-                  </div>
                 </div>
 
                 <div className="p-4">
@@ -314,7 +319,7 @@ export const Gallery = () => {
               <article
                 key={`${artwork.image}-${idx}`}
                 className="group glass rounded-2xl overflow-hidden animate-fade-in break-inside-avoid hover:shadow-[0_20px_60px_rgba(32,194,168,0.15)] transition-all duration-300 cursor-pointer"
-                style={{ animationDelay: `${(idx % 3) * 100}ms` }}
+                style={{ animationDelay: `${(idx % 3) * 100}ms`, contentVisibility: "auto", containIntrinsicSize: "420px" }}
                 onClick={() => openViewer(actualIndex)}
               >
                 <div className={`relative overflow-hidden ${artwork.tileStyle}`}>
@@ -331,13 +336,6 @@ export const Gallery = () => {
                     Click to view
                   </span>
 
-                  <div className="absolute inset-0 flex flex-col items-end justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="text-right">
-                      <h3 className="text-sm font-semibold text-white mb-1">
-                        {artwork.title}
-                      </h3>
-                    </div>
-                  </div>
                 </div>
 
                 <div className="p-4">
@@ -385,9 +383,9 @@ export const Gallery = () => {
       </div>
 
       {/* Fullscreen Viewer */}
-      {selectedArtwork && (
+      {selectedArtwork && createPortal(
         <div
-          className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+          className="fixed inset-0 z-[9999] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={closeViewer}
         >
           <button
@@ -415,13 +413,13 @@ export const Gallery = () => {
           </button>
 
           <div
-            className="relative w-full max-w-4xl max-h-[88vh] flex flex-col items-center justify-center"
+            className="relative w-full max-w-4xl max-h-[92vh] flex flex-col items-center justify-center"
             onClick={(event) => event.stopPropagation()}
           >
             <button
               type="button"
               onClick={closeViewer}
-              className="absolute top-3 right-3 md:top-4 md:right-4 z-20 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
+              className="fixed top-4 right-4 md:top-5 md:right-5 z-20 p-3 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
               aria-label="Close artwork viewer"
             >
               <X className="w-5 h-5" />
@@ -430,7 +428,7 @@ export const Gallery = () => {
               src={selectedArtwork.image}
               alt={selectedArtwork.title}
               decoding="async"
-              className="max-w-full max-h-[74vh] object-contain rounded-2xl shadow-2xl"
+              className="max-w-[92vw] max-h-[82vh] object-contain rounded-2xl shadow-2xl"
             />
             <div className="mt-6 text-center">
               <h3 className="text-xl font-semibold text-white mb-2">
@@ -444,7 +442,8 @@ export const Gallery = () => {
               </p>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

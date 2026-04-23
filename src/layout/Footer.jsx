@@ -1,6 +1,4 @@
-import { useEffect, useRef, useState } from "react";
 import { FaGithub, FaLinkedin, FaFacebook, FaBehance } from "react-icons/fa";
-import { MoveUp } from "lucide-react";
 import { useThemeMode } from "@/lib/useThemeMode";
 
 const socialLinks = [
@@ -21,65 +19,10 @@ const footerLinks = [
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
   const currentTheme = useThemeMode();
-  const logoSrc = currentTheme === "light" ? "/logo/JRLOGODARK.png" : "/logo/JRLOGO.png";
-  const [showMobileTopButton, setShowMobileTopButton] = useState(false);
-  const lastScrollYRef = useRef(0);
-  const upwardDistanceRef = useRef(0);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return undefined;
-
-    lastScrollYRef.current = window.scrollY;
-
-    const onScroll = () => {
-      const currentY = window.scrollY;
-      const delta = currentY - lastScrollYRef.current;
-
-      if (window.innerWidth >= 768) {
-        setShowMobileTopButton(false);
-        upwardDistanceRef.current = 0;
-        lastScrollYRef.current = currentY;
-        return;
-      }
-
-      if (delta < -2) {
-        upwardDistanceRef.current += Math.abs(delta);
-        if (currentY > 420 && upwardDistanceRef.current > 180) {
-          setShowMobileTopButton(true);
-        }
-      } else if (delta > 1) {
-        upwardDistanceRef.current = 0;
-        setShowMobileTopButton(false);
-      }
-
-      if (currentY <= 160) {
-        setShowMobileTopButton(false);
-      }
-
-      lastScrollYRef.current = currentY;
-    };
-
-    const onResize = () => {
-      if (window.innerWidth >= 768) {
-        setShowMobileTopButton(false);
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const footerLogoSrc = currentTheme === "light" ? "/logo/JRLOGODARK.png" : "/logo/JRLOGO.png";
 
   return (
-    <footer className="pt-12 sm:pt-20 pb-12 sm:pb-10 border-t border-[var(--color-border)]/70 bg-[var(--color-background)] relative overflow-hidden">
+    <footer className="pt-12 sm:pt-20 pb-12 sm:pb-10 border-t border-white/10 bg-[var(--color-background)] relative overflow-hidden">
       
       {/* Subtle background glow to tie in with the rest of the site */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-[var(--color-primary)]/50 to-transparent" />
@@ -94,7 +37,7 @@ export const Footer = () => {
           <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center text-center md:items-start md:text-left">
             <a href="#" className="inline-block mb-4" aria-label="Home">
               <img
-                src={logoSrc}
+                src={footerLogoSrc}
                 alt="JR Logo"
                 loading="lazy"
                 decoding="async"
@@ -108,14 +51,14 @@ export const Footer = () => {
 
           {/* Column 2: Social Links */}
           <div className="md:col-span-7 lg:col-span-4 lg:mx-auto text-center md:text-left">
-            <h4 className="text-[var(--color-foreground)] font-medium mb-5 tracking-wider uppercase text-xs">Connect Online</h4>
+            <h4 className="text-white theme-light-content-text font-medium mb-5 tracking-wider uppercase text-xs">Connect Online</h4>
             <div className="flex items-center justify-center md:justify-start gap-3 sm:gap-4 flex-wrap">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-11 h-11 rounded-full glass border border-[var(--color-border)]/30 flex items-center justify-center text-[var(--color-muted-foreground)] hover:text-[var(--color-primary-foreground)] hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] transition-all hover:-translate-y-1 shadow-lg"
+                  className="w-11 h-11 rounded-full glass border border-white/5 flex items-center justify-center text-[var(--color-muted-foreground)] hover:text-white hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] transition-all hover:-translate-y-1 shadow-lg"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
@@ -126,13 +69,13 @@ export const Footer = () => {
           {/* Column 3: Navigation Grid */}
           <div className="md:col-span-12 lg:col-span-4 grid grid-cols-2 gap-6 sm:gap-12 lg:flex lg:flex-row lg:gap-16 lg:justify-end">
             <div>
-              <h4 className="text-[var(--color-foreground)] font-medium mb-5 tracking-wider uppercase text-xs">Explore</h4>
+              <h4 className="text-white theme-light-content-text font-medium mb-5 tracking-wider uppercase text-xs">Explore</h4>
               <nav className="flex flex-col gap-3">
                 {footerLinks.slice(0, 3).map((link) => (
                   <a 
                     key={link.href} 
                     href={link.href} 
-                    className="text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)] transition-colors w-fit text-sm"
+                    className="text-[var(--color-muted-foreground)] hover:text-[var(--color-primary)] transition-colors w-fit text-sm"
                   >
                     {link.label}
                   </a>
@@ -140,13 +83,13 @@ export const Footer = () => {
               </nav>
             </div>
             <div>
-              <h4 className="text-[var(--color-foreground)] font-medium mb-5 tracking-wider uppercase text-xs">Connect</h4>
+              <h4 className="text-white theme-light-content-text font-medium mb-5 tracking-wider uppercase text-xs">Connect</h4>
               <nav className="flex flex-col gap-3">
                 {footerLinks.slice(3).map((link) => (
                   <a 
                     key={link.href} 
                     href={link.href} 
-                    className="text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)] transition-colors w-fit text-sm"
+                    className="text-[var(--color-muted-foreground)] hover:text-[var(--color-primary)] transition-colors w-fit text-sm"
                   >
                     {link.label}
                   </a>
@@ -157,32 +100,11 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Section: Copyright & Back to Top ONLY */}
-        <div className="pt-8 border-t border-[var(--color-border)]/70 flex flex-col-reverse md:flex-row items-end md:items-center justify-between gap-5 text-right md:text-left">
+        <div className="pt-8 border-t border-white/10 flex flex-col-reverse md:flex-row items-center md:items-center justify-between gap-5 text-center md:text-left">
           
-          <p className="text-sm text-[var(--color-muted-foreground)] text-right md:text-left self-end md:self-auto">
+          <p className="text-sm text-[var(--color-muted-foreground)] theme-light-content-text text-center self-center md:self-auto w-full md:w-auto">
             © {currentYear} John Rey Rosales. All rights reserved.
           </p>
-
-          {/* Sharp Back to Top Button */}
-          <button
-            onClick={scrollToTop}
-            className={`hide-when-viewer-open md:hidden fixed left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 rounded-full glass border border-[var(--color-primary)]/30 px-4 py-2 text-sm text-[var(--color-foreground)] transition-all duration-300 shadow-lg ${
-              showMobileTopButton ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-            }`}
-            style={{ bottom: "max(1rem, env(safe-area-inset-bottom))" }}
-            aria-label="From top"
-          >
-            <MoveUp className="w-4 h-4" />
-            <span className="font-medium">From top</span>
-          </button>
-
-          <button
-            onClick={scrollToTop}
-            className="hide-when-viewer-open group hidden md:flex items-center justify-center w-12 h-12 rounded-xl glass border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)] text-[var(--color-muted-foreground)] hover:text-[var(--color-primary-foreground)] transition-all shadow-lg"
-            aria-label="Scroll to top"
-          >
-            <MoveUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform animate-bounce" />
-          </button>
 
         </div>
       </div>

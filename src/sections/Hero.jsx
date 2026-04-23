@@ -7,6 +7,7 @@ import {
   FaLinkedin, FaChevronDown, FaJava, FaCss3Alt,
   FaHtml5, FaPython, FaReact, FaFigma, FaGitAlt
 } from "react-icons/fa";
+import { FiFolder } from "react-icons/fi";
 import { LuDownload } from "react-icons/lu";
 import {
   SiJavascript, SiTailwindcss, SiCanva
@@ -151,7 +152,6 @@ export const Hero = () => {
         setHasSentLove(remoteLiked);
         localStorage.setItem(LOVE_LIKED_STORAGE_KEY, String(remoteLiked));
       } catch {
-        // Keep local fallback values if Supabase is unavailable.
       }
     };
 
@@ -159,7 +159,18 @@ export const Hero = () => {
   }, []);
 
   const handleContactClick = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    const contactSection = document.getElementById("contact");
+    if (!contactSection) return;
+
+    const navbar = document.querySelector("header");
+    const navbarOffset = navbar?.getBoundingClientRect().height ?? 0;
+    const targetTop = window.scrollY + contactSection.getBoundingClientRect().top - navbarOffset - 12;
+
+    window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
+  };
+
+  const handleViewProjectsClick = () => {
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleCVDownload = () => {
@@ -273,7 +284,14 @@ export const Hero = () => {
             <div className="flex flex-nowrap items-center gap-3 sm:gap-4 animate-fade-in animation-delay-300">
               <Button
                 size="lg"
-                className="flex-1 min-w-0 h-11 sm:h-14 whitespace-nowrap px-3 text-sm sm:flex-none sm:px-5 sm:text-lg"
+                className="sm:hidden flex-1 min-w-0 h-11 whitespace-nowrap px-3 text-sm"
+                onClick={handleViewProjectsClick}
+              >
+                View Projects <FiFolder className="inline-flex w-4 h-4" />
+              </Button>
+              <Button
+                size="lg"
+                className="hidden sm:inline-flex sm:flex-none h-14 whitespace-nowrap px-5 text-lg"
                 onClick={handleContactClick}
               >
                 Contact Me <FaArrowRight className="inline-flex w-4 h-4 sm:w-5 sm:h-5" />
@@ -414,7 +432,6 @@ export const Hero = () => {
             <div className="flex w-max animate-marquee">
               {[...skills, ...skills].map((skill, idx) => (
                 <div key={idx} className="flex shrink-0 px-8 py-4">
-                  {/* Now rendering skill.icon and skill.name */}
                   <span className="flex items-center gap-3 text-xl font-semibold text-[var(--color-muted-foreground)]/50 hover:text-[var(--color-muted-foreground)] transition-colors cursor-default">
                     <span className="text-2xl">{skill.icon}</span>
                     {skill.name}

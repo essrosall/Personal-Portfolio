@@ -235,6 +235,23 @@ export const CertnBadge = () => {
   }, [selectedBadgeIndex]);
 
   useEffect(() => {
+    const isViewerOpen = isCertificateZoomOpen || selectedBadgeIndex !== null;
+
+    if (isViewerOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.overscrollBehavior = "none";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.overscrollBehavior = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.overscrollBehavior = "";
+    };
+  }, [isCertificateZoomOpen, selectedBadgeIndex]);
+
+  useEffect(() => {
     const isAnyViewerOpen = isCertificateZoomOpen || selectedBadgeIndex !== null;
     document.body.classList.toggle("viewer-open", isAnyViewerOpen);
 
@@ -521,7 +538,7 @@ export const CertnBadge = () => {
 
       {isCertificateZoomOpen && (
         <div
-          className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 pt-24 md:pt-28"
+          className="fixed inset-0 z-[9999] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={closeCertificateViewer}
         >
           <button
@@ -534,7 +551,7 @@ export const CertnBadge = () => {
           </button>
 
           <div
-            className="relative w-full max-w-6xl max-h-[90vh] flex items-center justify-center"
+            className="relative w-full max-w-6xl max-h-[92vh] flex items-center justify-center"
             onClick={(event) => event.stopPropagation()}
           >
             <button
@@ -550,7 +567,7 @@ export const CertnBadge = () => {
               src={certifications[selectedCertificate].image}
               alt={certifications[selectedCertificate].title}
               decoding="async"
-              className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
+              className="max-w-[92vw] max-h-[84vh] object-contain rounded-2xl shadow-2xl"
             />
 
             <button
