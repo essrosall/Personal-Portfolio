@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
-import { Button } from '@/Components/Button';
+import { Button } from "@/Components/Button";
 import { AnimatedBorderButton } from "@/Components/AnimatedBorderButton";
 import { supabase } from "@/lib/supabaseClient";
 import {
-  FaArrowRight, FaHeart, FaGithub, FaFacebookSquare, FaBehance,
-  FaLinkedin, FaChevronDown, FaJava, FaCss3Alt,
-  FaHtml5, FaPython, FaReact, FaFigma, FaGitAlt
+  FaArrowRight,
+  FaHeart,
+  FaGithub,
+  FaFacebookSquare,
+  FaBehance,
+  FaLinkedin,
+  FaChevronDown,
+  FaJava,
+  FaCss3Alt,
+  FaHtml5,
+  FaPython,
+  FaReact,
+  FaFigma,
+  FaGitAlt,
 } from "react-icons/fa";
 import { FiFolder } from "react-icons/fi";
 import { LuDownload } from "react-icons/lu";
-import {
-  SiJavascript, SiTailwindcss, SiCanva
-} from "react-icons/si";
-import {
-  DiIllustrator, DiPhotoshop
-} from "react-icons/di";
+import { SiJavascript, SiTailwindcss, SiCanva } from "react-icons/si";
+import { DiIllustrator, DiPhotoshop } from "react-icons/di";
 import { useThemeMode } from "@/lib/useThemeMode";
 
 const roles = ["UI/UX Designer", "Web Developer", "Graphic designer"];
-
 
 const skills = [
   { name: "HTML", icon: <FaHtml5 /> },
@@ -37,7 +43,7 @@ const skills = [
 ];
 
 export const Hero = () => {
-  const CV_PATH = "/Rosales_ATS resume.pdf";
+  const CV_PATH = "/ROSALES_RESUME_2026.pdf";
   const LOVE_DEVICE_STORAGE_KEY = "portfolio-love-device-id";
   const LOVE_COUNT_STORAGE_KEY = "portfolio-love-count";
   const LOVE_LIKED_STORAGE_KEY = "portfolio-love-liked";
@@ -55,7 +61,8 @@ export const Hero = () => {
   const [isLoveTooltipVisible, setIsLoveTooltipVisible] = useState(false);
   const [isLoveSyncing, setIsLoveSyncing] = useState(false);
   const currentTheme = useThemeMode();
-  const profileSrc = currentTheme === "light" ? "/logo/ProfileLight.png" : "/logo/Profile.png";
+  const profileSrc =
+    currentTheme === "light" ? "/logo/ProfileLight.png" : "/logo/Profile.png";
 
   const normalizeRpcRow = (data) => {
     if (Array.isArray(data)) return data[0] ?? null;
@@ -78,12 +85,14 @@ export const Hero = () => {
   };
 
   const parseRemoteCount = (row) => {
-    const value = row?.new_count ?? row?.current_count ?? row?.count ?? row?.total_likes;
+    const value =
+      row?.new_count ?? row?.current_count ?? row?.count ?? row?.total_likes;
     const parsed = Number(value);
     return Number.isNaN(parsed) ? null : parsed;
   };
 
-  const parseRemoteLiked = (row) => parseLikedValue(row?.liked ?? row?.is_liked);
+  const parseRemoteLiked = (row) =>
+    parseLikedValue(row?.liked ?? row?.is_liked);
 
   const syncLoveStateFromSupabase = async () => {
     if (!supabase) return;
@@ -111,24 +120,15 @@ export const Hero = () => {
 
       setHasSentLove(remoteLiked);
       localStorage.setItem(LOVE_LIKED_STORAGE_KEY, String(remoteLiked));
-    } catch {
-    }
+    } catch {}
   };
-
- 
 
   useEffect(() => {
     const currentRole = roles[roleIndex % roles.length];
     const isFullText = !isDeleting && text === currentRole;
     const isEmptyText = isDeleting && text === "";
 
-    const delay = isFullText
-      ? 1200
-      : isEmptyText
-        ? 500
-        : isDeleting
-          ? 80
-          : 120;
+    const delay = isFullText ? 1200 : isEmptyText ? 500 : isDeleting ? 80 : 120;
 
     const timer = setTimeout(() => {
       if (isFullText) {
@@ -140,7 +140,7 @@ export const Hero = () => {
         setText((prev) =>
           isDeleting
             ? currentRole.substring(0, prev.length - 1)
-            : currentRole.substring(0, prev.length + 1)
+            : currentRole.substring(0, prev.length + 1),
         );
       }
     }, delay);
@@ -191,7 +191,11 @@ export const Hero = () => {
 
     const navbar = document.querySelector("header");
     const navbarOffset = navbar?.getBoundingClientRect().height ?? 0;
-    const targetTop = window.scrollY + contactSection.getBoundingClientRect().top - navbarOffset - 12;
+    const targetTop =
+      window.scrollY +
+      contactSection.getBoundingClientRect().top -
+      navbarOffset -
+      12;
 
     window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
   };
@@ -203,7 +207,7 @@ export const Hero = () => {
   const handleCVDownload = () => {
     const link = document.createElement("a");
     link.href = CV_PATH;
-    link.download = "Rosales Resume.pdf";
+    link.download = "ROSALES_RESUME_2026.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -232,8 +236,8 @@ export const Hero = () => {
         const deviceId = localStorage.getItem(LOVE_DEVICE_STORAGE_KEY);
         const safeDeviceId =
           deviceId ??
-          (globalThis.crypto?.randomUUID?.() ??
-            `device-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`);
+          globalThis.crypto?.randomUUID?.() ??
+          `device-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 
         localStorage.setItem(LOVE_DEVICE_STORAGE_KEY, safeDeviceId);
 
@@ -273,7 +277,10 @@ export const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center overflow-hidden"
+    >
       <div className="absolute top-[-2rem] left-[-5rem] w-[500px] h-[500px] bg-[var(--color-primary)]/8 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/3 right-[-3rem] w-96 h-96 bg-[var(--color-primary)]/8 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-[var(--color-primary)]/6 rounded-full blur-3xl pointer-events-none" />
@@ -289,21 +296,40 @@ export const Hero = () => {
                 <span className="w-2 h-2 bg-[var(--color-primary)] rounded-sm animate-pulse" />
                 Aspiring&nbsp;
                 <span className="font-semibold">{text}</span>
-                <span className="ml-1 text-[var(--color-primary)] animate-pulse">|</span>
+                <span className="ml-1 text-[var(--color-primary)] animate-pulse">
+                  |
+                </span>
               </span>
             </div>
 
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in">
-                Turning <span className="text-[var(--color-primary)] glow_text">PIXELS </span>
+                Turning{" "}
+                <span className="text-[var(--color-primary)] glow_text">
+                  PIXELS{" "}
+                </span>
                 <br />
-                into <span className="font-cursive italic font-normal theme-light-title-foreground">code </span> and
-                <span className="text-[var(--color-primary)] glow_text"> IDEAS </span>
-                into <span className="font-cursive italic font-normal theme-light-title-foreground">interfaces</span>
+                into{" "}
+                <span className="font-cursive italic font-normal theme-light-title-foreground">
+                  code{" "}
+                </span>{" "}
+                and
+                <span className="text-[var(--color-primary)] glow_text">
+                  {" "}
+                  IDEAS{" "}
+                </span>
+                into{" "}
+                <span className="font-cursive italic font-normal theme-light-title-foreground">
+                  interfaces
+                </span>
               </h1>
               <p className="text-lg text-[var(--color-muted-foreground)] animate-fade-in">
-                I'm an aspiring Web Developer and UI/UX Designer dedicated to building clean, responsive, and user-centered digital experiences from the ground up. By blending visual storytelling with intuitive interactions, I ensure every pixel serves a purpose and every user journey feels effortless.
+                I'm an aspiring Web Developer and UI/UX Designer dedicated to
+                building clean, responsive, and user-centered digital
+                experiences from the ground up. By blending visual storytelling
+                with intuitive interactions, I ensure every pixel serves a
+                purpose and every user journey feels effortless.
               </p>
             </div>
 
@@ -321,7 +347,8 @@ export const Hero = () => {
                 className="hidden sm:inline-flex sm:flex-none h-14 whitespace-nowrap px-5 text-lg"
                 onClick={handleContactClick}
               >
-                Contact Me <FaArrowRight className="inline-flex w-4 h-4 sm:w-5 sm:h-5" />
+                Contact Me{" "}
+                <FaArrowRight className="inline-flex w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
               <AnimatedBorderButton
                 className="w-full sm:w-auto min-w-0 h-11 sm:h-14 whitespace-nowrap px-3 text-sm sm:flex-none sm:px-8 sm:text-lg"
@@ -334,12 +361,23 @@ export const Hero = () => {
 
             {/* Social Media Links */}
             <div className="flex flex-wrap items-center gap-1 animate-fade-in animation-delay-500">
-              <span className="text-sm text-[var(--color-muted-foreground)] mr-2">Follow me:</span>
+              <span className="text-sm text-[var(--color-muted-foreground)] mr-2">
+                Follow me:
+              </span>
               {[
                 { icon: FaGithub, href: "https://github.com/essrosall" },
-                { icon: FaLinkedin, href: "https://www.linkedin.com/in/rosales-john-rey-a-017a14341/" },
-                { icon: FaFacebookSquare, href: "https://www.facebook.com/ess.rosall/" },
-                { icon: FaBehance, href: "https://www.behance.net/rosalesjohnreya" },
+                {
+                  icon: FaLinkedin,
+                  href: "https://www.linkedin.com/in/rosales-john-rey-a-017a14341/",
+                },
+                {
+                  icon: FaFacebookSquare,
+                  href: "https://www.facebook.com/ess.rosall/",
+                },
+                {
+                  icon: FaBehance,
+                  href: "https://www.behance.net/rosalesjohnreya",
+                },
               ].map((social, idx) => (
                 <a
                   key={idx}
@@ -358,16 +396,20 @@ export const Hero = () => {
           <div className="relative animate-fade-in animation-delay-400 px-2 sm:px-0">
             {/*Profile Image*/}
             <div className="relative max-w-[300px] sm:max-w-md mx-auto">
-              <div className="absolute inset-0 
+              <div
+                className="absolute inset-0 
               rounded-3xl bg-gradient-to-br 
               from-[var(--color-primary)]/30 
               via-transparent to-[var(--color-primary)]/10 
-              blur-2xl animate-pulse-glow"/>
+              blur-2xl animate-pulse-glow"
+              />
               <div className="group relative glass rounded-3xl p-2 glow-border">
                 <div className="absolute top-3 right-3 z-30">
                   <div
                     className={`absolute -top-10 right-0 rounded-lg border border-white/10 bg-black/65 px-2.5 py-1 text-[10px] font-medium text-white whitespace-nowrap shadow-lg pointer-events-none transition-all duration-200 ${
-                      isLoveTooltipVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
+                      isLoveTooltipVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-1"
                     }`}
                   >
                     {hasSentLove ? "Thank you" : "Send love"}
@@ -389,10 +431,16 @@ export const Hero = () => {
                     aria-label={hasSentLove ? "Thank you" : "Send love"}
                     title={hasSentLove ? "Thank you" : "Send love"}
                   >
-                    <span className={`grid h-5 w-5 place-items-center rounded-full ${hasSentLove ? "bg-red-500/20" : "bg-[var(--color-primary)]/20"}`}>
-                      <FaHeart className={`h-3 w-3 ${hasSentLove ? "text-red-300" : "text-[var(--color-primary)]"}`} />
+                    <span
+                      className={`grid h-5 w-5 place-items-center rounded-full ${hasSentLove ? "bg-red-500/20" : "bg-[var(--color-primary)]/20"}`}
+                    >
+                      <FaHeart
+                        className={`h-3 w-3 ${hasSentLove ? "text-red-300" : "text-[var(--color-primary)]"}`}
+                      />
                     </span>
-                    <span className={`tabular-nums ${hasSentLove ? (currentTheme === "dark" ? "text-white" : "text-red-800") : "text-[var(--color-primary)]"}`}>
+                    <span
+                      className={`tabular-nums ${hasSentLove ? (currentTheme === "dark" ? "text-white" : "text-red-800") : "text-[var(--color-primary)]"}`}
+                    >
                       {loveCount}
                     </span>
                   </button>
@@ -400,7 +448,9 @@ export const Hero = () => {
 
                 <div
                   className={`absolute px-3 py-1.5 rounded-lg glass text-xs font-medium text-[var(--color-foreground)] whitespace-nowrap pointer-events-none transition-all duration-150 z-20 ${
-                    profileTooltip.visible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                    profileTooltip.visible
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-95"
                   }`}
                   style={{
                     left: profileTooltip.x,
@@ -438,14 +488,20 @@ export const Hero = () => {
                 <div className="absolute -bottom-4 -right-4 glass rounded-xl px-3 py-2 sm:px-4 sm:py-3 animate-float theme-light-dark-chip">
                   <div className="flex items-center gap-3">
                     <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-xs sm:text-sm font-medium">Available for work</span>
+                    <span className="text-xs sm:text-sm font-medium">
+                      Available for work
+                    </span>
                   </div>
                 </div>
 
                 {/*Stats Badge*/}
                 <div className="absolute -top-4 -left-4 glass rounded-xl px-3 py-2 sm:px-4 sm:py-3 animate-float animation-delay-500 theme-light-dark-chip">
-                  <div className="text-2xl sm:text-3xl font-bold text-[var(--color-primary)]">1</div>
-                  <div className="text-xs text-[var(--color-muted-foreground)]">Year Experience</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-[var(--color-primary)]">
+                    1
+                  </div>
+                  <div className="text-xs text-[var(--color-muted-foreground)]">
+                    Year Experience
+                  </div>
                 </div>
               </div>
             </div>
@@ -454,7 +510,9 @@ export const Hero = () => {
 
         {/*Skills Section - UPDATED*/}
         <div className="mt-10 animate-fade-in animation-delay-600">
-          <p className="text-sm text-[var(--color-muted-foreground)] mb-2 text-center">Technologies I work with</p>
+          <p className="text-sm text-[var(--color-muted-foreground)] mb-2 text-center">
+            Technologies I work with
+          </p>
           <div className="relative overflow-hidden">
             <div className="flex w-max animate-marquee">
               {[...skills, ...skills].map((skill, idx) => (

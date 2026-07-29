@@ -11,124 +11,176 @@ import { createPortal } from "react-dom";
 
 const badges = [
   {
+    title: "IBM Web Development",
+    description:
+      "Currently taking the IBM web development track and building the core frontend foundations step by step.",
+    date: "In progress",
+    issuer: "IBM",
+    image: "/badges/WD.png",
+    credly: "#",
+    courseLink:
+      "https://skills.yourlearning.ibm.com/activity/PLAN-8749C02A78EC",
+    status: "Currently taking",
+    progress: 42,
+  },
+  {
+    title: "IBM UX Design",
+    description:
+      "User experience design principles and practical foundations through IBM SkillsBuild learning modules.",
+    date: "April 8, 2026",
+    issuer: "IBM",
+    image: "/badges/UX.png",
+    credly:
+      "https://www.credly.com/badges/25eed70c-c6c2-4937-b9f8-afbaa80fbf79/public_url",
+    courseLink:
+      "https://skills.yourlearning.ibm.com/credential/CREDLY-ae2e453d-5311-41a0-be95-b217e0c4670f",
+  },
+  {
     title: "Network Defense",
-    description: "Advanced network security and defense techniques from Cisco Networking Academy.",
+    description:
+      "Advanced network security and defense techniques from Cisco Networking Academy.",
     date: "March 22, 2026",
     issuer: "CISCO",
     image: "/badges/DEF.png",
-    credly: "https://www.credly.com/badges/c60a0b9b-aed1-4e6c-be94-06c1e501c0df/public_url",
-    courseLink: "https://www.netacad.com/courses/network-defense?courseLang=en-US",
+    credly:
+      "https://www.credly.com/badges/c60a0b9b-aed1-4e6c-be94-06c1e501c0df/public_url",
+    courseLink:
+      "https://www.netacad.com/courses/network-defense?courseLang=en-US",
   },
   {
     title: "AI Fundamentals with IBM SkillsBuild",
-    description: "Core AI concepts and practical foundations through IBM SkillsBuild learning modules.",
+    description:
+      "Core AI concepts and practical foundations through IBM SkillsBuild learning modules.",
     date: "March 13, 2026",
     issuer: "IBM",
     image: "/badges/AI.png",
-    credly: "https://www.credly.com/badges/081690b6-d900-4c7d-840a-22ebf7dd4a78/public_url",
-    courseLink: "https://www.netacad.com/courses/ai-ibm-skillsbuild?courseLang=en-US",
+    credly:
+      "https://www.credly.com/badges/081690b6-d900-4c7d-840a-22ebf7dd4a78/public_url",
+    courseLink:
+      "https://www.netacad.com/courses/ai-ibm-skillsbuild?courseLang=en-US",
   },
   {
     title: "Artificial Intelligence Fundamentals",
-    description: "Essential artificial intelligence fundamentals and introductory machine learning concepts.",
+    description:
+      "Essential artificial intelligence fundamentals and introductory machine learning concepts.",
     date: "March 13, 2026",
     issuer: "IBM",
     image: "/badges/IBM.png",
-    credly: "https://www.credly.com/badges/7eb1e9d0-67ae-4728-8847-cb81726d4086/public_url",
-    courseLink: "https://www.netacad.com/courses/ai-ibm-skillsbuild?courseLang=en-US",
+    credly:
+      "https://www.credly.com/badges/7eb1e9d0-67ae-4728-8847-cb81726d4086/public_url",
+    courseLink:
+      "https://www.netacad.com/courses/ai-ibm-skillsbuild?courseLang=en-US",
   },
   {
     title: "Introduction to Data Science",
-    description: "Foundational data science workflow, analytics mindset, and practical introductory skills.",
+    description:
+      "Foundational data science workflow, analytics mindset, and practical introductory skills.",
     date: "February 27, 2026",
     issuer: "CISCO",
     image: "/badges/DATSCI.png",
-    credly: "https://www.credly.com/badges/660952c8-d299-4b7f-8198-32ca94640497/public_url",
-    courseLink: "https://www.netacad.com/courses/introduction-data-science?courseLang=en-US",
+    credly:
+      "https://www.credly.com/badges/660952c8-d299-4b7f-8198-32ca94640497/public_url",
+    courseLink:
+      "https://www.netacad.com/courses/introduction-data-science?courseLang=en-US",
   },
   {
     title: "Introduction to Cybersecurity Badge",
-    description: "Cybersecurity basics covering threats, protection strategies, and digital safety awareness.",
+    description:
+      "Cybersecurity basics covering threats, protection strategies, and digital safety awareness.",
     date: " February 05, 2026",
     issuer: "CISCO",
     image: "/badges/CS.png",
-    credly: "https://www.credly.com/badges/27b4ea10-dbaf-48ed-a1bc-f6b0822a345d/public_url",
-    courseLink: "https://www.netacad.com/courses/introduction-to-cybersecurity?courseLang=en-US",
+    credly:
+      "https://www.credly.com/badges/27b4ea10-dbaf-48ed-a1bc-f6b0822a345d/public_url",
+    courseLink:
+      "https://www.netacad.com/courses/introduction-to-cybersecurity?courseLang=en-US",
   },
-
-
 ];
 
 const certifications = [
   {
+    title: "IBM UX Design Learning Track",
+    description:
+      "Currently taking the IBM UX Design track and learning how to make interfaces clearer, calmer, and more user-friendly.",
+    date: "In progress",
+    image: "/certificates/UXFUND.jpg",
+    credly: "#",
+  },
+  {
     title: "CLOUDSTART 2026: AWS FULL STACK HANDS-ON WORKSHOP",
-    description: "Amazon Web Service Learning Club - Comprehensive AWS full stack training and hands-on workshop experience.",
+    description:
+      "Amazon Web Service Learning Club - Comprehensive AWS full stack training and hands-on workshop experience.",
     date: "February 9, 2026",
     image: "certificates/AWS.jpg",
     credly: "#",
   },
   {
     title: "IGNITE SUMMIT 2023",
-    description: "Navigating the Digital Frontier: Trends, Innovation, and Cybersecurity in the Modern IT Landscape - QCU.",
+    description:
+      "Navigating the Digital Frontier: Trends, Innovation, and Cybersecurity in the Modern IT Landscape - QCU.",
     date: "December 5, 2023",
     image: "/certificates/SUMMIT.png",
     credly: "#",
   },
   {
     title: "Cybersecurity in Education",
-    description: "Nephila Technology Inc. - Safeguarding Learner's Data in Academic Integrity.",
+    description:
+      "Nephila Technology Inc. - Safeguarding Learner's Data in Academic Integrity.",
     date: "October 9, 2025",
     image: "/certificates/NEPHILA.jpg",
     credly: "#",
   },
   {
     title: "FROM IDEA TO APP",
-    description: "National College of Business and Arts - Fairview Campus. Demystifying Web and Digital Marketing.",
+    description:
+      "National College of Business and Arts - Fairview Campus. Demystifying Web and Digital Marketing.",
     date: "September 21, 2025",
     image: "/certificates/NCBA.jpg",
     credly: "#",
   },
   {
     title: "Your Online Blueprint",
-    description: "Quezon City University - How to Protect Digital Privacy and Security.",
+    description:
+      "Quezon City University - How to Protect Digital Privacy and Security.",
     date: "December 2, 2024",
     image: "/certificates/YOB.jpg",
     credly: "#",
   },
   {
     title: "Introduction to Data Science",
-    description: "CISCO Networking Academy - Core data science fundamentals and practical applications.",
+    description:
+      "CISCO Networking Academy - Core data science fundamentals and practical applications.",
     date: "February 27, 2026",
     image: "/certificates/INTDATSCI.jpg",
-    credly: "https://www.credly.com/badges/660952c8-d299-4b7f-8198-32ca94640497/public_url",
+    credly:
+      "https://www.credly.com/badges/660952c8-d299-4b7f-8198-32ca94640497/public_url",
   },
   {
     title: "Network Defense",
-    description: "CISCO Networking Academy - Advanced network security and defense mechanisms.",
+    description:
+      "CISCO Networking Academy - Advanced network security and defense mechanisms.",
     date: "March 22, 2026",
     image: "/certificates/NETDEF.jpg",
-    credly: "https://www.credly.com/badges/c60a0b9b-aed1-4e6c-be94-06c1e501c0df/public_url",
+    credly:
+      "https://www.credly.com/badges/c60a0b9b-aed1-4e6c-be94-06c1e501c0df/public_url",
   },
   {
     title: "Introduction to Cyber Security",
-    description: "CISCO Networking Academy - Foundational cybersecurity principles and best practices.",
+    description:
+      "CISCO Networking Academy - Foundational cybersecurity principles and best practices.",
     date: "February 5, 2026",
     image: "/certificates/INTCS.jpg",
-    credly: "https://www.credly.com/badges/27b4ea10-dbaf-48ed-a1bc-f6b0822a345d/public_url",
+    credly:
+      "https://www.credly.com/badges/27b4ea10-dbaf-48ed-a1bc-f6b0822a345d/public_url",
   },
   {
     title: "AI Fundamentals with IBM SkillsBuild",
-    description: "CISCO IBM SkillsBuild - Essential artificial intelligence concepts and practical AI applications.",
+    description:
+      "CISCO IBM SkillsBuild - Essential artificial intelligence concepts and practical AI applications.",
     date: "March 13, 2026",
     image: "/certificates/AIFUND.jpg",
-    credly: "https://www.credly.com/badges/081690b6-d900-4c7d-840a-22ebf7dd4a78/public_url",
-  },
-  {
-    title: "Logo Design Competition",
-    description: "CISCO IBM SkillsBuild - Essential artificial intelligence concepts and practical AI applications.",
-    date: "March 13, 2026",
-    image: "/certificates/AIFUND.jpg",
-    credly: "https://www.credly.com/badges/081690b6-d900-4c7d-840a-22ebf7dd4a78/public_url",
+    credly:
+      "https://www.credly.com/badges/081690b6-d900-4c7d-840a-22ebf7dd4a78/public_url",
   },
 ];
 
@@ -138,7 +190,9 @@ export const CertnBadge = () => {
   const [selectedCertificate, setSelectedCertificate] = useState(0);
   const [selectedBadgeIndex, setSelectedBadgeIndex] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const isBadgeCountDivisibleByThree = badges.length % 3 === 0;
+  const visibleBadges = badges;
+  const shouldShowBadgeNote = visibleBadges.length % 3 !== 0;
+  const activeCertificateItem = certifications[activeCertificate];
 
   // Handle window resize to detect mobile/desktop
   useEffect(() => {
@@ -148,9 +202,6 @@ export const CertnBadge = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  // Limit badges on mobile view
-  const visibleBadges = badges;
 
   const closeCertificateViewer = () => {
     setIsCertificateZoomOpen(false);
@@ -162,7 +213,7 @@ export const CertnBadge = () => {
 
   const prevCertificate = () => {
     setActiveCertificate(
-      (prev) => (prev - 1 + certifications.length) % certifications.length
+      (prev) => (prev - 1 + certifications.length) % certifications.length,
     );
   };
 
@@ -172,7 +223,7 @@ export const CertnBadge = () => {
 
   const prevSelectedCertificate = () => {
     setSelectedCertificate(
-      (prev) => (prev - 1 + certifications.length) % certifications.length
+      (prev) => (prev - 1 + certifications.length) % certifications.length,
     );
   };
 
@@ -253,7 +304,8 @@ export const CertnBadge = () => {
   }, [isCertificateZoomOpen, selectedBadgeIndex]);
 
   useEffect(() => {
-    const isAnyViewerOpen = isCertificateZoomOpen || selectedBadgeIndex !== null;
+    const isAnyViewerOpen =
+      isCertificateZoomOpen || selectedBadgeIndex !== null;
     document.body.classList.toggle("viewer-open", isAnyViewerOpen);
 
     return () => {
@@ -262,10 +314,11 @@ export const CertnBadge = () => {
   }, [isCertificateZoomOpen, selectedBadgeIndex]);
 
   return (
-    <section id="certifications" className="py-20 sm:py-24 md:py-32 relative overflow-hidden">
-      <div
-        className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-[var(--color-primary)]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-      />
+    <section
+      id="certifications"
+      className="py-20 sm:py-24 md:py-32 relative overflow-hidden"
+    >
+      <div className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-[var(--color-primary)]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
       <div className="absolute top-1/4 right-[-3rem] w-96 h-96 bg-[var(--color-primary)]/6 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-[var(--color-primary)]/7 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-2/3 right-1/3 w-80 h-80 bg-[var(--color-primary)]/5 rounded-full blur-3xl pointer-events-none" />
@@ -292,7 +345,8 @@ export const CertnBadge = () => {
               className="font-cursive italic 
             font-normal theme-light-title-foreground"
             >
-              {" "}milestones.
+              {" "}
+              milestones.
             </span>
           </h2>
           <p className="text-[var(--color-muted-foreground)] animate-fade-in animation-delay-200">
@@ -301,22 +355,14 @@ export const CertnBadge = () => {
           </p>
         </div>
 
-          {isBadgeCountDivisibleByThree && (
-            <div className="mt-6 text-center animate-fade-in">
-              <p className="text-[var(--color-muted-foreground)] text-sm md:text-base">
-                Working on my next badge... currently grinding XP like it is a
-                side quest.
-              </p>
-            </div>
-          )}
-
         {/* Certification and Badge Cards */}
         <div className="text-center mb-8 animate-fade-in animation-delay-200">
           <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-secondary-foreground)]">
             Professional Certificates
           </h3>
           <p className="text-[var(--color-muted-foreground)] mt-2">
-            Course and program certifications that validate my technical and design skills.
+            Course and program certifications that validate my technical and
+            design skills.
           </p>
         </div>
 
@@ -329,11 +375,11 @@ export const CertnBadge = () => {
                 setIsCertificateZoomOpen(true);
               }}
               className="w-full h-full cursor-zoom-in"
-              aria-label={`Open ${certifications[activeCertificate].title} in full screen`}
+              aria-label={`Open ${activeCertificateItem.title} in full screen`}
             >
               <img
-                src={certifications[activeCertificate].image}
-                alt={certifications[activeCertificate].title}
+                src={activeCertificateItem.image}
+                alt={activeCertificateItem.title}
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
@@ -343,7 +389,7 @@ export const CertnBadge = () => {
 
             <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass_strong text-xs font-medium text-white theme-light-dark-chip">
               <Award className="w-4 h-4 text-[var(--color-primary)]" />
-              Certified
+              {activeCertificateItem.status ?? "Certified"}
             </div>
 
             <button
@@ -366,19 +412,38 @@ export const CertnBadge = () => {
 
           <div className="p-4 sm:p-6 space-y-3 sm:space-y-4 min-h-[230px] sm:min-h-0 flex flex-col">
             <h4 className="text-base sm:text-xl font-semibold leading-snug min-h-[3rem] sm:min-h-0 text-[var(--color-foreground)] group-hover:text-[var(--color-primary)] transition-colors">
-              {certifications[activeCertificate].title}
+              {activeCertificateItem.title}
             </h4>
             <p className="text-xs sm:text-sm leading-relaxed min-h-[3.5rem] sm:min-h-0 text-[var(--color-muted-foreground)] overflow-hidden">
-              {certifications[activeCertificate].description}
+              {activeCertificateItem.description}
             </p>
+            {typeof activeCertificateItem.progress === "number" && (
+              <div className="space-y-2 pt-1">
+                <div className="flex items-center justify-between text-xs text-[var(--color-muted-foreground)]">
+                  <span>Progress</span>
+                  <span className="font-semibold text-[var(--color-primary)]">
+                    {activeCertificateItem.progress}% complete
+                  </span>
+                </div>
+                <div className="h-2 rounded-full bg-[var(--color-border)]/60 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-[var(--color-primary)] to-emerald-400 transition-all"
+                    style={{ width: `${activeCertificateItem.progress}%` }}
+                  />
+                </div>
+                <p className="text-xs text-[var(--color-muted-foreground)]">
+                  Currently taking in IBM and building toward completion.
+                </p>
+              </div>
+            )}
             <div className="flex items-center justify-between gap-3 sm:gap-4 flex-wrap min-h-[2.25rem]">
               <div className="flex items-center gap-2 text-sm text-[var(--color-secondary-foreground)]">
                 <Calendar className="w-4 h-4" />
-                <span>{certifications[activeCertificate].date}</span>
+                <span>{activeCertificateItem.date}</span>
               </div>
-              {certifications[activeCertificate].credly !== "#" && (
+              {activeCertificateItem.credly !== "#" && (
                 <a
-                  href={certifications[activeCertificate].credly}
+                  href={activeCertificateItem.credly}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
@@ -395,10 +460,11 @@ export const CertnBadge = () => {
                   key={idx}
                   type="button"
                   onClick={() => setActiveCertificate(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 ${idx === activeCertificate
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    idx === activeCertificate
                       ? "w-8 bg-[var(--color-primary)]"
                       : "w-2 bg-[var(--color-muted-foreground)]/40 hover:bg-[var(--color-muted-foreground)]/70"
-                    }`}
+                  }`}
                   aria-label={`Go to certificate ${idx + 1}`}
                 />
               ))}
@@ -412,7 +478,8 @@ export const CertnBadge = () => {
               Badges
             </h3>
             <p className="text-[var(--color-muted-foreground)] mt-2">
-              Digital badges and micro-credentials that support my certificate portfolio.
+              Digital badges and micro-credentials that support my certificate
+              portfolio.
             </p>
           </div>
 
@@ -441,6 +508,22 @@ export const CertnBadge = () => {
                   <h5 className="text-xs sm:text-sm font-semibold text-[var(--color-foreground)] line-clamp-2">
                     {badge.title}
                   </h5>
+                  {typeof badge.progress === "number" && (
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between gap-2 text-[10px] sm:text-xs text-[var(--color-muted-foreground)]">
+                        <span>{badge.status ?? "In progress"}</span>
+                        <span className="font-semibold text-[var(--color-primary)]">
+                          {badge.progress}%
+                        </span>
+                      </div>
+                      <div className="h-1.5 rounded-full bg-[var(--color-border)]/60 overflow-hidden">
+                        <div
+                          className="h-full rounded-full bg-gradient-to-r from-[var(--color-primary)] to-emerald-400"
+                          style={{ width: `${badge.progress}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
                   <div className="grid grid-cols-2 gap-2 mt-auto">
                     <button
                       type="button"
@@ -449,15 +532,21 @@ export const CertnBadge = () => {
                     >
                       View Description
                     </button>
-                    <a
-                      href={badge.credly}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-2.5 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-[11px] sm:text-sm"
-                    >
-                      View Proof
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
+                    {badge.credly !== "#" ? (
+                      <a
+                        href={badge.credly}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-2.5 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-[11px] sm:text-sm"
+                      >
+                        View Proof
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    ) : (
+                      <div className="inline-flex items-center justify-center px-2.5 py-2 rounded-lg glass text-[11px] sm:text-sm text-[var(--color-muted-foreground)]">
+                        In progress
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -470,6 +559,11 @@ export const CertnBadge = () => {
                       <span className="px-3 py-1 rounded-full bg-[var(--color-primary)]/15 text-[var(--color-primary)] text-xs font-semibold uppercase tracking-wide">
                         {badge.issuer}
                       </span>
+                      {typeof badge.progress === "number" && (
+                        <span className="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-semibold uppercase tracking-wide">
+                          {badge.progress}% complete
+                        </span>
+                      )}
                       <span className="text-xs text-[var(--color-muted-foreground)]">
                         {badge.date}
                       </span>
@@ -478,32 +572,57 @@ export const CertnBadge = () => {
                   <p className="text-sm text-[var(--color-muted-foreground)] leading-relaxed flex-grow">
                     {badge.description}
                   </p>
+                  {typeof badge.progress === "number" && (
+                    <div className="space-y-2 mt-4">
+                      <div className="flex items-center justify-between text-xs text-[var(--color-muted-foreground)]">
+                        <span>Learning progress</span>
+                        <span className="font-semibold text-[var(--color-primary)]">
+                          {badge.progress}% complete
+                        </span>
+                      </div>
+                      <div className="h-2 rounded-full bg-[var(--color-border)]/60 overflow-hidden">
+                        <div
+                          className="h-full rounded-full bg-gradient-to-r from-[var(--color-primary)] to-emerald-400"
+                          style={{ width: `${badge.progress}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
                   <div className="flex flex-wrap items-center gap-2 pt-3 mt-4 border-t border-[var(--color-border)]/70 flex-shrink-0">
-                    <a
-                      href={badge.credly}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
-                    >
-                      View Proof
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                    <a
-                      href={badge.courseLink}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
-                    >
-                      Try It
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
+                    {badge.credly !== "#" ? (
+                      <a
+                        href={badge.credly}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
+                      >
+                        View Proof
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    ) : (
+                      <span className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass text-sm text-[var(--color-muted-foreground)]">
+                        In progress
+                      </span>
+                    )}
+                    {badge.courseLink !== "#" && (
+                      <a
+                        href={badge.courseLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 px-3 py-2 rounded-lg glass hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all text-sm"
+                      >
+                        Try It
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </article>
             ))}
 
             {/* Placeholder Badge Card - Show when badge count doesn't fill grid perfectly */}
-            {((isMobile && visibleBadges.length % 2 === 1) || (!isMobile && visibleBadges.length % 3 !== 0)) && (
+            {((isMobile && visibleBadges.length % 2 === 1) ||
+              (!isMobile && visibleBadges.length % 3 !== 0)) && (
               <article className="glass rounded-2xl overflow-hidden border border-[var(--color-border)]/70 border-dashed flex flex-col items-center justify-center p-6 min-h-[320px] md:min-h-[520px]">
                 <div className="aspect-[4/3] w-full flex flex-col items-center justify-center">
                   <div className="flex gap-1.5 mb-3">
@@ -517,10 +636,11 @@ export const CertnBadge = () => {
                 </div>
                 <div className="hidden md:flex flex-col items-center justify-center p-5 text-center">
                   <p className="text-lg font-semibold text-[var(--color-foreground)] mb-2">
-                    Coming Soon™
+                    Coming Soon
                   </p>
                   <p className="text-sm text-[var(--color-muted-foreground)]">
-                    Currently leveling up my skills like it's a side quest. Check back soon for the next achievement!
+                    Currently leveling up my skills like it's a side quest.
+                    Check back soon for the next achievement!
                   </p>
                 </div>
               </article>
@@ -530,8 +650,12 @@ export const CertnBadge = () => {
 
         <div className="text-center mt-8 animate-fade-in animation-delay-300">
           <p className="text-sm text-[var(--color-muted-foreground)]">
-            These are my <span className="theme-light-title-foreground">badges</span> and
-            <span className="theme-light-title-foreground"> certifications </span>
+            These are my{" "}
+            <span className="theme-light-title-foreground">badges</span> and
+            <span className="theme-light-title-foreground">
+              {" "}
+              certifications{" "}
+            </span>
             for the past years and months.
           </p>
         </div>
@@ -583,78 +707,110 @@ export const CertnBadge = () => {
         </div>
       )}
 
-      {selectedBadgeIndex !== null && createPortal(
-        <div
-          className="fixed inset-0 z-[9998] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={closeBadgeDetails}
-        >
+      {selectedBadgeIndex !== null &&
+        createPortal(
           <div
-            className="relative w-full max-w-md glass rounded-2xl border border-white/15 p-5 max-h-[88vh] overflow-y-auto md:max-h-none md:overflow-visible"
-            onClick={(event) => event.stopPropagation()}
+            className="fixed inset-0 z-[9998] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={closeBadgeDetails}
           >
-            <button
-              type="button"
-              onClick={closeBadgeDetails}
-              className="absolute top-3 right-3 md:hidden p-2 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
-              aria-label="Close badge details"
+            <div
+              className="relative w-full max-w-md glass rounded-2xl border border-white/15 p-5 max-h-[88vh] overflow-y-auto md:max-h-none md:overflow-visible"
+              onClick={(event) => event.stopPropagation()}
             >
-              <X className="w-4 h-4" />
-            </button>
-
-            <button
-              type="button"
-              onClick={closeBadgeDetails}
-              className="absolute top-3 right-3 hidden md:flex p-2 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
-              aria-label="Close badge details"
-            >
-              <X className="w-4 h-4" />
-            </button>
-
-            <div className="space-y-4">
-              <div className="w-full aspect-[4/3] rounded-xl overflow-hidden bg-[var(--color-surface)]/40 border border-white/10">
-                <img
-                  src={badges[selectedBadgeIndex].image}
-                  alt={badges[selectedBadgeIndex].title}
-                  decoding="async"
-                  className="w-full h-full object-contain p-5"
-                />
-              </div>
-
-              <h4 className="text-lg font-semibold text-[var(--color-foreground)] pr-8 leading-snug">
-                {badges[selectedBadgeIndex].title}
-              </h4>
-
-              <p className="text-sm text-[var(--color-muted-foreground)] leading-relaxed">
-                {badges[selectedBadgeIndex].description}
-              </p>
-
-              <div className="text-sm text-[var(--color-muted-foreground)] space-y-1">
-                <p>
-                  <span className="text-[var(--color-foreground)]">Acquisition Date:</span> {badges[selectedBadgeIndex].date}
-                </p>
-                <p>
-                  <span className="text-[var(--color-foreground)]">From:</span>{" "}
-                  <span className="inline-flex items-center rounded-full bg-[var(--color-primary)]/15 px-2.5 py-1 text-[var(--color-primary)] font-semibold tracking-wide">
-                    {badges[selectedBadgeIndex].issuer}
-                  </span>
-                </p>
-              </div>
-
-              <a
-                href={badges[selectedBadgeIndex].courseLink}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] hover:underline transition-colors"
+              <button
+                type="button"
+                onClick={closeBadgeDetails}
+                className="absolute top-3 right-3 md:hidden p-2 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
+                aria-label="Close badge details"
               >
-                Try it on your own
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
+                <X className="w-4 h-4" />
+              </button>
 
+              <button
+                type="button"
+                onClick={closeBadgeDetails}
+                className="absolute top-3 right-3 hidden md:flex p-2 rounded-full glass_strong hover:bg-[var(--color-primary)]/15 hover:text-[var(--color-primary)] transition-all"
+                aria-label="Close badge details"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="space-y-4">
+                <div className="w-full aspect-[4/3] rounded-xl overflow-hidden bg-[var(--color-surface)]/40 border border-white/10">
+                  <img
+                    src={badges[selectedBadgeIndex].image}
+                    alt={badges[selectedBadgeIndex].title}
+                    decoding="async"
+                    className="w-full h-full object-contain p-5"
+                  />
+                </div>
+
+                <h4 className="text-lg font-semibold text-[var(--color-foreground)] pr-8 leading-snug">
+                  {badges[selectedBadgeIndex].title}
+                </h4>
+
+                {typeof badges[selectedBadgeIndex].progress === "number" && (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-xs text-[var(--color-muted-foreground)]">
+                      <span>
+                        {badges[selectedBadgeIndex].status ?? "In progress"}
+                      </span>
+                      <span className="font-semibold text-[var(--color-primary)]">
+                        {badges[selectedBadgeIndex].progress}% complete
+                      </span>
+                    </div>
+                    <div className="h-2 rounded-full bg-[var(--color-border)]/60 overflow-hidden">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-[var(--color-primary)] to-emerald-400"
+                        style={{
+                          width: `${badges[selectedBadgeIndex].progress}%`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <p className="text-sm text-[var(--color-muted-foreground)] leading-relaxed">
+                  {badges[selectedBadgeIndex].description}
+                </p>
+
+                <div className="text-sm text-[var(--color-muted-foreground)] space-y-1">
+                  <p>
+                    <span className="text-[var(--color-foreground)]">
+                      Acquisition Date:
+                    </span>{" "}
+                    {badges[selectedBadgeIndex].date}
+                  </p>
+                  <p>
+                    <span className="text-[var(--color-foreground)]">
+                      From:
+                    </span>{" "}
+                    <span className="inline-flex items-center rounded-full bg-[var(--color-primary)]/15 px-2.5 py-1 text-[var(--color-primary)] font-semibold tracking-wide">
+                      {badges[selectedBadgeIndex].issuer}
+                    </span>
+                  </p>
+                </div>
+
+                {badges[selectedBadgeIndex].courseLink !== "#" ? (
+                  <a
+                    href={badges[selectedBadgeIndex].courseLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] hover:underline transition-colors"
+                  >
+                    Try it on your own
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                ) : (
+                  <p className="text-sm text-[var(--color-muted-foreground)]">
+                    Currently taking this track at IBM.
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
     </section>
   );
 };
