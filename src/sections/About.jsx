@@ -61,11 +61,14 @@ export const About = () => {
 
             <div className="space-y-4 text-[var(--color-muted-foreground)] animate-fade-in animation-delay-200 leading-relaxed">
               <p>
-                I’m a recent graduate from Quezon City University (Magna Cum
-                Laude) with a strong foundation in design and logic. I am
-                currently seeking job opportunities while sharpening my skills
-                in HTML, CSS, and JavaScript—turning ideas into interfaces that
-                are practical, polished, and easy to use.
+                I’m a recent graduate from{" "}
+                <span style={{ fontWeight: "bold", fontStyle: "italic" }}>
+                  Quezon City University (Magna Cum Laude)
+                </span>{" "}
+                with a strong foundation in design and logic. I am currently
+                seeking job opportunities while sharpening my skills in HTML,
+                CSS, and JavaScript—turning ideas into interfaces that are
+                practical, polished, and easy to use.
               </p>
               <p>
                 Design is still the compass for everything I build. I care about
